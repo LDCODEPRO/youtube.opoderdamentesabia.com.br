@@ -126,7 +126,9 @@ def decidir(body: DecisaoIn, request: Request, _=Depends(require_auth)):
 # ── Frontend ─────────────────────────────────────────────────────────────────
 @app.get("/")
 def root():
-    return FileResponse(os.path.join(FRONT, "index.html"))
+    # o painel nunca pode ficar velho no navegador do Diretor
+    return FileResponse(os.path.join(FRONT, "index.html"),
+                        headers={"Cache-Control": "no-store, must-revalidate"})
 
 
 @app.get("/logo.png")

@@ -49,11 +49,17 @@ def _busca_feed() -> list:
         pub = e.findtext("a:published", "", ns)
         stats = e.find(".//m:community/m:statistics", ns)
         views = int(stats.get("views", "0")) if stats is not None else 0
+        rating = e.find(".//m:community/m:starRating", ns)
+        likes = int(rating.get("count", "0")) if rating is not None else 0
+        dias = _dias_desde(pub[:10])
         videos.append({
             "id": vid,
             "titulo": titulo,
             "publicado": pub[:10],
             "views": views,
+            "likes": likes,
+            "dias_no_ar": dias,
+            "views_por_dia": round(views / (dias + 1), 2) if dias is not None else None,
             "url": f"https://www.youtube.com/watch?v={vid}",
         })
     return videos
@@ -116,6 +122,32 @@ def carrega_pautas() -> dict:
         return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
 
 
+HIST_PATH = os.path.join(BASE_DIR, "data", "historico.jsonl")
+
+
+def _grava_historico(d: dict) -> None:
+    """Um ponto REAL por coleta fresca: o histórico do canal nasce e cresce sozinho."""
+    try:
+        os.makedirs(os.path.dirname(HIST_PATH), exist_ok=True)
+        with open(HIST_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps({
+                "t": d.get("coletado_em"),
+                "inscritos": d.get("inscritos"),
+                "views_feed": d.get("views_somadas_feed"),
+            }, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+
+def carrega_historico(n: int = 120) -> list:
+    try:
+        with open(HIST_PATH, encoding="utf-8") as f:
+            pontos = [json.loads(ln) for ln in f if ln.strip()]
+        return pontos[-n:]
+    except Exception:
+        return []
+
+
 def _le_cache_disco():
     try:
         with open(CACHE_PATH, encoding="utf-8") as f:
@@ -163,6 +195,9 @@ def resumo(force: bool = False) -> dict:
     dados["inscritos"] = _busca_inscritos()
     dados["pipeline"] = carrega_pipeline()
     dados["agente"] = carrega_pautas()
+    if dados.get("ok"):
+        _grava_historico(dados)
+    dados["historico"] = carrega_historico()
 
     _cache.update(quando=agora, dados=dados)
     _grava_cache_disco(dados)

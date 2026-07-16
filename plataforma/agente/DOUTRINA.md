@@ -5,6 +5,12 @@
 ## Missão
 Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzindo e publicando vídeos **100% por IA com acabamento humano**, guiados pelo `ESTUDO_YOUTUBE_2026.md` e pelo **PARÂMETRO** dos virais.
 
+## 📏 RÉGUA DO DIRETOR (16/07/2026) — duração
+**Todo vídeo para o YouTube tem entre 5 e 30 minutos. Sem exceção sem ordem dele.**
+- Abaixo de 5min → não sobe (o vídeo-01 "Silêncio" de 4min05 foi arquivado por isso).
+- O pilar noturno de 1h30+ do estudo fica **suspenso** até o Diretor liberar; as pautas noturnas foram adaptadas para 25–30min.
+- Vídeo para o YouTube ≠ corte para o Instagram — mundos separados, nunca confundir.
+
 ## As 7 etapas do pipeline
 | # | Etapa | Regra | Estado (16/07) |
 |---|---|---|---|

@@ -8,107 +8,144 @@
 <title>Estúdio YouTube · O Poder da Mente Sábia</title>
 <style>
   :root{
-    --bg:#05060A; --card:#0D1017; --card2:#12151E;
-    --prata:#C9CDD8; --prata-hi:#F0F3FA; --prata-dim:rgba(201,205,216,.30);
-    --ink:#E8E9EE; --dim:#9BA1B0; --faint:#5F6472;
-    --ok:#4FC98B; --warn:#E8834A; --bad:#E05B5B; --cy:#8FB8D9;
-    --serif:Georgia,'Times New Roman',serif; --sans:'Segoe UI',system-ui,sans-serif;
+    /* padrão da casa (cockpits Complexo X) com o acento PRATA da marca Mente Sábia */
+    --bg:#090C10; --card:#0F131A; --card2:#131823;
+    --scr:215,230,255;              /* prata-gelo: o acento em rgb */
+    --prata:#C9CDD8; --prata-hi:#F0F3FA;
+    --ink:#E8EDF3; --dim:#9AA4B5; --faint:#5E6675;
+    --ok:#2EE6A8; --warn:#FFA53D; --bad:#FF5D5D; --cy:#8FB8D9;
+    --sans:'Segoe UI',system-ui,sans-serif;
     --label:Bahnschrift,'Segoe UI',sans-serif;
   }
   *{box-sizing:border-box}
   html{color-scheme:dark}
   body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.5;min-height:100vh;
     background:
-      radial-gradient(1px 1px at 12% 22%, rgba(240,243,250,.5), transparent 100%),
-      radial-gradient(1px 1px at 78% 12%, rgba(240,243,250,.35), transparent 100%),
-      radial-gradient(1px 1px at 34% 64%, rgba(240,243,250,.28), transparent 100%),
-      radial-gradient(1px 1px at 62% 82%, rgba(240,243,250,.35), transparent 100%),
-      radial-gradient(1000px 460px at 50% -6%, rgba(215,228,255,.09), transparent 62%),
-      radial-gradient(820px 560px at 88% 36%, rgba(96,116,152,.14), transparent 60%),
-      #05060A;}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin:0;line-height:1.1}
-  h1 em{font-style:normal;color:var(--prata-hi);text-shadow:0 0 30px rgba(215,230,255,.45)}
-  h2{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--prata-hi);margin:0 0 6px}
-  .sub{color:var(--dim);font-size:.9rem;margin:0 0 18px;max-width:72ch}
-  .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:var(--prata);margin:0 0 8px}
+      radial-gradient(1px 1px at 14% 18%, rgba(var(--scr),.5), transparent 100%),
+      radial-gradient(1px 1px at 76% 9%,  rgba(var(--scr),.4), transparent 100%),
+      radial-gradient(1px 1px at 36% 58%, rgba(var(--scr),.3), transparent 100%),
+      radial-gradient(1px 1px at 88% 44%, rgba(var(--scr),.3), transparent 100%),
+      radial-gradient(1px 1px at 55% 84%, rgba(var(--scr),.35), transparent 100%),
+      radial-gradient(1100px 500px at 50% -8%, rgba(var(--scr),.08), transparent 60%),
+      radial-gradient(900px 600px at 92% 30%, rgba(96,116,152,.12), transparent 60%),
+      var(--bg);}
+  h1{font-weight:700;font-size:clamp(1.3rem,2.6vw,1.7rem);margin:0;line-height:1.15;letter-spacing:.01em}
+  h1 em{font-style:normal;color:var(--prata-hi);text-shadow:0 0 26px rgba(var(--scr),.5)}
+  h2{font-weight:700;font-size:1.12rem;color:var(--prata-hi);margin:0 0 6px;letter-spacing:.01em}
+  .sub{color:var(--dim);font-size:.88rem;margin:0 0 16px;max-width:72ch}
+  .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.66rem;color:var(--prata);margin:0 0 8px}
   .grid{display:grid;gap:13px}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-  .card{background:linear-gradient(160deg,var(--card2),var(--card));
-    border:1px solid rgba(201,205,216,.15);border-radius:14px;padding:17px;
-    box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(240,243,250,.06);
-    transition:transform .22s ease, border-color .22s ease}
-  .card:hover{transform:translateY(-2px);border-color:rgba(220,232,255,.4)}
-  .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--dim);margin:0 0 7px}
-  .big{font-family:var(--serif);font-size:2.3rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums}
-  .big small{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
-  .d{font-size:.86rem;color:var(--dim);margin:7px 0 0}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+  /* ── O CARD DA CASA: grafite + brilho no canto + glow + hover que levanta ── */
+  .card{position:relative;border-radius:14px;padding:17px;
+    background:
+      radial-gradient(320px 150px at 100% 0%, rgba(var(--scr),.13), transparent 70%),
+      linear-gradient(165deg,var(--card2),var(--card));
+    border:1px solid rgba(var(--scr),.26);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 1px 2px rgba(0,0,0,.55),
+      0 12px 32px rgba(0,0,0,.35), 0 0 22px rgba(var(--scr),.08);
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    animation:floatIn .55s ease backwards}
+  .card:hover{transform:translateY(-3px);border-color:rgba(var(--scr),.6);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09), 0 2px 4px rgba(0,0,0,.6),
+      0 22px 50px rgba(0,0,0,.55), 0 0 34px rgba(var(--scr),.22)}
+  @keyframes floatIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.63rem;color:var(--dim);margin:0 0 7px}
+  .big{font-weight:700;font-size:2.15rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums;
+    text-shadow:0 0 22px rgba(var(--scr),.28)}
+  .big small{font-weight:400;font-size:.78rem;color:var(--dim);text-shadow:none}
+  .d{font-size:.85rem;color:var(--dim);margin:7px 0 0}
   .d b{color:var(--ink)}
-  .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}
-  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--prata),var(--prata-hi));box-shadow:0 0 12px rgba(215,230,255,.5);transition:width .8s ease}
-  .pill{display:inline-block;font-family:var(--label);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 11px;border-radius:999px;border:1px solid;margin-bottom:8px}
-  .pill.ok{color:var(--ok);border-color:rgba(79,201,139,.4);background:rgba(79,201,139,.08)}
-  .pill.warn{color:var(--warn);border-color:rgba(232,131,74,.45);background:rgba(232,131,74,.09)}
-  .pill.prata{color:var(--prata-hi);border-color:var(--prata-dim);background:rgba(201,205,216,.08)}
-  .pill.cy{color:var(--cy);border-color:rgba(143,184,217,.4);background:rgba(143,184,217,.08)}
-  .titulo-v{font-family:var(--serif);font-size:1rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
+  .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px;position:relative}
+  .bar i{display:block;height:100%;border-radius:6px;position:relative;overflow:hidden;
+    background:linear-gradient(90deg,var(--prata),var(--prata-hi));box-shadow:0 0 14px rgba(var(--scr),.55);transition:width .9s ease}
+  .bar i::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+    background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);animation:shimmer 2.6s ease infinite}
+  @keyframes shimmer{60%,100%{transform:translateX(100%)}}
+  .pill{display:inline-block;font-family:var(--label);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 11px;border-radius:999px;border:1px solid;margin-bottom:9px}
+  .pill.ok{color:var(--ok);border-color:rgba(46,230,168,.45);background:rgba(46,230,168,.08);box-shadow:0 0 14px rgba(46,230,168,.15)}
+  .pill.warn{color:var(--warn);border-color:rgba(255,165,61,.5);background:rgba(255,165,61,.09);box-shadow:0 0 14px rgba(255,165,61,.15)}
+  .pill.prata{color:var(--prata-hi);border-color:rgba(var(--scr),.35);background:rgba(var(--scr),.07)}
+  .pill.cy{color:var(--cy);border-color:rgba(143,184,217,.45);background:rgba(143,184,217,.08)}
+  .titulo-v{font-weight:600;font-size:.97rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
+
   .btn{font-family:var(--label);letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
     background:linear-gradient(120deg,var(--prata),var(--prata-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
-    box-shadow:0 6px 20px rgba(200,215,245,.25)}
-  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(201,205,216,.25);box-shadow:none;padding:8px 14px}
+    box-shadow:0 6px 20px rgba(var(--scr),.28)}
+  .btn:hover{filter:brightness(1.1);box-shadow:0 8px 26px rgba(var(--scr),.4)}
+  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(var(--scr),.25);box-shadow:none;padding:8px 14px}
   .vivo{font-family:var(--label);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);
-    border:1px solid rgba(79,201,139,.35);border-radius:999px;padding:5px 10px;background:rgba(79,201,139,.07);display:inline-block}
-  .vivo.off{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.07)}
+    border:1px solid rgba(46,230,168,.4);border-radius:999px;padding:5px 10px;background:rgba(46,230,168,.07);display:inline-block;
+    box-shadow:0 0 16px rgba(46,230,168,.15)}
+  .vivo.off{color:var(--warn);border-color:rgba(255,165,61,.4);background:rgba(255,165,61,.07);box-shadow:none}
 
-  /* fala do estúdio (Jarvis) */
-  .fala{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(160deg,#141824,#0D1017);
-    border:1px solid rgba(215,230,255,.22);border-radius:16px;padding:18px;margin-bottom:18px;
-    box-shadow:0 14px 40px rgba(0,0,0,.4), 0 0 30px rgba(215,230,255,.06)}
-  .fala .aura{width:52px;height:52px;margin:0;flex:none}
-  .fala p{margin:0;font-size:1.02rem;line-height:1.55}
+  /* fala do Estúdio: card-herói com sheen */
+  .fala{position:relative;overflow:hidden;display:flex;gap:16px;align-items:center;border-radius:16px;padding:20px;margin-bottom:16px;
+    background:
+      radial-gradient(420px 180px at 100% 0%, rgba(var(--scr),.16), transparent 70%),
+      linear-gradient(165deg,#161B27,#0F131A);
+    border:1px solid rgba(var(--scr),.32);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 16px 44px rgba(0,0,0,.5), 0 0 40px rgba(var(--scr),.1);
+    animation:floatIn .55s ease backwards}
+  .fala::after{content:"";position:absolute;top:0;bottom:0;width:38%;transform:translateX(-160%) skewX(-14deg);
+    background:linear-gradient(100deg,transparent, rgba(var(--scr),.09), transparent);animation:sheen 5.5s ease infinite}
+  @keyframes sheen{55%,100%{transform:translateX(340%) skewX(-14deg)}}
+  .fala .aura{width:58px;height:58px;margin:0;flex:none;animation:logoGlow 3.4s ease-in-out infinite}
+  @keyframes logoGlow{0%,100%{box-shadow:0 0 22px rgba(var(--scr),.3)}50%{box-shadow:0 0 44px rgba(var(--scr),.55)}}
+  .fala p{margin:0;font-size:1.03rem;line-height:1.55}
   .fala p b{color:var(--prata-hi)}
-  .fala .k{margin-bottom:4px}
 
-  /* lista "o que fazer" */
-  .tarefa{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:13px;margin-top:10px;
-    background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid rgba(201,205,216,.15)}
-  .tarefa .num{font-family:var(--serif);font-size:1.5rem;color:var(--prata-hi);line-height:1;flex:none;width:30px;text-align:center}
+  /* tarefa = CARD (nunca linha) */
+  .tarefa{text-align:left}
+  .tarefa .num{font-size:1.9rem;font-weight:700;line-height:1;margin:0 0 8px;
+    color:var(--prata-hi);text-shadow:0 0 20px rgba(var(--scr),.4)}
+  .tarefa.sua{border-color:rgba(255,165,61,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 1px 2px rgba(0,0,0,.55),0 12px 32px rgba(0,0,0,.35),0 0 24px rgba(255,165,61,.14)}
+  .tarefa.sua:hover{border-color:rgba(255,165,61,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 22px 50px rgba(0,0,0,.55),0 0 34px rgba(255,165,61,.28)}
+  .tarefa.sua .num{color:var(--warn);text-shadow:0 0 20px rgba(255,165,61,.45)}
+  .tarefa.minha{border-color:rgba(46,230,168,.4)}
+  .tarefa.minha .num{color:var(--ok);text-shadow:0 0 20px rgba(46,230,168,.4)}
   .tarefa p{margin:0;font-size:.92rem}
-  .tarefa small{color:var(--dim);display:block;margin-top:3px;font-size:.8rem}
-  .tarefa.sua{border-color:rgba(232,131,74,.4)}
-  .tarefa.minha{border-color:rgba(79,201,139,.3)}
+  .tarefa small{color:var(--dim);display:block;margin-top:5px;font-size:.8rem;line-height:1.45}
 
   /* layout */
   .layout{display:flex;min-height:100vh}
-  .side{width:225px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px;display:flex;flex-direction:column;
-    border-right:1px solid rgba(201,205,216,.12);
-    background:linear-gradient(180deg,rgba(13,16,23,.92),rgba(7,9,15,.96))}
+  .side{width:228px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px;display:flex;flex-direction:column;
+    border-right:1px solid rgba(var(--scr),.12);
+    background:linear-gradient(180deg,rgba(15,19,26,.95),rgba(9,12,16,.98))}
   .marca{display:flex;gap:11px;align-items:center;margin:2px 4px 20px}
   .marca .aura{width:46px;height:46px;margin:0}
-  .marca b{font-family:var(--serif);font-weight:400;font-size:.95rem;color:var(--prata-hi);line-height:1.15;display:block}
-  .marca span{font-size:.64rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;font-family:var(--label)}
-  nav.menu{display:flex;flex-direction:column;gap:4px}
-  nav.menu a{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:10px;border:1px solid transparent;
-    color:var(--dim);text-decoration:none;font-size:.92rem}
-  nav.menu a:hover{color:var(--ink);background:rgba(201,205,216,.05)}
-  nav.menu a.ativo{color:var(--prata-hi);background:rgba(201,205,216,.08);border-color:rgba(201,205,216,.18)}
+  .marca b{font-weight:700;font-size:.92rem;color:var(--prata-hi);line-height:1.2;display:block}
+  .marca span{font-size:.62rem;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;font-family:var(--label)}
+  nav.menu{display:flex;flex-direction:column;gap:5px}
+  nav.menu a{display:flex;gap:10px;align-items:center;padding:11px 13px;border-radius:11px;border:1px solid transparent;
+    color:var(--dim);text-decoration:none;font-size:.92rem;font-weight:500;transition:all .18s ease}
+  nav.menu a:hover{color:var(--ink);background:rgba(var(--scr),.05);transform:translateX(2px)}
+  nav.menu a.ativo{color:var(--prata-hi);background:rgba(var(--scr),.09);border-color:rgba(var(--scr),.28);
+    box-shadow:0 0 18px rgba(var(--scr),.1), inset 0 1px 0 rgba(255,255,255,.05)}
   nav.menu .ico{width:20px;text-align:center;flex:none}
   .side .rodape{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:10px}
-  .conteudo{flex:1;min-width:0;padding:28px 26px 70px;max-width:1020px}
+  .conteudo{flex:1;min-width:0;padding:26px 26px 70px;max-width:1040px}
   .view{display:none}
-  .view.ativa{display:block;animation:up .4s ease}
-  @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .aura{border-radius:50%;overflow:hidden;border:1px solid rgba(201,205,216,.35);
-    box-shadow:0 0 38px rgba(215,230,255,.35), 0 0 90px rgba(215,230,255,.12)}
+  .view.ativa{display:block}
+  .aura{border-radius:50%;overflow:hidden;border:1px solid rgba(var(--scr),.4);
+    box-shadow:0 0 30px rgba(var(--scr),.3)}
   .aura img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.35)}
 
   /* login */
   #telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .loginCard{width:min(380px,92vw);text-align:center;padding:34px 26px;background:linear-gradient(160deg,var(--card2),var(--card));
-    border:1px solid rgba(201,205,216,.25);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(201,205,216,.08)}
-  .loginCard .aura{width:92px;height:92px;margin:0 auto 14px}
+  .loginCard{width:min(384px,92vw);text-align:center;padding:36px 26px;border-radius:18px;
+    background:
+      radial-gradient(340px 170px at 100% 0%, rgba(var(--scr),.14), transparent 70%),
+      linear-gradient(165deg,var(--card2),var(--card));
+    border:1px solid rgba(var(--scr),.3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 24px 70px rgba(0,0,0,.6), 0 0 50px rgba(var(--scr),.1);
+    animation:floatIn .5s ease backwards}
+  .loginCard .aura{width:96px;height:96px;margin:0 auto 14px;animation:logoGlow 3.4s ease-in-out infinite}
   input[type=password]{width:100%;margin:16px 0 12px;padding:12px 14px;border-radius:10px;font-size:1rem;color:var(--ink);
-    background:rgba(255,255,255,.05);border:1px solid rgba(201,205,216,.25);outline:none}
-  input[type=password]:focus{border-color:var(--prata);box-shadow:0 0 0 3px rgba(215,230,255,.15)}
+    background:rgba(255,255,255,.05);border:1px solid rgba(var(--scr),.25);outline:none;transition:all .2s}
+  input[type=password]:focus{border-color:rgba(var(--scr),.6);box-shadow:0 0 0 3px rgba(var(--scr),.12), 0 0 24px rgba(var(--scr),.15)}
   #erroLogin{color:var(--bad);font-size:.82rem;min-height:1.2em;margin:4px 0 0}
   .shake{animation:shake .4s}
   @keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
@@ -122,7 +159,12 @@
     .side .rodape{display:none}
     .conteudo{padding:18px 15px 60px}
   }
-  @media (prefers-reduced-motion: reduce){.card,.bar i{transition:none}.view.ativa{animation:none}.shake{animation:none}}
+  @media (prefers-reduced-motion: reduce){
+    .card,.fala,.loginCard{animation:none}
+    .bar i::after,.fala::after{animation:none}
+    .fala .aura,.loginCard .aura{animation:none}
+    .card{transition:none}
+  }
 </style>
 </head>
 <body>
@@ -131,7 +173,7 @@
   <div class="loginCard" id="cardLogin">
     <div class="aura"><img src="/logo.png" alt="O Poder da Mente Sábia"></div>
     <p class="eyebrow">Estúdio YouTube</p>
-    <h1 style="font-size:1.5rem">O Poder da <em>Mente Sábia</em></h1>
+    <h1>O Poder da <em>Mente Sábia</em></h1>
     <p class="d">Painel do Diretor</p>
     <input type="password" id="senha" placeholder="Senha do Diretor" autocomplete="current-password">
     <p id="erroLogin"></p>
@@ -175,16 +217,19 @@
         <div class="card"><p class="k">Na fábrica</p><p class="big" id="filaTotal">—</p><p class="d" id="filaDetalhe">—</p></div>
       </div>
 
-      <h2 style="margin-top:30px">O que fazer agora</h2>
-      <p class="sub">Em ordem. Laranja = depende de você · Verde = eu faço.</p>
-      <div class="tarefa sua"><span class="num">1</span><div><p><b>Aprovar o novo visual do canal</b> (foto e capa já estão prontas)</p><small>Você olha, diz "aprovado" — eu aplico no canal.</small></div></div>
-      <div class="tarefa sua"><span class="num">2</span><div><p><b>Assistir e aprovar o vídeo pronto</b> ("O Poder do Silêncio")</p><small>Está esperando desde o dia 10. Aprovou → eu re-embalo o título/capa na fórmula e publicamos.</small></div></div>
-      <div class="tarefa minha"><span class="num">3</span><div><p><b>Terminar o vídeo "As 5 Leis da Mentalidade Vencedora"</b></p><small>Comigo. Sai com título e capa já na fórmula que funciona.</small></div></div>
-      <div class="tarefa sua"><span class="num">4</span><div><p><b>Entrar 1 vez na conta do canal no navegador do robô</b></p><small>Só uma vez, comigo te guiando. Depois disso o robô publica sozinho, sempre com sua aprovação antes.</small></div></div>
+      <h2 style="margin-top:28px">O que fazer agora</h2>
+      <p class="sub">Laranja = depende de você · Verde = eu faço.</p>
+      <div class="grid g2">
+        <div class="card tarefa sua"><p class="num">1</p><p><b>Aprovar o novo visual do canal</b></p><small>Foto e capa prontas. Você olha, diz "aprovado" — eu aplico no canal.</small></div>
+        <div class="card tarefa sua"><p class="num">2</p><p><b>Assistir e aprovar o vídeo pronto</b></p><small>"O Poder do Silêncio" espera desde o dia 10. Aprovou → eu re-embalo na fórmula e publicamos.</small></div>
+        <div class="card tarefa minha"><p class="num">3</p><p><b>Terminar "As 5 Leis da Mentalidade Vencedora"</b></p><small>Comigo. Sai com título e capa já na fórmula que funciona.</small></div>
+        <div class="card tarefa sua"><p class="num">4</p><p><b>Entrar 1 vez na conta do canal no navegador do robô</b></p><small>Só uma vez, comigo guiando. Depois o robô publica sozinho — sempre com sua aprovação antes.</small></div>
+      </div>
 
-      <div class="card" style="margin-top:26px">
-        <p class="k">Crescimento · gravado pela plataforma</p>
-        <p class="d" style="margin:0" id="histNota">—</p>
+      <div class="grid g3" style="margin-top:26px">
+        <div class="card"><p class="k">Crescimento</p><p class="d" style="margin:0" id="histNota">—</p></div>
+        <div class="card"><p class="k">Melhor vídeo do canal</p><p class="titulo-v" id="melhorTitulo">—</p><p class="d" id="melhorViews">—</p></div>
+        <div class="card"><p class="k">Quando o canal paga</p><p class="d" style="margin:0">Ao chegar em <b>1.000 inscritos + 4.000 horas assistidas</b>. Cada vídeo aprovado nos aproxima.</p></div>
       </div>
     </div>
 
@@ -193,17 +238,17 @@
       <h2>Vídeos</h2>
       <p class="sub">Primeiro os que estão sendo feitos, depois os que já estão no canal.</p>
 
-      <h2 style="font-size:1.05rem">🔨 Sendo feitos</h2>
+      <h2 style="font-size:.95rem;color:var(--dim)">🔨 SENDO FEITOS</h2>
       <div class="grid g3" id="gridPipeline" style="margin-bottom:26px"></div>
 
-      <h2 style="font-size:1.05rem">📺 No canal (números de agora)</h2>
+      <h2 style="font-size:.95rem;color:var(--dim)">📺 NO CANAL · números de agora</h2>
       <div class="grid g3" id="gridVideos"></div>
     </div>
 
     <!-- ═══════════ IDEIAS ═══════════ -->
     <div class="view" id="v-ideias">
       <h2>Ideias prontas</h2>
-      <p class="sub">10 ideias de vídeo. Cada uma é inspirada num vídeo que JÁ fez milhões de views — a prova está em cada cartão. Nada é copiado: a gente refaz tudo do zero, do nosso jeito.</p>
+      <p class="sub">10 ideias de vídeo. Cada uma inspirada num vídeo que JÁ fez milhões — a prova está no cartão. Nada é copiado: refazemos tudo do zero, do nosso jeito.</p>
       <div class="grid g3" id="gridPautas"></div>
     </div>
 
@@ -215,27 +260,25 @@
       <div class="grid g3">
         <div class="card"><p class="k">O título</p>
           <p class="d" style="margin:0">Fala <b>com você</b>, promete <b>resultado com prazo</b> e usa um <b>nome famoso</b>.</p>
-          <p class="d">Exemplo real: <i>"Aprenda a agir como se NADA te afetasse | Napoleon Hill"</i> — 5 milhões de views.</p></div>
+          <p class="d">Real: <i>"Aprenda a agir como se NADA te afetasse | Napoleon Hill"</i> — 5 milhões de views.</p></div>
         <div class="card"><p class="k">A capa</p>
           <p class="d" style="margin:0"><b>2 a 4 palavras gigantes</b>, uma emoção só, na identidade da marca. Tem que dar pra ler no celular.</p></div>
         <div class="card"><p class="k">Os primeiros 15 segundos</p>
           <p class="d" style="margin:0">Começa <b>direto no assunto</b>, sem "olá, bem-vindos". É aqui que o vídeo vive ou morre.</p></div>
         <div class="card"><p class="k">O tamanho</p>
-          <p class="d" style="margin:0"><b>15 a 40 min</b> para ensinar · <b>1h30 a 3h</b> para ouvir dormindo (é o que mais gera horas) · Shorts só dos nossos próprios vídeos.</p></div>
+          <p class="d" style="margin:0"><b>15 a 40 min</b> para ensinar · <b>1h30 a 3h</b> para ouvir dormindo · Shorts só dos nossos vídeos.</p></div>
         <div class="card"><p class="k">Os pedidos</p>
-          <p class="d" style="margin:0">Pedir comentário cedo, pedir inscrição <b>logo depois da melhor parte</b> (não no fim), e terminar apontando o próximo vídeo.</p></div>
+          <p class="d" style="margin:0">Comentário cedo · inscrição <b>logo após a melhor parte</b> · fim apontando o próximo vídeo.</p></div>
         <div class="card"><p class="k">A regra de ouro</p>
-          <p class="d" style="margin:0"><b>O vídeo tem que entregar o que o título promete.</b> O YouTube mede se a pessoa saiu satisfeita — quem engana, morre.</p></div>
+          <p class="d" style="margin:0"><b>Entregar o que o título promete.</b> O YouTube mede satisfação — quem engana, morre.</p></div>
       </div>
 
-      <h2 style="font-size:1.05rem;margin-top:26px">Como saber se funcionou (toda segunda)</h2>
+      <h2 style="font-size:.95rem;color:var(--dim);margin-top:26px">COMO SABER SE FUNCIONOU · toda segunda</h2>
       <div class="grid g3">
-        <div class="card"><p class="k">As pessoas clicam?</p><p class="big" style="font-size:1.7rem">4<small> em cada 100</small></p><p class="d">que veem a capa devem clicar. Menos que 2? Trocamos a capa.</p></div>
-        <div class="card"><p class="k">As pessoas ficam?</p><p class="big" style="font-size:1.7rem">7<small> em cada 10</small></p><p class="d">devem passar dos 15 segundos. Menos que 5? Refazemos o começo.</p></div>
-        <div class="card"><p class="k">Viram inscritos?</p><p class="big" style="font-size:1.7rem">↗</p><p class="d">cada vídeo deve trazer mais inscritos que o anterior.</p></div>
+        <div class="card"><p class="k">As pessoas clicam?</p><p class="big" style="font-size:1.8rem">4<small> em cada 100</small></p><p class="d">que veem a capa devem clicar. Menos que 2? Trocamos a capa.</p></div>
+        <div class="card"><p class="k">As pessoas ficam?</p><p class="big" style="font-size:1.8rem">7<small> em cada 10</small></p><p class="d">devem passar dos 15 segundos. Menos? Refazemos o começo.</p></div>
+        <div class="card"><p class="k">Viram inscritos?</p><p class="big" style="font-size:1.8rem">↗</p><p class="d">cada vídeo deve trazer mais que o anterior.</p></div>
       </div>
-
-      <p class="sub" style="margin-top:18px">A meta de tudo: <b>1.000 inscritos + 4.000 horas assistidas</b> = canal monetizado. O estudo completo (para quem quiser a versão profunda) está em ESTUDO_YOUTUBE_2026.md.</p>
     </div>
 
   </main>
@@ -259,8 +302,28 @@ function navega() {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("ativa"));
   $("#v-" + pagina).classList.add("ativa");
   document.querySelectorAll("nav.menu a").forEach(a => a.classList.toggle("ativo", a.getAttribute("href") === "#" + pagina));
+  cascata($("#v-" + pagina));
 }
 window.addEventListener("hashchange", navega);
+
+/* efeitos da casa: entrada em cascata + números que contam */
+function cascata(raiz) {
+  (raiz || document).querySelectorAll(".card,.fala").forEach((c, i) => {
+    c.style.animation = "none"; void c.offsetWidth;
+    c.style.animation = ""; c.style.animationDelay = Math.min(i * 55, 600) + "ms";
+  });
+}
+function countUp(el, valor) {
+  if (valor == null) { el.textContent = "—"; return; }
+  const dur = 750, t0 = performance.now();
+  const extra = el.querySelector("small");
+  (function tick(t) {
+    const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(Math.round(valor * eased));
+    if (extra) el.appendChild(extra);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
 
 const STATUS_GENTE = {
   aprovacao: ["warn", "⏸ esperando VOCÊ aprovar"],
@@ -278,46 +341,51 @@ function pillStatus(s) {
 function montaFala(d) {
   const partes = [];
   partes.push(`Diretor, o canal tem <b>${fmt(d.inscritos)} inscritos</b> — faltam <b>${fmt(Math.max(0, 1000 - (d.inscritos || 0)))}</b> para começar a ganhar dinheiro.`);
-  if (d.dias_sem_postar > 30) partes.push(`Está <b>parado há ${fmt(d.dias_sem_postar)} dias</b> — nossa primeira missão é voltar a postar.`);
+  if (d.dias_sem_postar > 30) partes.push(`Está <b>parado há ${fmt(d.dias_sem_postar)} dias</b> — a primeira missão é voltar a postar.`);
   const pipe = (d.pipeline && d.pipeline.videos) || [];
   const esperando = pipe.filter(v => v.status === "aprovacao").length;
   const fazendo = pipe.filter(v => v.status === "producao").length;
   if (esperando) partes.push(`Tem <b>${esperando} vídeo pronto esperando a sua aprovação</b>.`);
   if (fazendo) partes.push(`Estou produzindo <b>${fazendo}</b> agora.`);
-  partes.push(`O caminho está na lista aqui embaixo.`);
   return partes.join(" ");
 }
 
+let primeiraCarga = true;
 function desenhaResumo(d) {
   $("#falaEstudio").innerHTML = montaFala(d);
 
-  $("#inscritos").textContent = fmt(d.inscritos);
+  countUp($("#inscritos"), d.inscritos);
   const pct = Math.min(100, ((d.inscritos || 0) / 1000) * 100);
   $("#barMeta").style.width = pct + "%";
   $("#metaTxt").innerHTML = `<b>${pct.toFixed(1)}%</b> do caminho até 1.000 (quando o canal passa a pagar)`;
-  $("#diasParado").innerHTML = d.dias_sem_postar == null ? "—" : fmt(d.dias_sem_postar) + " <small>dias</small>";
+  $("#diasParado").innerHTML = (d.dias_sem_postar == null ? "—" : fmt(d.dias_sem_postar) + ' <small>dias</small>');
   $("#ultimoUpload").textContent = d.ultimo_upload ? "último vídeo: " + d.ultimo_upload.split("-").reverse().join("/") : "—";
 
   const pipe = (d.pipeline && d.pipeline.videos) || [];
   $("#filaTotal").textContent = pipe.length;
   $("#filaDetalhe").textContent = pipe.map(v => (STATUS_GENTE[v.status] || ["", v.status])[1].replace(/^[^\s]+\s/, "")).join(" · ") || "nada em produção";
 
+  const vids = d.videos || [];
+  const melhor = vids.slice().sort((a, b) => b.views - a.views)[0];
+  if (melhor) {
+    $("#melhorTitulo").textContent = melhor.titulo.length > 60 ? melhor.titulo.slice(0, 60) + "…" : melhor.titulo;
+    $("#melhorViews").innerHTML = `<b>${fmt(melhor.views)}</b> visualizações · <b>${fmt(melhor.likes)}</b> curtidas`;
+  }
+
   $("#selo").textContent = d.aviso ? "● retrato salvo" : "● AO VIVO";
   $("#selo").className = "vivo" + (d.aviso ? " off" : "");
 
   const hist = (d.historico || []).filter(p => p.inscritos != null);
   $("#histNota").innerHTML = hist.length >= 2
-    ? `A plataforma grava os inscritos todo dia. <b>${hist.length} registros</b> até agora — primeiro: ${fmt(hist[0].inscritos)}, hoje: ${fmt(hist[hist.length-1].inscritos)}.`
-    : `A plataforma começou hoje a gravar os inscritos todo dia — em uma semana isso vira o gráfico do crescimento.`;
+    ? `Gravamos os inscritos todo dia: <b>${hist.length} registros</b> — primeiro ${fmt(hist[0].inscritos)}, hoje ${fmt(hist[hist.length-1].inscritos)}.`
+    : `Começamos hoje a gravar os inscritos todo dia — em uma semana isso vira o gráfico do crescimento.`;
 
-  /* vídeos */
   $("#gridPipeline").innerHTML = pipe.map(v => `
     <div class="card">${pillStatus(v.status)}
       <p class="titulo-v">${v.titulo_trabalho}</p>
       <p class="d">${v.nota || ""}</p>
     </div>`).join("") || '<div class="card"><p class="d">Nada sendo feito agora.</p></div>';
 
-  const vids = d.videos || [];
   $("#gridVideos").innerHTML = vids.map(v => `
     <div class="card"><p class="k">${(v.publicado || "").split("-").reverse().join("/")}</p>
       <p class="titulo-v">${v.titulo.length > 70 ? v.titulo.slice(0, 70) + "…" : v.titulo}</p>
@@ -325,17 +393,17 @@ function desenhaResumo(d) {
       <p class="d"><a style="color:var(--cy);text-decoration:none" href="${v.url}" target="_blank" rel="noopener">ver no YouTube ↗</a></p>
     </div>`).join("") || '<div class="card"><p class="d">Sem vídeos.</p></div>';
 
-  /* ideias */
   const pautas = (d.agente && d.agente.pautas) || [];
   $("#gridPautas").innerHTML = pautas.map(p => {
-    const prova = (p.conceito_fonte.match(/[\d,.]+\s*(milh|M\b|mil)/i) || [p.conceito_fonte])[0];
     const tipo = p.formato === "noturno" ? "🌙 para ouvir dormindo" : (p.formato === "ensino-curto" ? "⚡ curto e direto" : "🎓 para ensinar");
     return `
     <div class="card"><span class="pill cy">${tipo}</span>
       <p class="titulo-v">${p.titulo_candidato}</p>
-      <p class="d">O vídeo que inspirou fez <b>${p.conceito_fonte.replace(/^.*?:\s*/, "")}</b></p>
+      <p class="d">Inspirado num vídeo que fez <b>${p.conceito_fonte.replace(/^.*?:\s*/, "")}</b></p>
     </div>`;
   }).join("") || '<div class="card"><p class="d">Sem ideias no banco.</p></div>';
+
+  if (primeiraCarga) { cascata(document.querySelector(".view.ativa")); primeiraCarga = false; }
 }
 
 async function carregaPainel() {

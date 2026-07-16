@@ -20,7 +20,7 @@ from pydantic import BaseModel
 from starlette.middleware.sessions import SessionMiddleware
 
 from auth import check_password, require_auth
-from dados import carrega_pipeline, resumo
+from dados import carrega_decisoes, carrega_pipeline, grava_decisao, resumo
 
 APP_NAME = "youtube-opoder"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,6 +54,7 @@ def status():
         "loja": APP_NAME,
         "missao": "canal @opoderdamentesabia rumo ao YPP (1.000 inscritos + 4.000h)",
         "pipeline": contagem,
+        "decisoes_do_diretor": carrega_decisoes(),
         "uptime_s": int(time.time() - INICIO),
     }
 
@@ -100,7 +101,26 @@ def me(request: Request):
 # ── Dados do painel ──────────────────────────────────────────────────────────
 @app.get("/api/resumo")
 def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
-    return JSONResponse(resumo(force=force))
+    dados = resumo(force=force)
+    dados["decisoes"] = carrega_decisoes()  # decisão do Diretor nunca espera cache
+    return JSONResponse(dados)
+
+
+class DecisaoIn(BaseModel):
+    item: str
+    decisao: str
+
+
+ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer"}, "sessao_navegador": {"pronto"},
+                 "video_aprovacao": {"aprovado", "reprovado"}}
+
+
+@app.post("/api/decisao")
+def decidir(body: DecisaoIn, request: Request, _=Depends(require_auth)):
+    """O Diretor decide no painel; a decisão fica registrada e o agente executa."""
+    if body.item not in ITENS_VALIDOS or body.decisao not in ITENS_VALIDOS[body.item]:
+        raise HTTPException(status_code=400, detail="Decisão desconhecida")
+    return {"ok": True, "decisoes": grava_decisao(body.item, body.decisao)}
 
 
 # ── Frontend ─────────────────────────────────────────────────────────────────
@@ -112,3 +132,11 @@ def root():
 @app.get("/logo.png")
 def logo():
     return FileResponse(os.path.join(FRONT, "logo.png"))
+
+
+@app.get("/kit/{arquivo}")
+def kit(arquivo: str):
+    caminho = os.path.join(FRONT, "kit", os.path.basename(arquivo))
+    if not os.path.isfile(caminho):
+        raise HTTPException(status_code=404, detail="não existe")
+    return FileResponse(caminho)

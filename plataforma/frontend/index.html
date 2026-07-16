@@ -151,6 +151,25 @@
   @keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
   .hide{display:none!important}
 
+  /* botões dentro das tarefas */
+  .tarefa .acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .btn.mini{padding:8px 14px;font-size:.66rem}
+  .btn.mini.ok{background:linear-gradient(120deg,#2EE6A8,#7FF5CC);box-shadow:0 6px 18px rgba(46,230,168,.3)}
+  .btn.mini.no{background:none;color:var(--bad);border:1px solid rgba(255,93,93,.4);box-shadow:none}
+
+  /* visualizador do kit (aprovação na tela) */
+  .overlay{position:fixed;inset:0;z-index:60;background:rgba(5,6,10,.88);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:18px}
+  .overlay .caixa{max-width:760px;width:100%;max-height:92vh;overflow-y:auto;border-radius:16px;padding:20px;
+    background:
+      radial-gradient(380px 170px at 100% 0%, rgba(var(--scr),.14), transparent 70%),
+      linear-gradient(165deg,var(--card2),var(--card));
+    border:1px solid rgba(var(--scr),.35);
+    box-shadow:0 30px 80px rgba(0,0,0,.7), 0 0 60px rgba(var(--scr),.12);animation:floatIn .3s ease}
+  .overlay img{width:100%;border-radius:12px;display:block;border:1px solid rgba(var(--scr),.2);
+    box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .overlay .caixa .k{margin-top:14px}
+
   @media (max-width:880px){
     .layout{flex-direction:column}
     .side{width:100%;height:auto;position:static;padding:14px}
@@ -168,6 +187,22 @@
 </style>
 </head>
 <body>
+
+<div class="overlay hide" id="verKit">
+  <div class="caixa">
+    <h2>O novo visual do canal</h2>
+    <p class="sub" style="margin-bottom:14px">Foto de perfil e capa, prontas na identidade da marca. Se aprovar, eu aplico no canal e te aviso quando estiver no ar.</p>
+    <p class="k">Foto de perfil</p>
+    <img src="/kit/avatar.png" alt="Foto de perfil proposta" style="max-width:240px;border-radius:50%">
+    <p class="k">Capa do canal</p>
+    <img src="/kit/banner.png" alt="Capa proposta">
+    <div class="acoes" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn mini ok" onclick="decidir('kit_visual','aprovado')">✔ Aprovado — pode aplicar</button>
+      <button class="btn mini no" onclick="decidir('kit_visual','refazer')">✖ Quero outra versão</button>
+      <button class="btn mini ghost" onclick="fechaKit()">Fechar</button>
+    </div>
+  </div>
+</div>
 
 <div id="telaLogin">
   <div class="loginCard" id="cardLogin">
@@ -218,13 +253,8 @@
       </div>
 
       <h2 style="margin-top:28px">O que fazer agora</h2>
-      <p class="sub">Laranja = depende de você · Verde = eu faço.</p>
-      <div class="grid g2">
-        <div class="card tarefa sua"><p class="num">1</p><p><b>Aprovar o novo visual do canal</b></p><small>Foto e capa prontas. Você olha, diz "aprovado" — eu aplico no canal.</small></div>
-        <div class="card tarefa sua"><p class="num">2</p><p><b>Assistir e aprovar o vídeo pronto</b></p><small>"O Poder do Silêncio" espera desde o dia 10. Aprovou → eu re-embalo na fórmula e publicamos.</small></div>
-        <div class="card tarefa minha"><p class="num">3</p><p><b>Terminar "As 5 Leis da Mentalidade Vencedora"</b></p><small>Comigo. Sai com título e capa já na fórmula que funciona.</small></div>
-        <div class="card tarefa sua"><p class="num">4</p><p><b>Entrar 1 vez na conta do canal no navegador do robô</b></p><small>Só uma vez, comigo guiando. Depois o robô publica sozinho — sempre com sua aprovação antes.</small></div>
-      </div>
+      <p class="sub">Laranja = depende de você · Verde = eu faço. Cada card tem o botão da ação.</p>
+      <div class="grid g2" id="gridTarefas"></div>
 
       <div class="grid g3" style="margin-top:26px">
         <div class="card"><p class="k">Crescimento</p><p class="d" style="margin:0" id="histNota">—</p></div>
@@ -353,9 +383,81 @@ function montaFala(d) {
   return partes.join(" ");
 }
 
+/* tarefas dinâmicas: nascem do estado real e cada uma tem seu botão */
+function montaTarefas(d) {
+  const dec = d.decisoes || {};
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  const cards = [];
+  let n = 1;
+
+  /* 1 · visual do canal */
+  const kit = dec.kit_visual;
+  if (!kit) {
+    cards.push(`<div class="card tarefa sua"><p class="num">${n++}</p>
+      <p><b>Aprovar o novo visual do canal</b></p>
+      <small>Foto e capa prontas. Clique para ver e decidir na hora.</small>
+      <div class="acoes"><button class="btn mini" onclick="abreKit()">👁 Ver e decidir</button></div></div>`);
+  } else if (kit.decisao === "aprovado") {
+    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
+      <p><b>Aplicar o visual aprovado no canal</b></p>
+      <small>Você aprovou em ${new Date(kit.quando).toLocaleDateString("pt-BR")}. Agora é comigo — aplico e te aviso.</small>
+      <div class="acoes"><button class="btn mini ghost" onclick="abreKit()">rever visual</button></div></div>`);
+  } else {
+    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
+      <p><b>Refazer o visual do canal</b></p>
+      <small>Você pediu outra versão em ${new Date(kit.quando).toLocaleDateString("pt-BR")}. Estou refazendo.</small></div>`);
+  }
+
+  /* 2 · vídeos esperando aprovação (só aparece se existir) */
+  pipe.filter(v => v.status === "aprovacao").forEach(v => {
+    cards.push(`<div class="card tarefa sua"><p class="num">${n++}</p>
+      <p><b>Assistir e aprovar: ${v.titulo_trabalho}</b></p>
+      <small>${v.nota || ""}</small>
+      <div class="acoes">
+        <button class="btn mini ok" onclick="decidir('video_aprovacao','aprovado')">✔ Aprovar publicação</button>
+        <button class="btn mini no" onclick="decidir('video_aprovacao','reprovado')">✖ Reprovar</button>
+      </div></div>`);
+  });
+
+  /* 3 · produção em andamento (comigo) */
+  pipe.filter(v => v.status === "producao").forEach(v => {
+    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
+      <p><b>Terminar "${v.titulo_trabalho}"</b></p>
+      <small>Comigo. Sai com título e capa já na fórmula que funciona (${v.duracao_alvo || "5-30min"}).</small>
+      <div class="acoes"><button class="btn mini ghost" onclick="location.hash='#videos'">acompanhar →</button></div></div>`);
+  });
+
+  /* 4 · sessão do navegador */
+  const sess = dec.sessao_navegador;
+  if (!sess) {
+    cards.push(`<div class="card tarefa sua"><p class="num">${n++}</p>
+      <p><b>Entrar 1 vez na conta do canal no navegador do robô</b></p>
+      <small>Só uma vez, comigo guiando. Depois o robô publica sozinho — sempre com sua aprovação antes.</small>
+      <div class="acoes"><button class="btn mini" onclick="decidir('sessao_navegador','pronto')">✋ Estou pronto — me chama</button></div></div>`);
+  } else {
+    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
+      <p><b>Fazer o login do robô com você</b></p>
+      <small>Avisado em ${new Date(sess.quando).toLocaleDateString("pt-BR")}! É só me dizer no chat "vamos logar o robô" que eu preparo tudo e te guio.</small></div>`);
+  }
+
+  $("#gridTarefas").innerHTML = cards.join("");
+}
+
+function abreKit() { $("#verKit").classList.remove("hide"); }
+function fechaKit() { $("#verKit").classList.add("hide"); }
+async function decidir(item, decisao) {
+  try {
+    await api("/api/decisao", {method: "POST", body: JSON.stringify({item, decisao})});
+    fechaKit();
+    carregaPainel();
+  } catch (e) { alert("Não consegui gravar: " + ((e.body && e.body.detail) || e.message)); }
+}
+$("#verKit") && $("#verKit").addEventListener("click", (ev) => { if (ev.target.id === "verKit") fechaKit(); });
+
 let primeiraCarga = true;
 function desenhaResumo(d) {
   $("#falaEstudio").innerHTML = montaFala(d);
+  montaTarefas(d);
 
   countUp($("#inscritos"), d.inscritos);
   const pct = Math.min(100, ((d.inscritos || 0) / 1000) * 100);

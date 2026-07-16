@@ -126,6 +126,27 @@ def carrega_pautas() -> dict:
         return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
 
 
+DECISOES_PATH = os.path.join(BASE_DIR, "data", "decisoes.json")
+
+
+def carrega_decisoes() -> dict:
+    """Decisões do Diretor tomadas no painel (aprovações, avisos)."""
+    try:
+        with open(DECISOES_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def grava_decisao(item: str, decisao: str) -> dict:
+    todas = carrega_decisoes()
+    todas[item] = {"decisao": decisao, "quando": datetime.now(timezone.utc).isoformat()}
+    os.makedirs(os.path.dirname(DECISOES_PATH), exist_ok=True)
+    with open(DECISOES_PATH, "w", encoding="utf-8") as f:
+        json.dump(todas, f, ensure_ascii=False, indent=2)
+    return todas
+
+
 HIST_PATH = os.path.join(BASE_DIR, "data", "historico.jsonl")
 
 
@@ -202,6 +223,7 @@ def resumo(force: bool = False) -> dict:
     if dados.get("ok"):
         _grava_historico(dados)
     dados["historico"] = carrega_historico()
+    dados["decisoes"] = carrega_decisoes()
 
     _cache.update(quando=agora, dados=dados)
     _grava_cache_disco(dados)

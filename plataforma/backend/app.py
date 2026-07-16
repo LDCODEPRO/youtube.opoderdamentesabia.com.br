@@ -107,3 +107,8 @@ def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
 @app.get("/")
 def root():
     return FileResponse(os.path.join(FRONT, "index.html"))
+
+
+@app.get("/logo.png")
+def logo():
+    return FileResponse(os.path.join(FRONT, "logo.png"))

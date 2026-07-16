@@ -7,10 +7,11 @@
 <title>Estúdio YouTube · O Poder da Mente Sábia</title>
 <style>
   :root{
-    --bg:#070B12; --card:#0E1826; --card2:#101C2E;
-    --gold:#D9A441; --gold-hi:#F2CF8D; --gold-dim:rgba(217,164,65,.32);
-    --ink:#EDE7D8; --dim:#A99F8A; --faint:#6E6A5E;
-    --ok:#4FC98B; --warn:#E8834A; --bad:#E05B5B; --cy:#57B8D9;
+    /* identidade da marca: preto cósmico + prata cromada (o logo da lâmpada-cérebro) */
+    --bg:#05060A; --card:#0D1017; --card2:#12151E;
+    --prata:#C9CDD8; --prata-hi:#F0F3FA; --prata-dim:rgba(201,205,216,.30);
+    --ink:#E8E9EE; --dim:#9BA1B0; --faint:#5F6472;
+    --ok:#4FC98B; --warn:#E8834A; --bad:#E05B5B; --cy:#8FB8D9;
     --serif:Georgia,'Times New Roman',serif; --sans:'Segoe UI',system-ui,sans-serif;
     --label:Bahnschrift,'Segoe UI',sans-serif;
   }
@@ -18,66 +19,72 @@
   html{color-scheme:dark}
   body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.5;min-height:100vh;
     background:
-      radial-gradient(1000px 460px at 50% -6%, rgba(217,164,65,.14), transparent 62%),
-      radial-gradient(800px 540px at 90% 34%, rgba(30,58,95,.32), transparent 60%),
-      #070B12;}
+      radial-gradient(1px 1px at 12% 22%, rgba(240,243,250,.5), transparent 100%),
+      radial-gradient(1px 1px at 78% 12%, rgba(240,243,250,.35), transparent 100%),
+      radial-gradient(1px 1px at 34% 64%, rgba(240,243,250,.28), transparent 100%),
+      radial-gradient(1px 1px at 62% 82%, rgba(240,243,250,.35), transparent 100%),
+      radial-gradient(1px 1px at 90% 52%, rgba(240,243,250,.25), transparent 100%),
+      radial-gradient(1000px 460px at 50% -6%, rgba(215,228,255,.09), transparent 62%),
+      radial-gradient(820px 560px at 88% 36%, rgba(96,116,152,.14), transparent 60%),
+      radial-gradient(700px 460px at 8% 72%, rgba(150,165,195,.06), transparent 55%),
+      #05060A;}
   .wrap{max-width:1120px;margin:0 auto;padding:30px 20px 70px}
-  .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:var(--gold);margin:0 0 8px}
+  .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:var(--prata);margin:0 0 8px}
   h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,4vw,2.5rem);margin:0;line-height:1.1}
-  h1 em{font-style:normal;color:var(--gold-hi);text-shadow:0 0 30px rgba(217,164,65,.45)}
-  h2{font-family:var(--serif);font-weight:400;font-size:1.28rem;color:var(--gold-hi);margin:0 0 14px}
+  h1 em{font-style:normal;color:var(--prata-hi);text-shadow:0 0 30px rgba(215,230,255,.45)}
+  h2{font-family:var(--serif);font-weight:400;font-size:1.28rem;color:var(--prata-hi);margin:0 0 14px}
   .sec{margin-top:46px;position:relative;padding-top:22px}
   .sec::before{content:"";position:absolute;top:0;left:0;width:60px;height:3px;border-radius:2px;
-    background:linear-gradient(90deg,var(--gold),transparent);box-shadow:0 0 16px rgba(217,164,65,.55)}
+    background:linear-gradient(90deg,var(--prata),transparent);box-shadow:0 0 16px rgba(215,230,255,.5)}
   .grid{display:grid;gap:13px}
   .g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
   .g4{grid-template-columns:repeat(auto-fit,minmax(175px,1fr))}
   .card{background:linear-gradient(160deg,var(--card2),var(--card));
-    border:1px solid rgba(217,164,65,.16);border-radius:14px;padding:16px;
-    box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(242,207,141,.07);
+    border:1px solid rgba(201,205,216,.15);border-radius:14px;padding:16px;
+    box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(240,243,250,.06);
     transition:transform .22s ease, border-color .22s ease}
-  .card:hover{transform:translateY(-3px);border-color:rgba(217,164,65,.42)}
+  .card:hover{transform:translateY(-3px);border-color:rgba(220,232,255,.4)}
   .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--dim);margin:0 0 7px}
-  .big{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--gold-hi);margin:0;font-variant-numeric:tabular-nums}
+  .big{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums}
   .big small{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
   .d{font-size:.83rem;color:var(--dim);margin:7px 0 0}
   .d b{color:var(--ink)}
   .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}
-  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold-hi));box-shadow:0 0 12px rgba(217,164,65,.5);transition:width .8s ease}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--prata),var(--prata-hi));box-shadow:0 0 12px rgba(215,230,255,.5);transition:width .8s ease}
   .pill{display:inline-block;font-family:var(--label);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid;margin-bottom:8px}
   .pill.ok{color:var(--ok);border-color:rgba(79,201,139,.4);background:rgba(79,201,139,.08)}
   .pill.warn{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.08)}
-  .pill.gold{color:var(--gold-hi);border-color:var(--gold-dim);background:rgba(217,164,65,.08)}
+  .pill.prata{color:var(--prata-hi);border-color:var(--prata-dim);background:rgba(201,205,216,.08)}
   .pill.cy{color:var(--cy);border-color:rgba(87,184,217,.4);background:rgba(87,184,217,.08)}
   .titulo-v{font-family:var(--serif);font-size:.98rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
-  .hl{color:var(--gold-hi)}
+  .hl{color:var(--prata-hi)}
   ul.lista{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:var(--dim)}
   ul.lista li{padding:4px 0 4px 22px;position:relative}
-  ul.lista li::before{content:"✦";position:absolute;left:2px;color:var(--gold);font-size:.75rem}
+  ul.lista li::before{content:"✦";position:absolute;left:2px;color:var(--prata);font-size:.75rem}
   .topo{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
   .vivo{font-family:var(--label);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ok);
     border:1px solid rgba(79,201,139,.35);border-radius:999px;padding:5px 12px;background:rgba(79,201,139,.07)}
   .vivo.off{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.07)}
   .btn{font-family:var(--label);letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
-    background:linear-gradient(120deg,var(--gold),var(--gold-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
-    box-shadow:0 6px 20px rgba(217,164,65,.3)}
+    background:linear-gradient(120deg,var(--prata),var(--prata-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
+    box-shadow:0 6px 20px rgba(200,215,245,.25)}
   .btn:hover{filter:brightness(1.08)}
-  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(217,164,65,.25);box-shadow:none}
+  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(201,205,216,.25);box-shadow:none}
   /* login */
   #telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
   .loginCard{width:min(380px,92vw);text-align:center;padding:34px 26px;background:linear-gradient(160deg,var(--card2),var(--card));
-    border:1px solid rgba(217,164,65,.25);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(217,164,65,.08)}
-  .aura{width:74px;height:74px;margin:0 auto 14px;border-radius:50%;
-    background:radial-gradient(circle at 50% 42%, rgba(242,207,141,.9), rgba(217,164,65,.35) 55%, transparent 72%);
-    box-shadow:0 0 34px rgba(217,164,65,.5);display:flex;align-items:center;justify-content:center;
-    font-family:var(--serif);font-size:1.9rem;color:#0A0F16}
+    border:1px solid rgba(201,205,216,.25);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(201,205,216,.08)}
+  .aura{width:92px;height:92px;margin:0 auto 14px;border-radius:50%;overflow:hidden;
+    border:1px solid rgba(201,205,216,.35);
+    box-shadow:0 0 38px rgba(215,230,255,.35), 0 0 90px rgba(215,230,255,.12)}
+  .aura img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.35)}
   input[type=password]{width:100%;margin:16px 0 12px;padding:12px 14px;border-radius:10px;font-size:1rem;color:var(--ink);
-    background:rgba(255,255,255,.05);border:1px solid rgba(217,164,65,.25);outline:none}
-  input[type=password]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,164,65,.15)}
+    background:rgba(255,255,255,.05);border:1px solid rgba(201,205,216,.25);outline:none}
+  input[type=password]:focus{border-color:var(--prata);box-shadow:0 0 0 3px rgba(215,230,255,.15)}
   #erroLogin{color:var(--bad);font-size:.82rem;min-height:1.2em;margin:4px 0 0}
   .shake{animation:shake .4s}
   @keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
-  .foot{margin-top:52px;padding-top:18px;border-top:1px solid rgba(217,164,65,.13);color:var(--faint);font-size:.76rem;display:flex;gap:16px;flex-wrap:wrap}
+  .foot{margin-top:52px;padding-top:18px;border-top:1px solid rgba(201,205,216,.13);color:var(--faint);font-size:.76rem;display:flex;gap:16px;flex-wrap:wrap}
   .foot a{color:var(--dim);text-decoration:none}
   .hide{display:none!important}
   @media (prefers-reduced-motion: reduce){.card,.bar i{transition:none}.shake{animation:none}}
@@ -87,7 +94,7 @@
 
 <div id="telaLogin">
   <div class="loginCard" id="cardLogin">
-    <div class="aura">🧠</div>
+    <div class="aura"><img src="/logo.png" alt="O Poder da Mente Sábia"></div>
     <p class="eyebrow">Estúdio YouTube</p>
     <h1 style="font-size:1.5rem">O Poder da <em>Mente Sábia</em></h1>
     <p class="d">Painel do Diretor — youtube.opoderdamentesabia.com.br</p>
@@ -154,7 +161,7 @@
     <div class="grid g3">
       <div class="card"><p class="k">Embalagem</p><ul class="lista">
         <li>Título ≤60c com <b>3 das 4 peças</b> do parâmetro</li>
-        <li>Thumb dourada da marca: 2–4 palavras, 1 emoção</li>
+        <li>Thumb na fórmula da marca: 2–4 palavras, 1 emoção</li>
         <li>Descrição: keyword nas 2 primeiras linhas + capítulos</li>
       </ul></div>
       <div class="card"><p class="k">Retenção</p><ul class="lista">
@@ -191,8 +198,8 @@ async function api(caminho, opts) {
 
 function pillStatus(s) {
   const mapa = {publicado: ["ok", "publicado"], aprovacao: ["warn", "aguarda aprovação"], producao: ["cy", "em produção"],
-    embalagem: ["gold", "embalagem"], roteiro: ["gold", "roteiro"], ideia: ["gold", "ideia"]};
-  const [cls, rotulo] = mapa[s] || ["gold", s];
+    embalagem: ["prata", "embalagem"], roteiro: ["prata", "roteiro"], ideia: ["prata", "ideia"]};
+  const [cls, rotulo] = mapa[s] || ["prata", s];
   return `<span class="pill ${cls}">${rotulo}</span>`;
 }
 
@@ -223,7 +230,7 @@ function desenhaResumo(d) {
 
   const pautas = (d.agente && d.agente.pautas) || [];
   $("#gridPautas").innerHTML = pautas.map(p => `
-    <div class="card"><span class="pill gold">${p.formato} · ${p.duracao_alvo}</span>
+    <div class="card"><span class="pill prata">${p.formato} · ${p.duracao_alvo}</span>
       <p class="titulo-v">${p.titulo_candidato}</p>
       <p class="d">Prova: ${p.conceito_fonte}</p>
     </div>`).join("") || '<div class="card"><p class="d">Banco de pautas vazio.</p></div>';

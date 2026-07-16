@@ -138,6 +138,18 @@
   </section>
 
   <section class="sec">
+    <h2>🤖 O Agente Youtuber — 100% IA, humanizado</h2>
+    <p class="d" style="margin:0 0 12px;max-width:78ch">Missão ditada pelo Diretor (16/07): criar os vídeos por IA com acabamento humano — roteiro com voz de gente, narração com pausas e ênfase, visual em movimento — e <b>publicar sozinho via navegador</b>, como uma pessoa faria, com aprovação no Telegram antes. Doutrina completa: <b>agente/DOUTRINA.md</b>.</p>
+    <div class="grid g4">
+      <div class="card"><span class="pill ok">✓ no ar</span><p class="k">1 · Inteligência</p><p class="d" style="margin:0">Estudo + parâmetro (16/07)</p></div>
+      <div class="card"><span class="pill ok">✓ no ar</span><p class="k">2 · Pauta</p><p class="d" style="margin:0">Banco v1 pelo parâmetro (abaixo)</p></div>
+      <div class="card"><span class="pill cy">parcial</span><p class="k">3–4 · Roteiro + Produção</p><p class="d" style="margin:0">Pipeline provado (vídeos 01/02); automação em construção</p></div>
+      <div class="card"><span class="pill warn">pendente</span><p class="k">6–7 · Aprovação + Navegador</p><p class="d" style="margin:0">Telegram a ligar · sessão do Chrome aguarda o Diretor (login 1x)</p></div>
+    </div>
+    <div class="grid g3" style="margin-top:13px" id="gridPautas"></div>
+  </section>
+
+  <section class="sec">
     <h2>Checklist de publicação (nenhum vídeo sai sem isso)</h2>
     <div class="grid g3">
       <div class="card"><p class="k">Embalagem</p><ul class="lista">
@@ -208,6 +220,13 @@ function desenhaResumo(d) {
       <p class="titulo-v">${v.codigo} · ${v.titulo_trabalho}</p>
       <p class="d">${v.nota || ""}</p>
     </div>`).join("") || '<div class="card"><p class="d">Fila vazia.</p></div>';
+
+  const pautas = (d.agente && d.agente.pautas) || [];
+  $("#gridPautas").innerHTML = pautas.map(p => `
+    <div class="card"><span class="pill gold">${p.formato} · ${p.duracao_alvo}</span>
+      <p class="titulo-v">${p.titulo_candidato}</p>
+      <p class="d">Prova: ${p.conceito_fonte}</p>
+    </div>`).join("") || '<div class="card"><p class="d">Banco de pautas vazio.</p></div>';
 }
 
 async function carregaPainel() {

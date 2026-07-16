@@ -107,6 +107,15 @@ def carrega_pipeline() -> dict:
         return {"erro": f"pipeline.json ilegível: {e}", "videos": []}
 
 
+def carrega_pautas() -> dict:
+    """Banco de pautas do Agente Youtuber (agente/pautas.json)."""
+    try:
+        with open(os.path.join(BASE_DIR, "agente", "pautas.json"), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
+
+
 def _le_cache_disco():
     try:
         with open(CACHE_PATH, encoding="utf-8") as f:
@@ -153,6 +162,7 @@ def resumo(force: bool = False) -> dict:
 
     dados["inscritos"] = _busca_inscritos()
     dados["pipeline"] = carrega_pipeline()
+    dados["agente"] = carrega_pautas()
 
     _cache.update(quando=agora, dados=dados)
     _grava_cache_disco(dados)

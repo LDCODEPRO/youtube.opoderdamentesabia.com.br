@@ -8,7 +8,6 @@
 <title>Estúdio YouTube · O Poder da Mente Sábia</title>
 <style>
   :root{
-    /* identidade da marca: preto cósmico + prata cromada (o logo da lâmpada-cérebro) */
     --bg:#05060A; --card:#0D1017; --card2:#12151E;
     --prata:#C9CDD8; --prata-hi:#F0F3FA; --prata-dim:rgba(201,205,216,.30);
     --ink:#E8E9EE; --dim:#9BA1B0; --faint:#5F6472;
@@ -24,85 +23,89 @@
       radial-gradient(1px 1px at 78% 12%, rgba(240,243,250,.35), transparent 100%),
       radial-gradient(1px 1px at 34% 64%, rgba(240,243,250,.28), transparent 100%),
       radial-gradient(1px 1px at 62% 82%, rgba(240,243,250,.35), transparent 100%),
-      radial-gradient(1px 1px at 90% 52%, rgba(240,243,250,.25), transparent 100%),
       radial-gradient(1000px 460px at 50% -6%, rgba(215,228,255,.09), transparent 62%),
       radial-gradient(820px 560px at 88% 36%, rgba(96,116,152,.14), transparent 60%),
-      radial-gradient(700px 460px at 8% 72%, rgba(150,165,195,.06), transparent 55%),
       #05060A;}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin:0;line-height:1.1}
+  h1 em{font-style:normal;color:var(--prata-hi);text-shadow:0 0 30px rgba(215,230,255,.45)}
+  h2{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--prata-hi);margin:0 0 6px}
+  .sub{color:var(--dim);font-size:.9rem;margin:0 0 18px;max-width:72ch}
   .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:var(--prata);margin:0 0 8px}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,2rem);margin:0;line-height:1.1}
-  h1 em,.hl{font-style:normal;color:var(--prata-hi);text-shadow:0 0 30px rgba(215,230,255,.45)}
-  h2{font-family:var(--serif);font-weight:400;font-size:1.35rem;color:var(--prata-hi);margin:0 0 4px}
-  .sub{color:var(--dim);font-size:.88rem;margin:0 0 20px;max-width:76ch}
   .grid{display:grid;gap:13px}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
-  .g4{grid-template-columns:repeat(auto-fit,minmax(172px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
   .card{background:linear-gradient(160deg,var(--card2),var(--card));
-    border:1px solid rgba(201,205,216,.15);border-radius:14px;padding:16px;
+    border:1px solid rgba(201,205,216,.15);border-radius:14px;padding:17px;
     box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(240,243,250,.06);
     transition:transform .22s ease, border-color .22s ease}
-  .card:hover{transform:translateY(-3px);border-color:rgba(220,232,255,.4)}
+  .card:hover{transform:translateY(-2px);border-color:rgba(220,232,255,.4)}
   .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--dim);margin:0 0 7px}
-  .big{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums}
-  .big small{font-family:var(--sans);font-size:.78rem;color:var(--dim)}
-  .d{font-size:.83rem;color:var(--dim);margin:7px 0 0}
+  .big{font-family:var(--serif);font-size:2.3rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums}
+  .big small{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
+  .d{font-size:.86rem;color:var(--dim);margin:7px 0 0}
   .d b{color:var(--ink)}
-  .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}
+  .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}
   .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--prata),var(--prata-hi));box-shadow:0 0 12px rgba(215,230,255,.5);transition:width .8s ease}
-  .pill{display:inline-block;font-family:var(--label);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid;margin-bottom:8px}
+  .pill{display:inline-block;font-family:var(--label);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 11px;border-radius:999px;border:1px solid;margin-bottom:8px}
   .pill.ok{color:var(--ok);border-color:rgba(79,201,139,.4);background:rgba(79,201,139,.08)}
-  .pill.warn{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.08)}
-  .pill.bad{color:var(--bad);border-color:rgba(224,91,91,.4);background:rgba(224,91,91,.08)}
+  .pill.warn{color:var(--warn);border-color:rgba(232,131,74,.45);background:rgba(232,131,74,.09)}
   .pill.prata{color:var(--prata-hi);border-color:var(--prata-dim);background:rgba(201,205,216,.08)}
   .pill.cy{color:var(--cy);border-color:rgba(143,184,217,.4);background:rgba(143,184,217,.08)}
-  .titulo-v{font-family:var(--serif);font-size:.98rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
-  ul.lista{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:var(--dim)}
-  ul.lista li{padding:4px 0 4px 22px;position:relative}
-  ul.lista li::before{content:"✦";position:absolute;left:2px;color:var(--prata);font-size:.75rem}
+  .titulo-v{font-family:var(--serif);font-size:1rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
   .btn{font-family:var(--label);letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
     background:linear-gradient(120deg,var(--prata),var(--prata-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
     box-shadow:0 6px 20px rgba(200,215,245,.25)}
-  .btn:hover{filter:brightness(1.08)}
   .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(201,205,216,.25);box-shadow:none;padding:8px 14px}
   .vivo{font-family:var(--label);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);
     border:1px solid rgba(79,201,139,.35);border-radius:999px;padding:5px 10px;background:rgba(79,201,139,.07);display:inline-block}
   .vivo.off{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.07)}
 
-  /* ── layout com sidebar: uma página por assunto ── */
+  /* fala do estúdio (Jarvis) */
+  .fala{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(160deg,#141824,#0D1017);
+    border:1px solid rgba(215,230,255,.22);border-radius:16px;padding:18px;margin-bottom:18px;
+    box-shadow:0 14px 40px rgba(0,0,0,.4), 0 0 30px rgba(215,230,255,.06)}
+  .fala .aura{width:52px;height:52px;margin:0;flex:none}
+  .fala p{margin:0;font-size:1.02rem;line-height:1.55}
+  .fala p b{color:var(--prata-hi)}
+  .fala .k{margin-bottom:4px}
+
+  /* lista "o que fazer" */
+  .tarefa{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:13px;margin-top:10px;
+    background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid rgba(201,205,216,.15)}
+  .tarefa .num{font-family:var(--serif);font-size:1.5rem;color:var(--prata-hi);line-height:1;flex:none;width:30px;text-align:center}
+  .tarefa p{margin:0;font-size:.92rem}
+  .tarefa small{color:var(--dim);display:block;margin-top:3px;font-size:.8rem}
+  .tarefa.sua{border-color:rgba(232,131,74,.4)}
+  .tarefa.minha{border-color:rgba(79,201,139,.3)}
+
+  /* layout */
   .layout{display:flex;min-height:100vh}
-  .side{width:236px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px;
+  .side{width:225px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px;display:flex;flex-direction:column;
     border-right:1px solid rgba(201,205,216,.12);
     background:linear-gradient(180deg,rgba(13,16,23,.92),rgba(7,9,15,.96))}
   .marca{display:flex;gap:11px;align-items:center;margin:2px 4px 20px}
   .marca .aura{width:46px;height:46px;margin:0}
   .marca b{font-family:var(--serif);font-weight:400;font-size:.95rem;color:var(--prata-hi);line-height:1.15;display:block}
-  .marca span{font-size:.66rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;font-family:var(--label)}
+  .marca span{font-size:.64rem;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;font-family:var(--label)}
   nav.menu{display:flex;flex-direction:column;gap:4px}
-  nav.menu a{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;border:1px solid transparent;
-    color:var(--dim);text-decoration:none;font-size:.88rem}
+  nav.menu a{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:10px;border:1px solid transparent;
+    color:var(--dim);text-decoration:none;font-size:.92rem}
   nav.menu a:hover{color:var(--ink);background:rgba(201,205,216,.05)}
   nav.menu a.ativo{color:var(--prata-hi);background:rgba(201,205,216,.08);border-color:rgba(201,205,216,.18)}
   nav.menu .ico{width:20px;text-align:center;flex:none}
   .side .rodape{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:10px}
-  .conteudo{flex:1;min-width:0;padding:30px 26px 70px;max-width:1080px}
+  .conteudo{flex:1;min-width:0;padding:28px 26px 70px;max-width:1020px}
   .view{display:none}
   .view.ativa{display:block;animation:up .4s ease}
   @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .aura{width:92px;height:92px;margin:0 auto 14px;border-radius:50%;overflow:hidden;
-    border:1px solid rgba(201,205,216,.35);
+  .aura{border-radius:50%;overflow:hidden;border:1px solid rgba(201,205,216,.35);
     box-shadow:0 0 38px rgba(215,230,255,.35), 0 0 90px rgba(215,230,255,.12)}
   .aura img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.35)}
-
-  /* gráfico de colunas (histórico real) */
-  .chart{display:flex;gap:4px;align-items:flex-end;height:130px;margin-top:12px}
-  .chart .col{flex:1;min-height:3px;border-radius:3px 3px 0 0;
-    background:linear-gradient(180deg,var(--prata-hi),var(--prata));box-shadow:0 0 10px rgba(215,230,255,.25)}
-  .chart .col.meta{background:linear-gradient(180deg,var(--cy),#5E86A8)}
 
   /* login */
   #telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
   .loginCard{width:min(380px,92vw);text-align:center;padding:34px 26px;background:linear-gradient(160deg,var(--card2),var(--card));
     border:1px solid rgba(201,205,216,.25);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(201,205,216,.08)}
+  .loginCard .aura{width:92px;height:92px;margin:0 auto 14px}
   input[type=password]{width:100%;margin:16px 0 12px;padding:12px 14px;border-radius:10px;font-size:1rem;color:var(--ink);
     background:rgba(255,255,255,.05);border:1px solid rgba(201,205,216,.25);outline:none}
   input[type=password]:focus{border-color:var(--prata);box-shadow:0 0 0 3px rgba(215,230,255,.15)}
@@ -115,9 +118,9 @@
     .layout{flex-direction:column}
     .side{width:100%;height:auto;position:static;padding:14px}
     nav.menu{flex-direction:row;flex-wrap:wrap}
-    nav.menu a{padding:8px 11px;font-size:.8rem}
+    nav.menu a{padding:9px 12px;font-size:.84rem}
     .side .rodape{display:none}
-    .conteudo{padding:20px 16px 60px}
+    .conteudo{padding:18px 15px 60px}
   }
   @media (prefers-reduced-motion: reduce){.card,.bar i{transition:none}.view.ativa{animation:none}.shake{animation:none}}
 </style>
@@ -129,7 +132,7 @@
     <div class="aura"><img src="/logo.png" alt="O Poder da Mente Sábia"></div>
     <p class="eyebrow">Estúdio YouTube</p>
     <h1 style="font-size:1.5rem">O Poder da <em>Mente Sábia</em></h1>
-    <p class="d">Painel do Diretor — youtube.opoderdamentesabia.com.br</p>
+    <p class="d">Painel do Diretor</p>
     <input type="password" id="senha" placeholder="Senha do Diretor" autocomplete="current-password">
     <p id="erroLogin"></p>
     <button class="btn" id="btnEntrar" style="width:100%">Entrar</button>
@@ -143,13 +146,10 @@
       <div><b>O Poder da<br>Mente Sábia</b><span>Estúdio YouTube</span></div>
     </div>
     <nav class="menu" id="menu">
-      <a href="#inicio"><span class="ico">◈</span> Visão Geral</a>
-      <a href="#canal"><span class="ico">▶</span> Canal</a>
-      <a href="#pautas"><span class="ico">✎</span> Pautas</a>
-      <a href="#fabrica"><span class="ico">⚙</span> Fábrica</a>
-      <a href="#agente"><span class="ico">🤖</span> Agente</a>
-      <a href="#parametro"><span class="ico">🎯</span> Parâmetro</a>
-      <a href="#checklist"><span class="ico">✓</span> Checklist</a>
+      <a href="#inicio"><span class="ico">🏠</span> Início</a>
+      <a href="#videos"><span class="ico">📹</span> Vídeos</a>
+      <a href="#ideias"><span class="ico">💡</span> Ideias</a>
+      <a href="#receita"><span class="ico">📖</span> A Receita</a>
     </nav>
     <div class="rodape">
       <span class="vivo" id="selo">● conectando…</span>
@@ -159,113 +159,83 @@
 
   <main class="conteudo">
 
+    <!-- ═══════════ INÍCIO ═══════════ -->
     <div class="view" id="v-inicio">
-      <h2>Visão Geral</h2>
-      <p class="sub">O essencial do canal e da fábrica numa tela. Retrato <span id="coletadoEm">—</span>.</p>
-      <div class="grid g4">
-        <div class="card"><p class="k">Inscritos</p><p class="big" id="inscritos">—</p><div class="bar"><i id="barMeta" style="width:0%"></i></div><p class="d" id="metaPct">rumo aos <b>1.000</b> do YPP</p></div>
-        <div class="card"><p class="k">Views no feed</p><p class="big" id="views">—</p><p class="d" id="viewsNota">soma do feed público</p></div>
-        <div class="card"><p class="k">Sem postar há</p><p class="big" id="diasParado">—</p><p class="d" id="ultimoUpload">—</p></div>
-        <div class="card"><p class="k">Fila da fábrica</p><p class="big" id="filaTotal">—</p><p class="d" id="filaDetalhe">—</p></div>
+      <div class="fala">
+        <div class="aura"><img src="/logo.png" alt=""></div>
+        <div style="flex:1">
+          <p class="k">O Estúdio diz</p>
+          <p id="falaEstudio">Carregando o retrato do canal…</p>
+        </div>
       </div>
-      <div class="grid g3" style="margin-top:13px">
-        <div class="card"><p class="k">Melhor vídeo do feed</p><p class="titulo-v" id="melhorTitulo">—</p><p class="d" id="melhorViews">—</p></div>
-        <div class="card"><p class="k">Horas de exibição</p><p class="big">—</p><p class="d">dado privado do Studio — entra quando conectarmos a <b>YouTube API</b> (pendente)</p></div>
-        <div class="card"><p class="k">Sistema</p><p class="d" style="margin:0" id="sistemaInfo">—</p></div>
-      </div>
-      <div class="card" style="margin-top:13px">
-        <p class="k">Histórico de inscritos · <span style="letter-spacing:0">dado real acumulado pela plataforma (1 ponto por coleta)</span></p>
-        <div id="histWrap"><p class="d" id="histNota">o histórico começou a ser gravado hoje — cada coleta vira um ponto aqui.</p><div class="chart hide" id="histChart"></div></div>
-      </div>
-    </div>
 
-    <div class="view" id="v-canal">
-      <h2>Canal — @opoderdamentesabia</h2>
-      <p class="sub">Todos os vídeos do feed público, com métricas reais por vídeo (views, likes, ritmo). Fonte: YouTube.</p>
-      <div class="grid g4" id="canalResumo"></div>
-      <div class="grid g3" style="margin-top:13px" id="gridVideos"></div>
-    </div>
-
-    <div class="view" id="v-pautas">
-      <h2>Pautas — banco do Agente</h2>
-      <p class="sub">Cada pauta nasce do parâmetro e carrega a prova (views do conceito no território). Aprovar uma pauta = vira roteiro na Fábrica.</p>
-      <div class="grid g4" id="pautasResumo"></div>
-      <div class="grid g3" style="margin-top:13px" id="gridPautas"></div>
-    </div>
-
-    <div class="view" id="v-fabrica">
-      <h2>Fábrica — fila de produção</h2>
-      <p class="sub">O caminho de cada vídeo: ideia → roteiro → produção → embalagem → aprovação → publicado.</p>
-      <div class="grid g4" id="fabricaResumo"></div>
-      <div class="grid g3" style="margin-top:13px" id="gridPipeline"></div>
-    </div>
-
-    <div class="view" id="v-agente">
-      <h2>🤖 O Agente Youtuber</h2>
-      <p class="sub">Missão ditada pelo Diretor (16/07): vídeos 100% por IA com acabamento humano — e publicação via navegador, como uma pessoa faria, com aprovação no Telegram antes. Doutrina completa: <b>agente/DOUTRINA.md</b>.</p>
-      <div class="grid g4">
-        <div class="card"><span class="pill ok">✓ no ar</span><p class="k">1 · Inteligência</p><p class="d" style="margin:0">Estudo completo + parâmetro dos virais (16/07)</p></div>
-        <div class="card"><span class="pill ok">✓ no ar</span><p class="k">2 · Pauta</p><p class="d" style="margin:0">Banco v1 gerado pelo parâmetro</p></div>
-        <div class="card"><span class="pill cy">parcial</span><p class="k">3 · Roteiro</p><p class="d" style="margin:0">Humanizado, por sessão; automação via ponte da assinatura em construção</p></div>
-        <div class="card"><span class="pill cy">parcial</span><p class="k">4 · Produção</p><p class="d" style="margin:0">Voz Sterling + visual em movimento; pipeline provado nos vídeos 01/02</p></div>
-        <div class="card"><span class="pill prata">definida</span><p class="k">5 · Embalagem</p><p class="d" style="margin:0">Título pelo parâmetro + thumb da marca + SEO (checklist)</p></div>
-        <div class="card"><span class="pill warn">a ligar</span><p class="k">6 · Aprovação</p><p class="d" style="margin:0">Preview no Telegram → ok/horário (padrão da casa)</p></div>
-        <div class="card"><span class="pill warn">aguarda Diretor</span><p class="k">7 · Publicação</p><p class="d" style="margin:0">Navegador humanizado — precisa do login 1x na sessão do Chrome</p></div>
-        <div class="card"><span class="pill prata">lei</span><p class="k">Regras duras</p><p class="d" style="margin:0">Zero Ghost · anti-cópia · Shorts só dos nossos · verificação/captcha → chama o Diretor</p></div>
-      </div>
-    </div>
-
-    <div class="view" id="v-parametro">
-      <h2>🎯 O Parâmetro dos virais</h2>
-      <p class="sub">Análise de ~70 vídeos de 1M–10M views no nosso território (16/07/2026). Todo título vencedor combina 3 destas 4 peças:</p>
-      <div class="grid g4">
-        <div class="card"><p class="k">1 · Você no centro</p><p class="d" style="margin:0">2ª pessoa direta: "SUA mente", "seu cérebro", "te viciar"</p></div>
-        <div class="card"><p class="k">2 · Prazo/velocidade</p><p class="d" style="margin:0">"APENAS 1 NOITE", "em 8 semanas", "no dia seguinte", "523 segundos"</p></div>
-        <div class="card"><p class="k">3 · Autoridade</p><p class="d" style="margin:0">"| Napoleon Hill", "| Joseph Murphy", Dispenza, Lipton — keyword + selo</p></div>
-        <div class="card"><p class="k">4 · Estado-limite</p><p class="d" style="margin:0">"NUNCA MAIS será a mesma", "como se NADA te afetasse", "melhor que 99%"</p></div>
-      </div>
-      <div class="grid g3" style="margin-top:13px">
-        <div class="card"><span class="pill prata">prova máxima</span><p class="titulo-v">"OUÇA DORMINDO… APENAS 1 NOITE E SUA MENTE NUNCA MAIS SERÁ A MESMA"</p><p class="big" style="font-size:1.7rem">10<small> milhões · 3h18</small></p></div>
-        <div class="card"><span class="pill prata">conceito reciclável</span><p class="titulo-v">"Aprenda a agir como se NADA o incomodasse | Napoleon Hill"</p><p class="big" style="font-size:1.7rem">5,1M<small> + 2M em outro canal</small></p></div>
-        <div class="card"><span class="pill prata">autor + ensino</span><p class="titulo-v">"O Poder da Mente Subconsciente | Joseph Murphy"</p><p class="big" style="font-size:1.7rem">1,3M<small> · 32 min</small></p></div>
-      </div>
-      <div class="grid g3" style="margin-top:13px">
-        <div class="card"><p class="k">Duração dos outliers</p><p class="d" style="margin:0"><b>15–40 min</b> ensino · <b>1h30–3h30</b> noturno · 1–2h podcast</p></div>
-        <div class="card"><p class="k">Emoção-alvo dupla</p><p class="d" style="margin:0"><b>Blindagem</b> ("nada te afeta") ou <b>ativação</b> ("reprogramar", "ativar prosperidade")</p></div>
-        <div class="card"><p class="k">Estudo completo</p><p class="d" style="margin:0">ESTUDO_YOUTUBE_2026.md — algoritmo, embalagem, retenção, CTAs, monetização verificada na fonte, plano de 4 fases</p></div>
-      </div>
-    </div>
-
-    <div class="view" id="v-checklist">
-      <h2>✓ Checklist de publicação</h2>
-      <p class="sub">Nenhum vídeo sai sem cumprir tudo. É a tradução operacional do estudo.</p>
       <div class="grid g3">
-        <div class="card"><p class="k">Embalagem</p><ul class="lista">
-          <li>Título ≤60c com <b>3 das 4 peças</b> do parâmetro</li>
-          <li>Thumb na fórmula da marca: 2–4 palavras, 1 emoção</li>
-          <li>Descrição: keyword nas 2 primeiras linhas + capítulos</li>
-          <li>Tags do nicho · 3 hashtags · playlist da série</li>
-        </ul></div>
-        <div class="card"><p class="k">Retenção</p><ul class="lista">
-          <li>Gancho 0–15s direto na tensão (sem "olá")</li>
-          <li>Open loop no 1º min + payoff no fim</li>
-          <li>Re-hook a cada bloco (2–3 min)</li>
-          <li>Corte/movimento a cada 4–8s, nunca imagem parada</li>
-        </ul></div>
-        <div class="card"><p class="k">Conversão & regras</p><ul class="lista">
-          <li>CTA comentário ~25% · inscrição no pico de valor</li>
-          <li>End screen → próximo vídeo (sessão)</li>
-          <li>Roteiro 100% original + flag IA quando aplicável</li>
-          <li><b>Short do canal = só recorte NOSSO</b></li>
-          <li>Legenda .srt · horário fixo 19h</li>
-        </ul></div>
+        <div class="card"><p class="k">Inscritos</p><p class="big" id="inscritos">—</p><div class="bar"><i id="barMeta" style="width:0%"></i></div><p class="d" id="metaTxt">—</p></div>
+        <div class="card"><p class="k">Parado há</p><p class="big" id="diasParado">—</p><p class="d" id="ultimoUpload">—</p></div>
+        <div class="card"><p class="k">Na fábrica</p><p class="big" id="filaTotal">—</p><p class="d" id="filaDetalhe">—</p></div>
       </div>
-      <div class="grid g4" style="margin-top:13px">
-        <div class="card"><p class="k">CTR alvo · 72h</p><p class="big">≥ 4%</p><p class="d">abaixo de 2%: thumb nova (regra oficial)</p></div>
-        <div class="card"><p class="k">Retenção aos 15s</p><p class="big">≥ 70%</p><p class="d">abaixo: reescrever o gancho no próximo</p></div>
-        <div class="card"><p class="k">Retenção média</p><p class="big">≥ 45%</p><p class="d">vale na curva = bloco fraco</p></div>
-        <div class="card"><p class="k">Inscritos/vídeo</p><p class="big">↗</p><p class="d">estagnou: mover CTA pro pico real</p></div>
+
+      <h2 style="margin-top:30px">O que fazer agora</h2>
+      <p class="sub">Em ordem. Laranja = depende de você · Verde = eu faço.</p>
+      <div class="tarefa sua"><span class="num">1</span><div><p><b>Aprovar o novo visual do canal</b> (foto e capa já estão prontas)</p><small>Você olha, diz "aprovado" — eu aplico no canal.</small></div></div>
+      <div class="tarefa sua"><span class="num">2</span><div><p><b>Assistir e aprovar o vídeo pronto</b> ("O Poder do Silêncio")</p><small>Está esperando desde o dia 10. Aprovou → eu re-embalo o título/capa na fórmula e publicamos.</small></div></div>
+      <div class="tarefa minha"><span class="num">3</span><div><p><b>Terminar o vídeo "As 5 Leis da Mentalidade Vencedora"</b></p><small>Comigo. Sai com título e capa já na fórmula que funciona.</small></div></div>
+      <div class="tarefa sua"><span class="num">4</span><div><p><b>Entrar 1 vez na conta do canal no navegador do robô</b></p><small>Só uma vez, comigo te guiando. Depois disso o robô publica sozinho, sempre com sua aprovação antes.</small></div></div>
+
+      <div class="card" style="margin-top:26px">
+        <p class="k">Crescimento · gravado pela plataforma</p>
+        <p class="d" style="margin:0" id="histNota">—</p>
       </div>
+    </div>
+
+    <!-- ═══════════ VÍDEOS ═══════════ -->
+    <div class="view" id="v-videos">
+      <h2>Vídeos</h2>
+      <p class="sub">Primeiro os que estão sendo feitos, depois os que já estão no canal.</p>
+
+      <h2 style="font-size:1.05rem">🔨 Sendo feitos</h2>
+      <div class="grid g3" id="gridPipeline" style="margin-bottom:26px"></div>
+
+      <h2 style="font-size:1.05rem">📺 No canal (números de agora)</h2>
+      <div class="grid g3" id="gridVideos"></div>
+    </div>
+
+    <!-- ═══════════ IDEIAS ═══════════ -->
+    <div class="view" id="v-ideias">
+      <h2>Ideias prontas</h2>
+      <p class="sub">10 ideias de vídeo. Cada uma é inspirada num vídeo que JÁ fez milhões de views — a prova está em cada cartão. Nada é copiado: a gente refaz tudo do zero, do nosso jeito.</p>
+      <div class="grid g3" id="gridPautas"></div>
+    </div>
+
+    <!-- ═══════════ A RECEITA ═══════════ -->
+    <div class="view" id="v-receita">
+      <h2>A Receita do vídeo que dá certo</h2>
+      <p class="sub">O resumo prático de todo o estudo. É assim que cada vídeo nosso é feito:</p>
+
+      <div class="grid g3">
+        <div class="card"><p class="k">O título</p>
+          <p class="d" style="margin:0">Fala <b>com você</b>, promete <b>resultado com prazo</b> e usa um <b>nome famoso</b>.</p>
+          <p class="d">Exemplo real: <i>"Aprenda a agir como se NADA te afetasse | Napoleon Hill"</i> — 5 milhões de views.</p></div>
+        <div class="card"><p class="k">A capa</p>
+          <p class="d" style="margin:0"><b>2 a 4 palavras gigantes</b>, uma emoção só, na identidade da marca. Tem que dar pra ler no celular.</p></div>
+        <div class="card"><p class="k">Os primeiros 15 segundos</p>
+          <p class="d" style="margin:0">Começa <b>direto no assunto</b>, sem "olá, bem-vindos". É aqui que o vídeo vive ou morre.</p></div>
+        <div class="card"><p class="k">O tamanho</p>
+          <p class="d" style="margin:0"><b>15 a 40 min</b> para ensinar · <b>1h30 a 3h</b> para ouvir dormindo (é o que mais gera horas) · Shorts só dos nossos próprios vídeos.</p></div>
+        <div class="card"><p class="k">Os pedidos</p>
+          <p class="d" style="margin:0">Pedir comentário cedo, pedir inscrição <b>logo depois da melhor parte</b> (não no fim), e terminar apontando o próximo vídeo.</p></div>
+        <div class="card"><p class="k">A regra de ouro</p>
+          <p class="d" style="margin:0"><b>O vídeo tem que entregar o que o título promete.</b> O YouTube mede se a pessoa saiu satisfeita — quem engana, morre.</p></div>
+      </div>
+
+      <h2 style="font-size:1.05rem;margin-top:26px">Como saber se funcionou (toda segunda)</h2>
+      <div class="grid g3">
+        <div class="card"><p class="k">As pessoas clicam?</p><p class="big" style="font-size:1.7rem">4<small> em cada 100</small></p><p class="d">que veem a capa devem clicar. Menos que 2? Trocamos a capa.</p></div>
+        <div class="card"><p class="k">As pessoas ficam?</p><p class="big" style="font-size:1.7rem">7<small> em cada 10</small></p><p class="d">devem passar dos 15 segundos. Menos que 5? Refazemos o começo.</p></div>
+        <div class="card"><p class="k">Viram inscritos?</p><p class="big" style="font-size:1.7rem">↗</p><p class="d">cada vídeo deve trazer mais inscritos que o anterior.</p></div>
+      </div>
+
+      <p class="sub" style="margin-top:18px">A meta de tudo: <b>1.000 inscritos + 4.000 horas assistidas</b> = canal monetizado. O estudo completo (para quem quiser a versão profunda) está em ESTUDO_YOUTUBE_2026.md.</p>
     </div>
 
   </main>
@@ -281,117 +251,98 @@ async function api(caminho, opts) {
   return r.json();
 }
 
-/* ── router: uma página por assunto ── */
-const PAGINAS = ["inicio", "canal", "pautas", "fabrica", "agente", "parametro", "checklist"];
+/* páginas */
+const PAGINAS = ["inicio", "videos", "ideias", "receita"];
 function navega() {
   const alvo = (location.hash || "#inicio").slice(1);
   const pagina = PAGINAS.includes(alvo) ? alvo : "inicio";
   document.querySelectorAll(".view").forEach(v => v.classList.remove("ativa"));
-  const view = $("#v-" + pagina);
-  if (view) view.classList.add("ativa");
+  $("#v-" + pagina).classList.add("ativa");
   document.querySelectorAll("nav.menu a").forEach(a => a.classList.toggle("ativo", a.getAttribute("href") === "#" + pagina));
 }
 window.addEventListener("hashchange", navega);
 
+const STATUS_GENTE = {
+  aprovacao: ["warn", "⏸ esperando VOCÊ aprovar"],
+  producao: ["cy", "⚙ sendo produzido"],
+  embalagem: ["prata", "🎨 fazendo capa e título"],
+  roteiro: ["prata", "✍ escrevendo roteiro"],
+  ideia: ["prata", "💡 ideia"],
+  publicado: ["ok", "✔ publicado"],
+};
 function pillStatus(s) {
-  const mapa = {publicado: ["ok", "publicado"], aprovacao: ["warn", "aguarda aprovação"], producao: ["cy", "em produção"],
-    embalagem: ["prata", "embalagem"], roteiro: ["prata", "roteiro"], ideia: ["prata", "ideia"], banco: ["prata", "no banco"]};
-  const [cls, rotulo] = mapa[s] || ["prata", s];
+  const [cls, rotulo] = STATUS_GENTE[s] || ["prata", s];
   return `<span class="pill ${cls}">${rotulo}</span>`;
 }
 
+function montaFala(d) {
+  const partes = [];
+  partes.push(`Diretor, o canal tem <b>${fmt(d.inscritos)} inscritos</b> — faltam <b>${fmt(Math.max(0, 1000 - (d.inscritos || 0)))}</b> para começar a ganhar dinheiro.`);
+  if (d.dias_sem_postar > 30) partes.push(`Está <b>parado há ${fmt(d.dias_sem_postar)} dias</b> — nossa primeira missão é voltar a postar.`);
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  const esperando = pipe.filter(v => v.status === "aprovacao").length;
+  const fazendo = pipe.filter(v => v.status === "producao").length;
+  if (esperando) partes.push(`Tem <b>${esperando} vídeo pronto esperando a sua aprovação</b>.`);
+  if (fazendo) partes.push(`Estou produzindo <b>${fazendo}</b> agora.`);
+  partes.push(`O caminho está na lista aqui embaixo.`);
+  return partes.join(" ");
+}
+
 function desenhaResumo(d) {
-  /* visão geral */
-  $("#coletadoEm").textContent = d.coletado_em ? "de " + new Date(d.coletado_em).toLocaleString("pt-BR") : "—";
+  $("#falaEstudio").innerHTML = montaFala(d);
+
   $("#inscritos").textContent = fmt(d.inscritos);
   const pct = Math.min(100, ((d.inscritos || 0) / 1000) * 100);
   $("#barMeta").style.width = pct + "%";
-  $("#metaPct").innerHTML = `<b>${pct.toFixed(1)}%</b> da meta de 1.000 (YPP)`;
-  $("#views").textContent = fmt(d.views_somadas_feed);
-  $("#viewsNota").textContent = `soma dos ${d.total_videos_no_feed || 0} vídeos do feed público`;
+  $("#metaTxt").innerHTML = `<b>${pct.toFixed(1)}%</b> do caminho até 1.000 (quando o canal passa a pagar)`;
   $("#diasParado").innerHTML = d.dias_sem_postar == null ? "—" : fmt(d.dias_sem_postar) + " <small>dias</small>";
-  $("#ultimoUpload").textContent = d.ultimo_upload ? "último vídeo em " + d.ultimo_upload : "sem dado";
-
-  const vids = d.videos || [];
-  const melhor = vids.slice().sort((a, b) => b.views - a.views)[0];
-  if (melhor) {
-    $("#melhorTitulo").textContent = melhor.titulo.length > 70 ? melhor.titulo.slice(0, 70) + "…" : melhor.titulo;
-    $("#melhorViews").innerHTML = `<b>${fmt(melhor.views)} views</b> · ${fmt(melhor.likes)} likes · ${melhor.publicado}`;
-  }
+  $("#ultimoUpload").textContent = d.ultimo_upload ? "último vídeo: " + d.ultimo_upload.split("-").reverse().join("/") : "—";
 
   const pipe = (d.pipeline && d.pipeline.videos) || [];
   $("#filaTotal").textContent = pipe.length;
-  const porStatus = {};
-  pipe.forEach(v => porStatus[v.status] = (porStatus[v.status] || 0) + 1);
-  $("#filaDetalhe").textContent = Object.entries(porStatus).map(([s, n]) => `${n} em ${s}`).join(" · ") || "fila vazia";
+  $("#filaDetalhe").textContent = pipe.map(v => (STATUS_GENTE[v.status] || ["", v.status])[1].replace(/^[^\s]+\s/, "")).join(" · ") || "nada em produção";
 
-  $("#sistemaInfo").innerHTML = `Coleta com cache de 30 min · fonte: dados públicos do YouTube${d.aviso ? "<br><b>⚠ " + d.aviso + "</b>" : ""}`;
   $("#selo").textContent = d.aviso ? "● retrato salvo" : "● AO VIVO";
   $("#selo").className = "vivo" + (d.aviso ? " off" : "");
 
-  /* histórico real */
-  const hist = d.historico || [];
-  const comInscritos = hist.filter(p => p.inscritos != null);
-  if (comInscritos.length >= 2) {
-    const max = Math.max(...comInscritos.map(p => p.inscritos), 1);
-    $("#histChart").innerHTML = comInscritos.slice(-60).map(p =>
-      `<div class="col" style="height:${Math.max(3, (p.inscritos / max) * 100)}%" title="${new Date(p.t).toLocaleString("pt-BR")} · ${fmt(p.inscritos)} inscritos"></div>`).join("");
-    $("#histChart").classList.remove("hide");
-    $("#histNota").textContent = `${comInscritos.length} pontos gravados · pico ${fmt(max)} inscritos`;
-  } else {
-    $("#histNota").textContent = `histórico começou a ser gravado hoje (${hist.length} ponto${hist.length === 1 ? "" : "s"}) — cada coleta vira um ponto aqui.`;
-  }
+  const hist = (d.historico || []).filter(p => p.inscritos != null);
+  $("#histNota").innerHTML = hist.length >= 2
+    ? `A plataforma grava os inscritos todo dia. <b>${hist.length} registros</b> até agora — primeiro: ${fmt(hist[0].inscritos)}, hoje: ${fmt(hist[hist.length-1].inscritos)}.`
+    : `A plataforma começou hoje a gravar os inscritos todo dia — em uma semana isso vira o gráfico do crescimento.`;
 
-  /* canal */
-  const somaLikes = vids.reduce((s, v) => s + (v.likes || 0), 0);
-  const media = vids.length ? Math.round(vids.reduce((s, v) => s + v.views, 0) / vids.length) : 0;
-  $("#canalResumo").innerHTML = `
-    <div class="card"><p class="k">Vídeos no feed</p><p class="big">${vids.length}</p><p class="d">o canal tem 9 no total</p></div>
-    <div class="card"><p class="k">Média de views</p><p class="big">${fmt(media)}</p><p class="d">por vídeo do feed</p></div>
-    <div class="card"><p class="k">Likes somados</p><p class="big">${fmt(somaLikes)}</p><p class="d">no feed público</p></div>
-    <div class="card"><p class="k">Inscritos</p><p class="big">${fmt(d.inscritos)}</p><p class="d">medido nesta coleta</p></div>`;
-  $("#gridVideos").innerHTML = vids.map(v => `
-    <div class="card"><p class="k">${v.publicado} · ${fmt(v.dias_no_ar)} dias no ar</p>
-      <p class="titulo-v">${v.titulo.length > 74 ? v.titulo.slice(0, 74) + "…" : v.titulo}</p>
-      <p class="d"><b>${fmt(v.views)} views</b> · ${fmt(v.likes)} likes · ${v.views_por_dia != null ? v.views_por_dia + " views/dia" : ""}</p>
-      <p class="d"><a class="hl" style="text-decoration:none" href="${v.url}" target="_blank" rel="noopener">abrir no YouTube ↗</a></p>
-    </div>`).join("") || '<div class="card"><p class="d">Sem vídeos no feed.</p></div>';
-
-  /* pautas */
-  const pautas = (d.agente && d.agente.pautas) || [];
-  const porFormato = {};
-  pautas.forEach(p => porFormato[p.formato] = (porFormato[p.formato] || 0) + 1);
-  $("#pautasResumo").innerHTML = `
-    <div class="card"><p class="k">No banco</p><p class="big">${pautas.length}</p><p class="d">geradas pelo parâmetro</p></div>` +
-    Object.entries(porFormato).map(([f, n]) =>
-      `<div class="card"><p class="k">${f}</p><p class="big">${n}</p><p class="d">pauta${n > 1 ? "s" : ""}</p></div>`).join("");
-  $("#gridPautas").innerHTML = pautas.map(p => `
-    <div class="card">${pillStatus(p.status)} <span class="pill cy">${p.formato} · ${p.duracao_alvo}</span>
-      <p class="titulo-v">${p.titulo_candidato}</p>
-      <p class="d">Prova: ${p.conceito_fonte}</p>
-      <p class="d">Autor-âncora: <b>${p.autor_ancora}</b></p>
-    </div>`).join("") || '<div class="card"><p class="d">Banco vazio.</p></div>';
-
-  /* fábrica */
-  $("#fabricaResumo").innerHTML = `
-    <div class="card"><p class="k">Na fila</p><p class="big">${pipe.length}</p><p class="d">vídeos em andamento</p></div>` +
-    Object.entries(porStatus).map(([s, n]) =>
-      `<div class="card"><p class="k">${s}</p><p class="big">${n}</p><p class="d">nesta etapa</p></div>`).join("");
+  /* vídeos */
   $("#gridPipeline").innerHTML = pipe.map(v => `
     <div class="card">${pillStatus(v.status)}
-      <p class="titulo-v">${v.codigo} · ${v.titulo_trabalho}</p>
+      <p class="titulo-v">${v.titulo_trabalho}</p>
       <p class="d">${v.nota || ""}</p>
-    </div>`).join("") || '<div class="card"><p class="d">Fila vazia.</p></div>';
+    </div>`).join("") || '<div class="card"><p class="d">Nada sendo feito agora.</p></div>';
+
+  const vids = d.videos || [];
+  $("#gridVideos").innerHTML = vids.map(v => `
+    <div class="card"><p class="k">${(v.publicado || "").split("-").reverse().join("/")}</p>
+      <p class="titulo-v">${v.titulo.length > 70 ? v.titulo.slice(0, 70) + "…" : v.titulo}</p>
+      <p class="d"><b>${fmt(v.views)}</b> visualizações · <b>${fmt(v.likes)}</b> curtidas</p>
+      <p class="d"><a style="color:var(--cy);text-decoration:none" href="${v.url}" target="_blank" rel="noopener">ver no YouTube ↗</a></p>
+    </div>`).join("") || '<div class="card"><p class="d">Sem vídeos.</p></div>';
+
+  /* ideias */
+  const pautas = (d.agente && d.agente.pautas) || [];
+  $("#gridPautas").innerHTML = pautas.map(p => {
+    const prova = (p.conceito_fonte.match(/[\d,.]+\s*(milh|M\b|mil)/i) || [p.conceito_fonte])[0];
+    const tipo = p.formato === "noturno" ? "🌙 para ouvir dormindo" : (p.formato === "ensino-curto" ? "⚡ curto e direto" : "🎓 para ensinar");
+    return `
+    <div class="card"><span class="pill cy">${tipo}</span>
+      <p class="titulo-v">${p.titulo_candidato}</p>
+      <p class="d">O vídeo que inspirou fez <b>${p.conceito_fonte.replace(/^.*?:\s*/, "")}</b></p>
+    </div>`;
+  }).join("") || '<div class="card"><p class="d">Sem ideias no banco.</p></div>';
 }
 
 async function carregaPainel() {
-  try {
-    const d = await api("/api/resumo");
-    desenhaResumo(d);
-  } catch (e) {
+  try { desenhaResumo(await api("/api/resumo")); }
+  catch (e) {
     if (e.status === 401) return mostraLogin();
-    $("#selo").textContent = "● sem sinal";
-    $("#selo").className = "vivo off";
+    $("#selo").textContent = "● sem sinal"; $("#selo").className = "vivo off";
   }
 }
 
@@ -404,8 +355,7 @@ async function entrar() {
   $("#erroLogin").textContent = "";
   try {
     await api("/api/login", {method: "POST", body: JSON.stringify({senha: $("#senha").value})});
-    $("#senha").value = "";
-    mostraPainel();
+    $("#senha").value = ""; mostraPainel();
   } catch (e) {
     $("#erroLogin").textContent = (e.body && e.body.detail) || "Falha no login";
     $("#cardLogin").classList.add("shake");
@@ -415,10 +365,8 @@ async function entrar() {
 $("#btnSair").addEventListener("click", async () => { await api("/api/logout", {method: "POST"}).catch(() => {}); mostraLogin(); });
 
 (async function init() {
-  try {
-    const m = await api("/api/me");
-    m.autenticado ? mostraPainel() : mostraLogin();
-  } catch { mostraLogin(); }
+  try { (await api("/api/me")).autenticado ? mostraPainel() : mostraLogin(); }
+  catch { mostraLogin(); }
   setInterval(() => { if (!$("#painel").classList.contains("hide")) carregaPainel(); }, 60000);
 })();
 </script>

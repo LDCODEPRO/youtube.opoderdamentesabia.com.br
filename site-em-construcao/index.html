@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Poder da Mente Sábia</title>
+<meta name="description" content="O Poder da Mente Sábia — conteúdo sobre mentalidade, foco e sabedoria. Site em construção.">
+<meta property="og:title" content="O Poder da Mente Sábia">
+<meta property="og:description" content="Conteúdo sobre mentalidade, foco e sabedoria. Em breve.">
+<meta property="og:image" content="https://opoderdamentesabia.com.br/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body {
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    color:#e8e9ee;
+    background:
+      radial-gradient(1200px 800px at 50% 32%, rgba(120,130,160,.10), transparent 60%),
+      radial-gradient(900px 700px at 80% 90%, rgba(90,100,130,.08), transparent 55%),
+      #05060a;
+    min-height:100dvh;
+    display:flex; align-items:center; justify-content:center;
+    overflow-x:hidden;
+    position:relative;
+    text-align:center;
+    padding:32px 20px;
+  }
+  /* poeira de estrelas sutil */
+  body::before {
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 40% 85%, rgba(255,255,255,.35), transparent),
+      radial-gradient(1px 1px at 55% 50%, rgba(255,255,255,.25), transparent);
+    opacity:.6;
+  }
+  .wrap { position:relative; z-index:1; max-width:640px; width:100%; }
+  .logo-glow {
+    position:relative; display:inline-block; margin-bottom:26px;
+  }
+  .logo-glow::after {
+    content:""; position:absolute; inset:-8% -8% 4% -8%; z-index:-1;
+    background:radial-gradient(closest-side, rgba(150,165,200,.28), transparent 72%);
+    filter:blur(6px);
+  }
+  .logo {
+    width:min(260px, 62vw); height:auto; display:block;
+    border-radius:22px;
+    box-shadow:0 24px 70px rgba(0,0,0,.6);
+    animation:breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  h1 {
+    font-family:'Cinzel',serif; font-weight:700;
+    font-size:clamp(24px, 5.4vw, 40px);
+    letter-spacing:.12em; line-height:1.25;
+    background:linear-gradient(180deg,#ffffff 0%,#c7ccd8 46%,#8a90a0 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 2px 30px rgba(150,165,200,.15);
+  }
+  .rule {
+    width:74px; height:1px; margin:22px auto 20px;
+    background:linear-gradient(90deg, transparent, rgba(200,210,230,.65), transparent);
+  }
+  .badge {
+    display:inline-block; font-size:12px; font-weight:500; letter-spacing:.22em;
+    text-transform:uppercase; color:#aeb6c6;
+    padding:9px 20px; border-radius:999px;
+    border:1px solid rgba(160,172,200,.28);
+    background:rgba(140,152,182,.06);
+  }
+  .tagline {
+    margin:26px auto 0; max-width:440px;
+    font-weight:300; font-size:clamp(14px,3.6vw,16.5px); line-height:1.7;
+    color:#b9becb;
+  }
+  .tagline .em { color:#e8e9ee; font-weight:400; }
+  .cta {
+    display:inline-flex; align-items:center; gap:9px; margin-top:32px;
+    font-size:14px; font-weight:500; letter-spacing:.02em;
+    color:#0a0b10; text-decoration:none;
+    padding:13px 26px; border-radius:999px;
+    background:linear-gradient(180deg,#f4f5f8,#c9cedb);
+    box-shadow:0 10px 30px rgba(160,172,200,.18);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta:hover { transform:translateY(-2px); box-shadow:0 16px 40px rgba(160,172,200,.28); }
+  .cta svg { width:17px; height:17px; }
+  .foot { margin-top:40px; font-size:12px; letter-spacing:.06em; color:#5d6473; }
+  @media (max-width:480px){ h1{letter-spacing:.08em} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo-glow">
+      <img class="logo" src="logo.png" alt="O Poder da Mente Sábia">
+    </div>
+    <h1>O Poder da Mente Sábia</h1>
+    <div class="rule"></div>
+    <span class="badge">Site em construção</span>
+    <p class="tagline">
+      Estamos preparando um espaço dedicado a <span class="em">mentalidade, foco e sabedoria</span>.
+      Enquanto isso, o conteúdo já está no ar nas redes.
+    </p>
+    <a class="cta" href="https://www.instagram.com/opoderdamentesabia/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+      Seguir no Instagram
+    </a>
+    <div class="foot">opoderdamentesabia.com.br</div>
+  </div>
+</body>
+</html>

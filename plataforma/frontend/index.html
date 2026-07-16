@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Estúdio YouTube · O Poder da Mente Sábia</title>
+<style>
+  :root{
+    --bg:#070B12; --card:#0E1826; --card2:#101C2E;
+    --gold:#D9A441; --gold-hi:#F2CF8D; --gold-dim:rgba(217,164,65,.32);
+    --ink:#EDE7D8; --dim:#A99F8A; --faint:#6E6A5E;
+    --ok:#4FC98B; --warn:#E8834A; --bad:#E05B5B; --cy:#57B8D9;
+    --serif:Georgia,'Times New Roman',serif; --sans:'Segoe UI',system-ui,sans-serif;
+    --label:Bahnschrift,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:dark}
+  body{margin:0;font-family:var(--sans);color:var(--ink);line-height:1.5;min-height:100vh;
+    background:
+      radial-gradient(1000px 460px at 50% -6%, rgba(217,164,65,.14), transparent 62%),
+      radial-gradient(800px 540px at 90% 34%, rgba(30,58,95,.32), transparent 60%),
+      #070B12;}
+  .wrap{max-width:1120px;margin:0 auto;padding:30px 20px 70px}
+  .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.68rem;color:var(--gold);margin:0 0 8px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,4vw,2.5rem);margin:0;line-height:1.1}
+  h1 em{font-style:normal;color:var(--gold-hi);text-shadow:0 0 30px rgba(217,164,65,.45)}
+  h2{font-family:var(--serif);font-weight:400;font-size:1.28rem;color:var(--gold-hi);margin:0 0 14px}
+  .sec{margin-top:46px;position:relative;padding-top:22px}
+  .sec::before{content:"";position:absolute;top:0;left:0;width:60px;height:3px;border-radius:2px;
+    background:linear-gradient(90deg,var(--gold),transparent);box-shadow:0 0 16px rgba(217,164,65,.55)}
+  .grid{display:grid;gap:13px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(175px,1fr))}
+  .card{background:linear-gradient(160deg,var(--card2),var(--card));
+    border:1px solid rgba(217,164,65,.16);border-radius:14px;padding:16px;
+    box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(242,207,141,.07);
+    transition:transform .22s ease, border-color .22s ease}
+  .card:hover{transform:translateY(-3px);border-color:rgba(217,164,65,.42)}
+  .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.64rem;color:var(--dim);margin:0 0 7px}
+  .big{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--gold-hi);margin:0;font-variant-numeric:tabular-nums}
+  .big small{font-family:var(--sans);font-size:.8rem;color:var(--dim)}
+  .d{font-size:.83rem;color:var(--dim);margin:7px 0 0}
+  .d b{color:var(--ink)}
+  .bar{height:9px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold-hi));box-shadow:0 0 12px rgba(217,164,65,.5);transition:width .8s ease}
+  .pill{display:inline-block;font-family:var(--label);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid;margin-bottom:8px}
+  .pill.ok{color:var(--ok);border-color:rgba(79,201,139,.4);background:rgba(79,201,139,.08)}
+  .pill.warn{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.08)}
+  .pill.gold{color:var(--gold-hi);border-color:var(--gold-dim);background:rgba(217,164,65,.08)}
+  .pill.cy{color:var(--cy);border-color:rgba(87,184,217,.4);background:rgba(87,184,217,.08)}
+  .titulo-v{font-family:var(--serif);font-size:.98rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
+  .hl{color:var(--gold-hi)}
+  ul.lista{list-style:none;margin:8px 0 0;padding:0;font-size:.83rem;color:var(--dim)}
+  ul.lista li{padding:4px 0 4px 22px;position:relative}
+  ul.lista li::before{content:"✦";position:absolute;left:2px;color:var(--gold);font-size:.75rem}
+  .topo{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .vivo{font-family:var(--label);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ok);
+    border:1px solid rgba(79,201,139,.35);border-radius:999px;padding:5px 12px;background:rgba(79,201,139,.07)}
+  .vivo.off{color:var(--warn);border-color:rgba(232,131,74,.4);background:rgba(232,131,74,.07)}
+  .btn{font-family:var(--label);letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
+    background:linear-gradient(120deg,var(--gold),var(--gold-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
+    box-shadow:0 6px 20px rgba(217,164,65,.3)}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(217,164,65,.25);box-shadow:none}
+  /* login */
+  #telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .loginCard{width:min(380px,92vw);text-align:center;padding:34px 26px;background:linear-gradient(160deg,var(--card2),var(--card));
+    border:1px solid rgba(217,164,65,.25);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(217,164,65,.08)}
+  .aura{width:74px;height:74px;margin:0 auto 14px;border-radius:50%;
+    background:radial-gradient(circle at 50% 42%, rgba(242,207,141,.9), rgba(217,164,65,.35) 55%, transparent 72%);
+    box-shadow:0 0 34px rgba(217,164,65,.5);display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-size:1.9rem;color:#0A0F16}
+  input[type=password]{width:100%;margin:16px 0 12px;padding:12px 14px;border-radius:10px;font-size:1rem;color:var(--ink);
+    background:rgba(255,255,255,.05);border:1px solid rgba(217,164,65,.25);outline:none}
+  input[type=password]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,164,65,.15)}
+  #erroLogin{color:var(--bad);font-size:.82rem;min-height:1.2em;margin:4px 0 0}
+  .shake{animation:shake .4s}
+  @keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+  .foot{margin-top:52px;padding-top:18px;border-top:1px solid rgba(217,164,65,.13);color:var(--faint);font-size:.76rem;display:flex;gap:16px;flex-wrap:wrap}
+  .foot a{color:var(--dim);text-decoration:none}
+  .hide{display:none!important}
+  @media (prefers-reduced-motion: reduce){.card,.bar i{transition:none}.shake{animation:none}}
+</style>
+</head>
+<body>
+
+<div id="telaLogin">
+  <div class="loginCard" id="cardLogin">
+    <div class="aura">🧠</div>
+    <p class="eyebrow">Estúdio YouTube</p>
+    <h1 style="font-size:1.5rem">O Poder da <em>Mente Sábia</em></h1>
+    <p class="d">Painel do Diretor — youtube.opoderdamentesabia.com.br</p>
+    <input type="password" id="senha" placeholder="Senha do Diretor" autocomplete="current-password">
+    <p id="erroLogin"></p>
+    <button class="btn" id="btnEntrar" style="width:100%">Entrar</button>
+  </div>
+</div>
+
+<div class="wrap hide" id="painel">
+  <header class="topo">
+    <div>
+      <p class="eyebrow">Estúdio YouTube · plataforma da federação</p>
+      <h1>O Poder da <em>Mente Sábia</em></h1>
+      <p class="d" style="max-width:60ch">Missão: <b>1.000 inscritos + 4.000 horas</b> → monetização. O estudo completo e o parâmetro dos virais guiam cada vídeo.</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="vivo" id="selo">● conectando…</span>
+      <button class="btn ghost" id="btnSair">Sair</button>
+    </div>
+  </header>
+
+  <section class="sec">
+    <h2>O canal agora <span style="font-size:.72rem;color:var(--faint);font-family:var(--sans)" id="coletadoEm"></span></h2>
+    <div class="grid g4">
+      <div class="card"><p class="k">Inscritos</p><p class="big" id="inscritos">—</p><div class="bar"><i id="barMeta" style="width:0%"></i></div><p class="d">rumo aos <b>1.000</b> do YPP</p></div>
+      <div class="card"><p class="k">Views (últimos vídeos)</p><p class="big" id="views">—</p><p class="d" id="viewsNota">soma do feed público</p></div>
+      <div class="card"><p class="k">Último upload</p><p class="big" id="diasParado">—</p><p class="d" id="ultimoUpload">—</p></div>
+      <div class="card"><p class="k">Horas de exibição</p><p class="big">—</p><p class="d">dado privado do Studio — aparece quando conectarmos a <b>YouTube API</b> (pendente)</p></div>
+    </div>
+    <div class="grid g3" style="margin-top:13px" id="gridVideos"></div>
+  </section>
+
+  <section class="sec">
+    <h2>🎯 O parâmetro — todo título combina 3 destas 4 peças</h2>
+    <div class="grid g4">
+      <div class="card"><p class="k">1 · Você no centro</p><p class="d" style="margin:0">"SUA mente", "seu cérebro", "te viciar" — 2ª pessoa direta</p></div>
+      <div class="card"><p class="k">2 · Prazo/velocidade</p><p class="d" style="margin:0">"APENAS 1 NOITE", "em 8 semanas", "no dia seguinte"</p></div>
+      <div class="card"><p class="k">3 · Autoridade</p><p class="d" style="margin:0">"| Napoleon Hill", "| Joseph Murphy", Dispenza, Lipton</p></div>
+      <div class="card"><p class="k">4 · Estado-limite</p><p class="d" style="margin:0">"NUNCA MAIS será a mesma", "como se NADA te afetasse"</p></div>
+    </div>
+    <p class="d" style="margin-top:10px">Provas medidas: 10M ("ouça dormindo… apenas 1 noite"), 5,1M+2M (mesmo conceito, 2 canais), 3,5M, 1,3M. Ensino 15–40min · noturno 1h30–3h30. Estudo completo: <b>ESTUDO_YOUTUBE_2026.md</b>.</p>
+  </section>
+
+  <section class="sec">
+    <h2>Fábrica — fila de produção</h2>
+    <div class="grid g3" id="gridPipeline"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Checklist de publicação (nenhum vídeo sai sem isso)</h2>
+    <div class="grid g3">
+      <div class="card"><p class="k">Embalagem</p><ul class="lista">
+        <li>Título ≤60c com <b>3 das 4 peças</b> do parâmetro</li>
+        <li>Thumb dourada da marca: 2–4 palavras, 1 emoção</li>
+        <li>Descrição: keyword nas 2 primeiras linhas + capítulos</li>
+      </ul></div>
+      <div class="card"><p class="k">Retenção</p><ul class="lista">
+        <li>Gancho 0–15s direto na tensão (sem "olá")</li>
+        <li>Open loop no 1º min + payoff no fim</li>
+        <li>Corte/movimento a cada 4–8s, nunca imagem parada</li>
+      </ul></div>
+      <div class="card"><p class="k">Conversão & regras</p><ul class="lista">
+        <li>CTA comentário ~25% · inscrição no pico de valor</li>
+        <li>End screen → próximo vídeo (sessão)</li>
+        <li>Roteiro 100% original + flag IA quando aplicável</li>
+        <li><b>Short do canal = só recorte NOSSO</b></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>◆ Estúdio YouTube · O Poder da Mente Sábia</span>
+    <a href="/health" target="_blank">/health</a>
+    <a href="/status" target="_blank">/status</a>
+    <span id="rodapeInfo"></span>
+  </footer>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const fmt = (n) => n == null ? "—" : n.toLocaleString("pt-BR");
+
+async function api(caminho, opts) {
+  const r = await fetch(caminho, Object.assign({headers: {"Content-Type": "application/json"}}, opts));
+  if (!r.ok) throw Object.assign(new Error("HTTP " + r.status), {status: r.status, body: await r.json().catch(() => ({}))});
+  return r.json();
+}
+
+function pillStatus(s) {
+  const mapa = {publicado: ["ok", "publicado"], aprovacao: ["warn", "aguarda aprovação"], producao: ["cy", "em produção"],
+    embalagem: ["gold", "embalagem"], roteiro: ["gold", "roteiro"], ideia: ["gold", "ideia"]};
+  const [cls, rotulo] = mapa[s] || ["gold", s];
+  return `<span class="pill ${cls}">${rotulo}</span>`;
+}
+
+function desenhaResumo(d) {
+  $("#coletadoEm").textContent = d.coletado_em ? "· retrato de " + new Date(d.coletado_em).toLocaleString("pt-BR") : "";
+  $("#inscritos").textContent = fmt(d.inscritos);
+  $("#barMeta").style.width = Math.min(100, ((d.inscritos || 0) / 1000) * 100) + "%";
+  $("#views").textContent = fmt(d.views_somadas_feed);
+  $("#viewsNota").textContent = `soma dos ${d.total_videos_no_feed || 0} vídeos do feed público`;
+  $("#diasParado").textContent = d.dias_sem_postar == null ? "—" : d.dias_sem_postar + " dias";
+  $("#ultimoUpload").textContent = d.ultimo_upload ? "último vídeo em " + d.ultimo_upload : "sem dado";
+  $("#selo").textContent = d.aviso ? "● retrato salvo (YouTube fora de alcance)" : "● AO VIVO · dados públicos do YouTube";
+  $("#selo").className = "vivo" + (d.aviso ? " off" : "");
+
+  const vids = (d.videos || []).slice(0, 6);
+  $("#gridVideos").innerHTML = vids.map(v => `
+    <div class="card"><p class="k">${v.publicado} · ${fmt(v.views)} views</p>
+      <p class="titulo-v">${v.titulo.length > 74 ? v.titulo.slice(0, 74) + "…" : v.titulo}</p>
+      <p class="d"><a class="hl" style="text-decoration:none" href="${v.url}" target="_blank" rel="noopener">abrir no YouTube ↗</a></p>
+    </div>`).join("") || '<div class="card"><p class="d">Sem vídeos no feed.</p></div>';
+
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  $("#gridPipeline").innerHTML = pipe.map(v => `
+    <div class="card">${pillStatus(v.status)}
+      <p class="titulo-v">${v.codigo} · ${v.titulo_trabalho}</p>
+      <p class="d">${v.nota || ""}</p>
+    </div>`).join("") || '<div class="card"><p class="d">Fila vazia.</p></div>';
+}
+
+async function carregaPainel() {
+  try {
+    const d = await api("/api/resumo");
+    desenhaResumo(d);
+  } catch (e) {
+    if (e.status === 401) return mostraLogin();
+    $("#selo").textContent = "● sem sinal do backend";
+    $("#selo").className = "vivo off";
+  }
+}
+
+function mostraLogin() { $("#telaLogin").classList.remove("hide"); $("#painel").classList.add("hide"); $("#senha").focus(); }
+function mostraPainel() { $("#telaLogin").classList.add("hide"); $("#painel").classList.remove("hide"); carregaPainel(); }
+
+$("#btnEntrar").addEventListener("click", entrar);
+$("#senha").addEventListener("keydown", (ev) => { if (ev.key === "Enter") entrar(); });
+async function entrar() {
+  $("#erroLogin").textContent = "";
+  try {
+    await api("/api/login", {method: "POST", body: JSON.stringify({senha: $("#senha").value})});
+    $("#senha").value = "";
+    mostraPainel();
+  } catch (e) {
+    $("#erroLogin").textContent = (e.body && e.body.detail) || "Falha no login";
+    $("#cardLogin").classList.add("shake");
+    setTimeout(() => $("#cardLogin").classList.remove("shake"), 450);
+  }
+}
+$("#btnSair").addEventListener("click", async () => { await api("/api/logout", {method: "POST"}).catch(() => {}); mostraLogin(); });
+
+(async function init() {
+  try {
+    const m = await api("/api/me");
+    m.autenticado ? mostraPainel() : mostraLogin();
+  } catch { mostraLogin(); }
+  setInterval(() => { if (!$("#painel").classList.contains("hide")) carregaPainel(); }, 60000);
+})();
+</script>
+</body>
+</html>

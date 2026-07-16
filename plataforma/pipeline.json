@@ -1,0 +1,22 @@
+{
+  "atualizado_em": "2026-07-16",
+  "nota": "Fila REAL de produção da fábrica. Status possíveis: ideia | roteiro | producao | embalagem | aprovacao | publicado",
+  "videos": [
+    {
+      "codigo": "video-01",
+      "titulo_trabalho": "O Poder do Silêncio",
+      "status": "aprovacao",
+      "duracao": "4min05",
+      "pasta": "E:\\youtuber-opoderdamentesabia\\video-01",
+      "nota": "PRONTO desde 10/07, não publicado (decisão: subir junto com o Luiz). Re-embalar título/capa com O PARÂMETRO antes de subir."
+    },
+    {
+      "codigo": "video-02",
+      "titulo_trabalho": "As 5 Leis da Mentalidade Vencedora",
+      "status": "producao",
+      "duracao_alvo": "7-10min",
+      "pasta": "E:\\youtuber-opoderdamentesabia\\video-02",
+      "nota": "Voz Sterling, b-roll executivo dourado. Título candidato pelo parâmetro: APRENDA AS 5 LEIS QUE REPROGRAMAM SUA MENTE | Napoleon Hill"
+    }
+  ]
+}

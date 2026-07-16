@@ -1,0 +1,12 @@
+# mídia pesada de produção (os vídeos vivem no disco, não no git)
+video-*/
+*.tgz
+
+# segredos e runtime — NUNCA versionar
+.env
+plataforma/backend/.env
+plataforma/data/
+venv/
+__pycache__/
+*.pyc
+.claude/

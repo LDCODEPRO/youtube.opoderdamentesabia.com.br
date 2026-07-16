@@ -241,8 +241,11 @@
       <h2 style="font-size:.95rem;color:var(--dim)">🔨 SENDO FEITOS</h2>
       <div class="grid g3" id="gridPipeline" style="margin-bottom:26px"></div>
 
-      <h2 style="font-size:.95rem;color:var(--dim)">📺 NO CANAL · números de agora</h2>
-      <div class="grid g3" id="gridVideos"></div>
+      <h2 style="font-size:.95rem;color:var(--dim)">🎬 VÍDEOS DE YOUTUBE · o foco do projeto</h2>
+      <div class="grid g3" id="gridLongos" style="margin-bottom:26px"></div>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">📱 CORTES ANTIGOS · formato Instagram que subiu como Short (outro mundo, só registro)</h2>
+      <div class="grid g3" id="gridCortes"></div>
     </div>
 
     <!-- ═══════════ IDEIAS ═══════════ -->
@@ -366,10 +369,13 @@ function desenhaResumo(d) {
   $("#filaDetalhe").textContent = pipe.map(v => (STATUS_GENTE[v.status] || ["", v.status])[1].replace(/^[^\s]+\s/, "")).join(" · ") || "nada em produção";
 
   const vids = d.videos || [];
-  const melhor = vids.slice().sort((a, b) => b.views - a.views)[0];
+  const longos = vids.filter(v => v.tipo === "longo");
+  const cortes = vids.filter(v => v.tipo === "corte");
+  const melhor = (longos.length ? longos : vids).slice().sort((a, b) => b.views - a.views)[0];
   if (melhor) {
     $("#melhorTitulo").textContent = melhor.titulo.length > 60 ? melhor.titulo.slice(0, 60) + "…" : melhor.titulo;
-    $("#melhorViews").innerHTML = `<b>${fmt(melhor.views)}</b> visualizações · <b>${fmt(melhor.likes)}</b> curtidas`;
+    $("#melhorViews").innerHTML = `<b>${fmt(melhor.views)}</b> visualizações · <b>${fmt(melhor.likes)}</b> curtidas` +
+      (melhor.tipo === "longo" ? " · vídeo de YouTube" : "");
   }
 
   $("#selo").textContent = d.aviso ? "● retrato salvo" : "● AO VIVO";
@@ -386,12 +392,16 @@ function desenhaResumo(d) {
       <p class="d">${v.nota || ""}</p>
     </div>`).join("") || '<div class="card"><p class="d">Nada sendo feito agora.</p></div>';
 
-  $("#gridVideos").innerHTML = vids.map(v => `
+  const cardVideo = (v) => `
     <div class="card"><p class="k">${(v.publicado || "").split("-").reverse().join("/")}</p>
       <p class="titulo-v">${v.titulo.length > 70 ? v.titulo.slice(0, 70) + "…" : v.titulo}</p>
       <p class="d"><b>${fmt(v.views)}</b> visualizações · <b>${fmt(v.likes)}</b> curtidas</p>
       <p class="d"><a style="color:var(--cy);text-decoration:none" href="${v.url}" target="_blank" rel="noopener">ver no YouTube ↗</a></p>
-    </div>`).join("") || '<div class="card"><p class="d">Sem vídeos.</p></div>';
+    </div>`;
+  $("#gridLongos").innerHTML = longos.map(cardVideo).join("") ||
+    '<div class="card"><p class="d">Ainda só os 2 antigos de teste — os novos da fábrica entram aqui.</p></div>';
+  $("#gridCortes").innerHTML = cortes.map(cardVideo).join("") ||
+    '<div class="card"><p class="d">Nenhum corte no feed.</p></div>';
 
   const pautas = (d.agente && d.agente.pautas) || [];
   $("#gridPautas").innerHTML = pautas.map(p => {

@@ -52,7 +52,11 @@ def _busca_feed() -> list:
         rating = e.find(".//m:community/m:starRating", ns)
         likes = int(rating.get("count", "0")) if rating is not None else 0
         dias = _dias_desde(pub[:10])
+        # dois mundos que NÃO se misturam: corte vertical (veio do motor do Instagram,
+        # subiu como Short) vs vídeo LONGO original (o foco deste projeto no YouTube)
+        eh_corte = titulo.strip().startswith("✨") or titulo.count("#") >= 3
         videos.append({
+            "tipo": "corte" if eh_corte else "longo",
             "id": vid,
             "titulo": titulo,
             "publicado": pub[:10],

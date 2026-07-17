@@ -621,7 +621,12 @@ function montaCapas(d) {
       corpo = `<img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(46,230,168,.4);margin:10px 0">
         <span class="pill ok">✔ capa aprovada por você</span>`;
     } else if (v.capa_url) {
+      const cr = v.crivo || {};
+      const badgeCrivo = cr.resumo
+        ? `<span class="pill ${cr.aprovada ? "ok" : "warn"}" title="${(cr.checks || []).map(c => (c.ok ? "✔ " : "✖ ") + c.nome + ": " + c.detalhe).join("\n")}">🔬 crivo do pesquisador: ${cr.resumo}</span><br>`
+        : "";
       corpo = `<img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(215,230,255,.25);margin:10px 0">
+        ${badgeCrivo}
         <input type="text" id="inst_${v.codigo}" placeholder="O que mudar? ex.: texto menor, lâmpada à esquerda… (opcional)"
           style="width:100%;padding:10px 12px;border-radius:9px;font-size:.85rem;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid rgba(215,230,255,.2);outline:none;margin-bottom:9px">
         <div class="acoes" style="margin-top:0">

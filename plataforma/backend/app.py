@@ -109,6 +109,8 @@ def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
         estado = _CAPAS_EM_CURSO.get(v.get("codigo"))
         if estado:
             v["capa_status"] = estado
+        if v.get("capa_url"):
+            v["crivo"] = carrega_crivo(v["codigo"])
     return JSONResponse(dados)
 
 
@@ -178,26 +180,98 @@ def _prompt_capa(video: dict, instrucao: str = "", variar: bool = False) -> str:
 
 
 _CAPAS_EM_CURSO: dict = {}  # codigo -> "desenhando" | "erro: ..."
+CRIVO_DIR = os.path.join(BASE_DIR, "data", "crivo")
+
+
+def _crivo_capa(codigo: str, video: dict) -> dict:
+    """O CRIVO DO PESQUISADOR (ordem do Diretor 16/07): toda thumbnail é comparada
+    com o padrão visual dos virais DESTA semana antes de ir ao Diretor."""
+    from dados import carrega_pesquisa
+    from pesquisa_semanal import medir_imagem
+
+    caminho = os.path.join(CAPAS_DIR, f"{codigo}.png")
+    medida = medir_imagem(caminho)
+    padrao = (carrega_pesquisa() or {}).get("padrao_visual") or {}
+    palavras = ((video.get("palavras_capa") or "") + " " + (video.get("subtitulo_capa") or "")).split()
+
+    checks = []
+
+    def check(nome, ok, detalhe):
+        checks.append({"nome": nome, "ok": bool(ok), "detalhe": detalhe})
+
+    check("Formato de YouTube (16:9)", 1.6 <= medida["proporcao"] <= 1.9,
+          f"proporção {medida['proporcao']} (alvo ~1,78)")
+    check("Poucas palavras, impacto", 2 <= len(palavras) <= 8,
+          f"{len(palavras)} palavras na capa")
+    if padrao:
+        check("Escura como os virais da semana",
+              medida["escuro_pct"] >= padrao.get("escuro_pct_mediana", 0) * 0.6,
+              f"nossa: {medida['escuro_pct']}% escuro · virais: {padrao.get('escuro_pct_mediana')}%")
+        check("Contraste de viral",
+              medida["contraste"] >= padrao.get("contraste_mediana", 0) * 0.7,
+              f"nossa: {medida['contraste']} · virais: {padrao.get('contraste_mediana')}")
+    else:
+        check("Padrão da semana", True, "sem gabarito ainda (1ª varredura pendente)")
+
+    aprovada = all(c["ok"] for c in checks)
+    veredito = {
+        "quando": datetime_agora(),
+        "aprovada": aprovada,
+        "resumo": ("✔ dentro do padrão dos virais desta semana" if aprovada
+                   else "✖ fora do padrão: " + "; ".join(c["nome"] for c in checks if not c["ok"])),
+        "checks": checks,
+        "medida": medida,
+        "gabarito": padrao,
+    }
+    os.makedirs(CRIVO_DIR, exist_ok=True)
+    with open(os.path.join(CRIVO_DIR, f"{codigo}.json"), "w", encoding="utf-8") as f:
+        json.dump(veredito, f, ensure_ascii=False, indent=2)
+    return veredito
+
+
+def datetime_agora() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).isoformat()
+
+
+def carrega_crivo(codigo: str) -> dict:
+    try:
+        with open(os.path.join(CRIVO_DIR, f"{codigo}.json"), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _gera_e_salva(codigo: str, video: dict, instrucao: str, variar: bool) -> None:
+    import urllib.request
+    payload = json.dumps({"descricao": _prompt_capa(video, instrucao, variar),
+                          "marca": MARCA_MENTE_SABIA,
+                          "recipe_key": "dica_unica"}).encode("utf-8")
+    req = urllib.request.Request(f"{PONTE_URL}/api/gerar-imagem", data=payload,
+                                 headers={"Content-Type": "application/json"}, method="POST")
+    with urllib.request.urlopen(req, timeout=280) as resp:
+        res = json.loads(resp.read().decode("utf-8"))
+    if not res.get("ok") or not res.get("image_url"):
+        raise RuntimeError("a ponte não devolveu imagem")
+    os.makedirs(CAPAS_DIR, exist_ok=True)
+    with urllib.request.urlopen(f"{PONTE_URL}{res['image_url']}", timeout=60) as img:
+        with open(os.path.join(CAPAS_DIR, f"{codigo}.png"), "wb") as f:
+            f.write(img.read())
 
 
 def _job_capa(codigo: str, video: dict, instrucao: str = "", variar: bool = False) -> None:
-    """Roda em thread: pede o desenho à ponte, baixa e salva. O painel acompanha pelo estado."""
-    import urllib.request
+    """Thread: desenha → CRIVO DO PESQUISADOR → reprovou? refaz 1x sozinha → salva veredito."""
     try:
-        payload = json.dumps({"descricao": _prompt_capa(video, instrucao, variar),
-                              "marca": MARCA_MENTE_SABIA,
-                              "recipe_key": "dica_unica"}).encode("utf-8")
-        req = urllib.request.Request(f"{PONTE_URL}/api/gerar-imagem", data=payload,
-                                     headers={"Content-Type": "application/json"}, method="POST")
-        with urllib.request.urlopen(req, timeout=280) as resp:
-            res = json.loads(resp.read().decode("utf-8"))
-        if not res.get("ok") or not res.get("image_url"):
-            raise RuntimeError("a ponte não devolveu imagem")
-        os.makedirs(CAPAS_DIR, exist_ok=True)
-        destino = os.path.join(CAPAS_DIR, f"{codigo}.png")
-        with urllib.request.urlopen(f"{PONTE_URL}{res['image_url']}", timeout=60) as img:
-            with open(destino, "wb") as f:
-                f.write(img.read())
+        _gera_e_salva(codigo, video, instrucao, variar)
+        veredito = _crivo_capa(codigo, video)
+        if not veredito.get("aprovada"):
+            _CAPAS_EM_CURSO[codigo] = "desenhando"  # segue ocupado no refazer automático
+            correcao = ("Correção do pesquisador (obrigatória): "
+                        + "; ".join(c["nome"] + " — " + c["detalhe"]
+                                    for c in veredito["checks"] if not c["ok"])
+                        + ". Fundo mais escuro e texto com mais contraste, como os virais da semana.")
+            _gera_e_salva(codigo, video, (instrucao + " " + correcao).strip(), True)
+            _crivo_capa(codigo, video)  # veredito final (aprovada ou não, o Diretor vê a verdade)
         grava_decisao(f"capa_{codigo}", "aguardando_diretor")
         _CAPAS_EM_CURSO.pop(codigo, None)
     except Exception as e:  # noqa: BLE001 — o erro vira estado visível, nunca silêncio

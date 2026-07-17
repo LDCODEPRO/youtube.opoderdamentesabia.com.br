@@ -25,7 +25,7 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 | 2 | Pauta | Banco gerado pelo parâmetro: conceito COMPROVADO (prova em views) + autor-âncora + embalagem própria | 🟢 no ar (banco v1) |
 | 3 | Roteiro humanizado | Ver "Humanização" abaixo; 100% original (teste: "outro canal faria este exato vídeo?" → refazer) | 🔶 por sessão (automatizar via ponte da assinatura) |
 | 4 | Produção | Voz Sterling (ElevenLabs/Higgsfield) + visual na identidade da marca com MOVIMENTO real + ffmpeg (build.ps1/subs.ps1 provados) | 🔶 pipeline provado (vídeo-01/02), automação em construção |
-| 5 | Embalagem | Título = 3 das 4 peças do parâmetro · thumb fórmula da marca · SEO completo · flag de conteúdo sintético quando aplicável | 🟢 checklist no ar |
+| 5 | Embalagem | Título = 3 das 4 peças do parâmetro · thumb fórmula da marca (letras 3D cromadas) · **toda thumbnail passa pelo CRIVO DO PESQUISADOR** (comparada com o padrão visual dos virais da semana: escuridão, contraste, formato, nº de palavras; reprovou → refaz sozinha 1x antes de ir ao Diretor — ordem de 16/07) · SEO completo · flag de conteúdo sintético quando aplicável | 🟢 no ar (crivo automático) |
 | 6 | Aprovação | Preview no Telegram → `ok`/horário (padrão da casa); portão que some quando o Diretor soltar | ⏳ a ligar |
 | 7 | Publicação via navegador | Ver "Publicação" abaixo | ⏳ aguarda sessão logada (Diretor, 1x) |
 

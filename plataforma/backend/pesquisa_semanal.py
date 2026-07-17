@@ -121,6 +121,54 @@ def _pecas(titulo: str) -> list:
     return pecas
 
 
+def medir_imagem(caminho_ou_bytes) -> dict:
+    """Métricas visuais REAIS de uma thumbnail (PIL): luminância, % escuro, contraste."""
+    import io as _io
+
+    from PIL import Image, ImageStat
+    img = Image.open(_io.BytesIO(caminho_ou_bytes) if isinstance(caminho_ou_bytes, bytes)
+                     else caminho_ou_bytes)
+    w, h = img.size
+    cinza = img.convert("L")
+    stat = ImageStat.Stat(cinza)
+    hist = cinza.histogram()
+    total = sum(hist)
+    escuros = sum(hist[:60])
+    return {
+        "proporcao": round(w / h, 2),
+        "luminancia": round(stat.mean[0], 1),
+        "escuro_pct": round(100 * escuros / max(1, total)),
+        "contraste": round(stat.stddev[0], 1),
+    }
+
+
+def _padrao_visual_thumbs(ids: list) -> dict:
+    """Baixa as thumbnails dos virais da semana e mede o padrão visual deles.
+    É o gabarito do crivo: toda capa nossa é comparada com isto."""
+    medidas = []
+    for vid in ids:
+        try:
+            req = urllib.request.Request(
+                f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg", headers={"User-Agent": UA})
+            raw = urllib.request.urlopen(req, timeout=20).read()
+            medidas.append(medir_imagem(raw))
+        except Exception:
+            continue
+    if not medidas:
+        return {}
+
+    def mediana(chave):
+        vals = sorted(m[chave] for m in medidas)
+        return vals[len(vals) // 2]
+
+    return {
+        "amostra": len(medidas),
+        "luminancia_mediana": mediana("luminancia"),
+        "escuro_pct_mediana": mediana("escuro_pct"),
+        "contraste_mediana": mediana("contraste"),
+    }
+
+
 def main() -> int:
     todos, erros = {}, []
     for q in QUERIES:
@@ -147,8 +195,11 @@ def main() -> int:
         for p in v["pecas"]:
             contagem[p] += 1
 
+    padrao_visual = _padrao_visual_thumbs([v["id"] for v in quentes[:10]])
+
     resultado = {
         "varredura_em": datetime.now(timezone.utc).isoformat(),
+        "padrao_visual": padrao_visual,
         "queries": QUERIES,
         "total_analisado": len(videos),
         "quentes": quentes,  # os que estão estourando agora (≤12 meses), por views

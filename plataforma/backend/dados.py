@@ -136,6 +136,15 @@ def carrega_pautas() -> dict:
         return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
 
 
+def carrega_equipe() -> dict:
+    """O time do Agente Gerente YouTube (agente/equipe/equipe.json)."""
+    try:
+        with open(os.path.join(BASE_DIR, "agente", "equipe", "equipe.json"), encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {"membros": []}
+
+
 PESQUISA_PATH = os.path.join(BASE_DIR, "data", "pesquisa_semana.json")
 
 
@@ -242,6 +251,7 @@ def resumo(force: bool = False) -> dict:
     dados["inscritos"] = _busca_inscritos()
     dados["pipeline"] = carrega_pipeline()
     dados["agente"] = carrega_pautas()
+    dados["equipe"] = carrega_equipe()
     if dados.get("ok"):
         _grava_historico(dados)
     dados["historico"] = carrega_historico()

@@ -286,6 +286,7 @@
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
       <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
       <a href="#videos"><span class="ico">🎛</span> Studio</a>
+      <a href="#equipe"><span class="ico">👥</span> Equipe</a>
       <a href="#biblioteca"><span class="ico">📚</span> Biblioteca</a>
       <a href="#repositorio"><span class="ico">📦</span> Repositório</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
@@ -398,6 +399,14 @@
         <p class="d" style="margin:0">Cada vídeo novo publicado entra na comparação automaticamente (visualizações, curtidas e ritmo por dia, direto do YouTube). Quando ligarmos a chave oficial do YouTube, entram também cliques na capa e tempo assistido — aí esta página vira o juiz de cada capa e título.</p></div>
     </div>
 
+
+    <!-- ═══════════ EQUIPE ═══════════ -->
+    <div class="view" id="v-equipe">
+      <h2>👥 A Equipe do Gerente YouTube</h2>
+      <p class="sub">Ditada pelo Diretor: 3 roteiristas escrevem → o Sintetizador junta e monta o melhor → visual simbólico → áudio medido → montagem → crivo → seu OK → publica. Cada card mostra o estado real.</p>
+      <div class="grid g3" id="gridEquipe"></div>
+    </div>
+
     <!-- ═══════════ BIBLIOTECA ═══════════ -->
     <div class="view" id="v-biblioteca">
       <h2>📚 Biblioteca</h2>
@@ -465,9 +474,9 @@ async function api(caminho, opts) {
 }
 
 /* páginas */
-const PAGINAS = ["inicio", "funciona", "videos", "biblioteca", "repositorio", "ideias", "receita"];
+const PAGINAS = ["inicio", "funciona", "videos", "equipe", "biblioteca", "repositorio", "ideias", "receita"];
 function navega() {
-  const alvo = ((location.hash || "#inicio").slice(1)) === "capas" ? "videos" : (location.hash || "#inicio").slice(1);
+  const alvo = ((location.hash || "#inicio").slice(1)) === "capas" ? "videos" : ((location.hash || "").slice(1)) === "agente" ? "equipe" : (location.hash || "#inicio").slice(1);
   const pagina = PAGINAS.includes(alvo) ? alvo : "inicio";
   document.querySelectorAll(".view").forEach(v => v.classList.remove("ativa"));
   $("#v-" + pagina).classList.add("ativa");
@@ -718,6 +727,21 @@ function montaCapas(d) {
   }).join("") || '<div class="card"><p class="d">Nenhum vídeo na fila — as capas nascem junto com os vídeos.</p></div>';
 }
 
+
+/* página Equipe: o time do gerente com estado honesto */
+function montaEquipe(d) {
+  const membros = (d.equipe && d.equipe.membros) || [];
+  const pillEstado = (e) => e.includes("no ar") || e.includes("provado") ? "ok"
+    : e.includes("aguarda") || e.includes("construção") ? "warn" : "prata";
+  $("#gridEquipe").innerHTML = membros.map(m => `
+    <div class="card"><p class="icoBig">${m.ico}</p>
+      ${m.origem && m.origem.startsWith("FALTAVA") ? '<span class="pill cy">+ completado pelo agente</span>' : ""}
+      <p class="k">${m.papel}</p>
+      <p class="d" style="margin:0">${m.faz}</p>
+      <span class="pill ${pillEstado(m.estado)}" style="margin-top:10px">${m.estado}</span>
+    </div>`).join("") || '<div class="card"><p class="d">Equipe não carregada.</p></div>';
+}
+
 /* página Biblioteca: o acervo publicado com as métricas do YouTube */
 function montaBiblioteca(d) {
   const vids = d.videos || [];
@@ -776,6 +800,7 @@ function desenhaResumo(d) {
   montaProvasNossas(d);
   montaPesquisa(d);
   montaCapas(d);
+  montaEquipe(d);
   montaBiblioteca(d);
   montaRepositorio(d);
 

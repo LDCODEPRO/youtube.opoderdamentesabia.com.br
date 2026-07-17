@@ -246,6 +246,91 @@ def carrega_crivo(codigo: str) -> dict:
         return {}
 
 
+def _md5(caminho: str) -> str:
+    import hashlib
+    h = hashlib.md5()
+    with open(caminho, "rb") as f:
+        for bloco in iter(lambda: f.read(1 << 20), b""):
+            h.update(bloco)
+    return h.hexdigest()
+
+
+_MEDICOES_EM_CURSO: set = set()
+
+
+def _medidas_cache(caminho: str):
+    try:
+        with open(os.path.join(CRIVO_DIR, os.path.basename(caminho) + ".medidas.json"),
+                  encoding="utf-8") as f:
+            c = json.load(f)
+        st = os.stat(caminho)
+        if c.get("_size") == st.st_size and c.get("_mtime") == int(st.st_mtime):
+            return c
+    except Exception:
+        pass
+    return None
+
+
+def _dispara_medicao(codigo: str, caminho: str) -> None:
+    import threading
+    if codigo in _MEDICOES_EM_CURSO:
+        return
+    _MEDICOES_EM_CURSO.add(codigo)
+
+    def rodar():
+        try:
+            from medidas_video import mede_tudo
+            mede_tudo(caminho, CRIVO_DIR)
+        except Exception:
+            pass
+        finally:
+            _MEDICOES_EM_CURSO.discard(codigo)
+
+    threading.Thread(target=rodar, daemon=True).start()
+
+
+def _crivo_arquivo_checks(codigo: str, check) -> None:
+    """O pesquisador mede o ARQUIVO INTEIRO (ordem: 'não só o som, tudo'):
+    imagem (tremor, P&B, resolução), som (LUFS, voz×música) e duração real."""
+    prev = os.path.join(FRONT, "previews", f"{codigo}.mp4")
+    if not os.path.isfile(prev):
+        check("Arquivo medido pelo pesquisador", False, "vídeo ainda não subiu para o painel")
+        return
+    m = _medidas_cache(prev)
+    if not m:
+        _dispara_medicao(codigo, prev)
+        check("Arquivo em medição", False, "🔬 o pesquisador está medindo imagem e som deste arquivo (~1–2min)")
+        return
+    check("Duração real na régua (5–30min)",
+          m.get("duracao_s") and 300 <= m["duracao_s"] <= 1800,
+          f"{(m.get('duracao_s') or 0) / 60:.1f} min")
+    check("Qualidade de imagem (1080p, 24fps+)",
+          (m.get("width") or 0) >= 1920 and (m.get("fps") or 0) >= 24,
+          f"{m.get('width')}x{m.get('height')} @ {m.get('fps')}fps")
+    check("Identidade P&B da marca",
+          m.get("saturacao_pct") is not None and 0 <= m["saturacao_pct"] <= 6,
+          f"saturação {m.get('saturacao_pct')}% (P&B pede ~0)")
+    jit = (m.get("jitter") or {}).get("alternantes_pct")
+    check("Imagem estável, sem tremor", jit is not None and jit <= 25,
+          f"micro-tremor em {jit}% dos quadros analisados")
+    check("Volume padrão YouTube (−17 a −12 LUFS)",
+          m.get("lufs") is not None and -17.0 <= m["lufs"] <= -12.0,
+          f"{m.get('lufs')} LUFS")
+    manif_p = os.path.join(CRIVO_DIR, f"{codigo}_mix.json")
+    try:
+        with open(manif_p, encoding="utf-8") as f:
+            manif = json.load(f)
+        if manif.get("arquivo_md5") == _md5(prev):
+            dif = manif.get("diferenca_voz_musica_db")
+            check("Música atrás da voz (≥18 dB)", dif is not None and dif >= 18.0,
+                  f"voz {manif.get('voz_mean_db')} dB · música {manif.get('musica_mean_db')} dB · diferença {dif} dB")
+        else:
+            check("Música atrás da voz (≥18 dB)", False,
+                  "o manifesto de mix não é DESTE arquivo — mix não medida")
+    except Exception:
+        check("Música atrás da voz (≥18 dB)", False, "sem manifesto de mix medido")
+
+
 def _crivo_video(video: dict) -> dict:
     """CRIVO GERAL do vídeo (ordem do Diretor: TUDO passa pelo pesquisador antes de postar).
     Julga título, capa, duração e descrição contra a pesquisa e as regras da casa."""
@@ -275,6 +360,8 @@ def _crivo_video(video: dict) -> dict:
 
     check("Descrição SEO pronta", bool((video.get("descricao_seo") or "").strip()),
           "pronta" if (video.get("descricao_seo") or "").strip() else "ainda falta escrever")
+
+    _crivo_arquivo_checks(codigo, check)
 
     aprovado = all(c["ok"] for c in checks)
     return {"aprovado": aprovado, "checks": checks,

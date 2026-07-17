@@ -15,14 +15,14 @@ import os
 import re
 import time
 
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from starlette.middleware.sessions import SessionMiddleware
 
 from auth import check_password, require_auth
 from dados import (atualiza_status_video, carrega_decisoes, carrega_pipeline,
-                   grava_decisao, md5_arquivo, resumo)
+                   carrega_producao, grava_decisao, grava_producao, md5_arquivo, resumo)
 
 APP_NAME = "youtube-opoder"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -113,6 +113,7 @@ def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
     import copy
     dados = copy.deepcopy(resumo(force=force))  # nunca mutar o cache compartilhado
     dados["decisoes"] = carrega_decisoes()  # decisão do Diretor nunca espera cache
+    dados["producao"] = carrega_producao()  # progresso ao vivo nunca espera cache
     dados["pipeline"] = carrega_pipeline()  # capa recém-salva aparece sem esperar cache
     for v in dados["pipeline"].get("videos", []):
         estado = _CAPAS_EM_CURSO.get(v.get("codigo"))
@@ -140,6 +141,29 @@ def _decisao_permitida(item: str, decisao: str) -> bool:
     if item.startswith("aprovar_video_"):
         return decisao in {"aprovado", "reprovado"}
     return item in ITENS_VALIDOS and decisao in ITENS_VALIDOS[item]
+
+
+class ProducaoIn(BaseModel):
+    codigo: str
+    titulo: str | None = None
+    etapa: str
+    etapa_num: int | None = None
+    etapa_total: int | None = None
+    pct: int | None = None
+    detalhe: str | None = None
+    estado: str = "trabalhando"  # trabalhando | pronto | reprovado | erro
+
+
+_API_KEY = os.getenv("YOUTUBE_OPODER_API_KEY", "")
+
+
+@app.post("/api/producao/status")
+def producao_status(body: ProducaoIn, x_api_key: str = Header(None, alias="X-API-Key")):
+    """A fábrica reporta o progresso do vídeo em tempo real (o painel mostra a barra)."""
+    if not _API_KEY or x_api_key != _API_KEY:
+        raise HTTPException(status_code=401, detail="chave inválida")
+    grava_producao(body.model_dump())
+    return {"ok": True}
 
 
 @app.post("/api/decisao")

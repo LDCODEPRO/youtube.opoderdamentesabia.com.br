@@ -149,6 +149,33 @@ def carrega_pautas() -> dict:
         return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
 
 
+PRODUCAO_PATH = os.path.join(BASE_DIR, "data", "producao_status.json")
+
+
+def carrega_producao() -> dict:
+    """O que a fábrica está fazendo AGORA (reportado pelo pipeline em tempo real)."""
+    try:
+        with open(PRODUCAO_PATH, encoding="utf-8") as f:
+            d = json.load(f)
+        # se o último sinal é velho (>20min) e ainda 'trabalhando', a fábrica travou
+        if d.get("estado") == "trabalhando":
+            try:
+                quando = datetime.fromisoformat(d["atualizado_em"])
+                if (datetime.now(timezone.utc) - quando).total_seconds() > 1200:
+                    d["estado"] = "parou"
+                    d["detalhe"] = "sem sinal há mais de 20 min — pode ter travado"
+            except Exception:
+                pass
+        return d
+    except Exception:
+        return {}
+
+
+def grava_producao(dados: dict) -> None:
+    dados["atualizado_em"] = datetime.now(timezone.utc).isoformat()
+    _grava_json_atomico(PRODUCAO_PATH, dados)
+
+
 def carrega_equipe() -> dict:
     """O time do Agente Gerente YouTube (agente/equipe/equipe.json)."""
     try:
@@ -317,6 +344,7 @@ def resumo(force: bool = False) -> dict:
     dados["pipeline"] = carrega_pipeline()
     dados["agente"] = carrega_pautas()
     dados["equipe"] = carrega_equipe()
+    dados["producao"] = carrega_producao()
     if dados.get("ok"):
         _grava_historico(dados)
     dados["historico"] = carrega_historico()

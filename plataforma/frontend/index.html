@@ -186,6 +186,30 @@
     box-shadow:0 0 14px rgba(var(--scr),.5);transition:width .9s ease}
   .icoBig{font-size:2rem;line-height:1;margin:0 0 8px;filter:drop-shadow(0 0 12px rgba(var(--scr),.35))}
 
+  /* ── bloco "sendo preparado agora": capa grande + barra de progressão ── */
+  .prodHero{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:20px;align-items:center;
+    border-radius:16px;padding:18px;
+    background:radial-gradient(420px 200px at 100% 0%, rgba(var(--scr),.15), transparent 70%),linear-gradient(165deg,#141A26,#0F131A);
+    border:1px solid rgba(var(--scr),.3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 16px 44px rgba(0,0,0,.5), 0 0 40px rgba(var(--scr),.1)}
+  .prodHero.pronto{border-color:rgba(46,230,168,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 16px 44px rgba(0,0,0,.5),0 0 44px rgba(46,230,168,.2)}
+  .prodHero .capa{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0A0D14 center/cover no-repeat;border:1px solid rgba(var(--scr),.25)}
+  .prodHero .capa::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(var(--scr),.14) 50%,transparent 60%);transform:translateX(-120%);animation:sheen 3s ease infinite}
+  .prodHero.pronto .capa::after{animation:none}
+  .prodHero .capa .semcapa{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:.8rem;text-align:center;padding:12px}
+  .prodBar{height:22px;border-radius:11px;background:rgba(255,255,255,.06);overflow:hidden;position:relative;margin:12px 0 4px}
+  .prodBar i{display:block;height:100%;border-radius:11px;background:linear-gradient(90deg,var(--prata),var(--prata-hi));box-shadow:0 0 16px rgba(var(--scr),.5);transition:width 1s ease;position:relative;overflow:hidden}
+  .prodBar i::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);animation:shimmer 2s ease infinite}
+  .prodBar.pronto i{background:linear-gradient(90deg,#2EE6A8,#7FF5CC);box-shadow:0 0 16px rgba(46,230,168,.55)}
+  .prodBar b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--label);font-size:.72rem;letter-spacing:.1em;color:#0A0F16;font-weight:700;text-shadow:0 0 6px rgba(255,255,255,.4)}
+  .prodEtapas{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .prodEtapas .e{font-family:var(--label);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:5px}
+  .prodEtapas .e::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12)}
+  .prodEtapas .e.feito{color:var(--dim)} .prodEtapas .e.feito::before{background:var(--ok);box-shadow:0 0 8px rgba(46,230,168,.6)}
+  .prodEtapas .e.agora{color:var(--prata-hi)} .prodEtapas .e.agora::before{background:var(--prata-hi);box-shadow:0 0 10px rgba(var(--scr),.9);animation:pulsa 1.4s ease infinite}
+  @keyframes pulsa{50%{opacity:.4}}
+  @media (max-width:620px){.prodHero{grid-template-columns:1fr}}
+
   /* esteira da capa: desenho → crivo → seu OK → repositório */
   .passos{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 6px}
   .passo{display:flex;gap:6px;align-items:center;font-family:var(--label);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
@@ -284,13 +308,11 @@
     </div>
     <nav class="menu" id="menu">
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
-      <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
       <a href="#videos"><span class="ico">🏭</span> Fábrica</a>
-      <a href="#equipe"><span class="ico">👥</span> Equipe</a>
       <a href="#biblioteca"><span class="ico">📚</span> Biblioteca</a>
-      <a href="#repositorio"><span class="ico">🔐</span> Cofre</a>
+      <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
-      <a href="#receita"><span class="ico">📖</span> A Receita</a>
+      <a href="#equipe"><span class="ico">👥</span> Equipe</a>
     </nav>
     <div class="rodape">
       <span class="vivo" id="selo">● conectando…</span>
@@ -324,7 +346,11 @@
       <p class="sub">Laranja = depende de você · Verde = eu faço. Cada card tem o botão da ação.</p>
       <div class="grid g2" id="gridTarefas"></div>
 
-      <div class="grid g3" style="margin-top:26px">
+      <!-- o vídeo que está sendo preparado: capa + barra de progressão ao vivo -->
+      <div id="blocoProducao" class="hide" style="margin-top:30px"></div>
+
+      <h2 style="margin-top:30px">O canal</h2>
+      <div class="grid g3">
         <div class="card tcard"><a class="thumb" id="melhorThumb" href="#" target="_blank" rel="noopener"><span class="pill prata tag">🏆 melhor do canal</span><div class="ovl"><b id="melhorViews">—</b><span>views</span></div></a><p class="titulo-v" id="melhorTitulo">—</p></div>
         <div class="card"><p class="icoBig">📈</p><p class="k">Crescimento</p><p class="d" style="margin:0" id="histNota">—</p></div>
         <div class="card"><p class="icoBig">💰</p><p class="k">Quando paga</p><p class="big" style="font-size:1.5rem">1.000 <small>+ 4.000h</small></p><p class="d">inscritos + horas assistidas</p></div>
@@ -351,7 +377,10 @@
       <div class="grid g3" id="gridLongos" style="margin-bottom:26px"></div>
 
       <h2 style="font-size:.95rem;color:var(--dim)">📱 CORTES ANTIGOS · formato Instagram que subiu como Short (outro mundo, só registro)</h2>
-      <div class="grid g3" id="gridCortes"></div>
+      <div class="grid g3" id="gridCortes" style="margin-bottom:26px"></div>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">🔐 COFRE · prontos para subir (crivo + seu OK completos)</h2>
+      <div class="grid gfill" id="gridRepositorio"></div>
     </div>
 
     <!-- ═══════════ O QUE FUNCIONA ═══════════ -->
@@ -397,6 +426,22 @@
 
       <div class="card"><p class="k">Como esta página evolui</p>
         <p class="d" style="margin:0">Cada vídeo novo publicado entra na comparação automaticamente (visualizações, curtidas e ritmo por dia, direto do YouTube). Quando ligarmos a chave oficial do YouTube, entram também cliques na capa e tempo assistido — aí esta página vira o juiz de cada capa e título.</p></div>
+
+      <h2 style="margin-top:30px">📖 A Receita — como cada vídeo é feito</h2>
+      <div class="grid g3">
+        <div class="card"><p class="icoBig">✍</p><p class="k">Título</p>
+          <p class="d" style="margin:0"><b>Você</b> + <b>prazo</b> + <b>nome famoso</b></p></div>
+        <div class="card"><p class="icoBig">🖼</p><p class="k">Capa</p>
+          <p class="d" style="margin:0"><b>2–4 palavras 3D</b> · legível no celular</p></div>
+        <div class="card"><p class="icoBig">⏱</p><p class="k">Primeiros 15s</p>
+          <p class="d" style="margin:0"><b>Direto no assunto</b> · sem "olá"</p></div>
+        <div class="card"><p class="icoBig">📏</p><p class="k">Tamanho</p>
+          <p class="big" style="font-size:1.5rem">5–30<small> min</small></p></div>
+        <div class="card"><p class="icoBig">🙏</p><p class="k">Pedidos</p>
+          <p class="d" style="margin:0">comentário cedo · inscrição <b>na melhor parte</b></p></div>
+        <div class="card"><p class="icoBig">⚖</p><p class="k">Regra de ouro</p>
+          <p class="d" style="margin:0"><b>entregar o que o título promete</b></p></div>
+      </div>
     </div>
 
 
@@ -418,46 +463,11 @@
       <div class="grid g3" id="gridBibCortes"></div>
     </div>
 
-    <!-- ═══════════ REPOSITÓRIO ═══════════ -->
-    <div class="view" id="v-repositorio">
-      <h2>🔐 Cofre</h2>
-      <p class="sub">O cofre final: só entra vídeo <b>totalmente aprovado</b> — crivo do pesquisador + seu OK em tudo (vídeo, capa e título). Daqui ele só sai para o canal; depois de postado, muda para a Biblioteca.</p>
-      <div class="grid gfill" id="gridRepositorio"></div>
-    </div>
-
     <!-- ═══════════ IDEIAS ═══════════ -->
     <div class="view" id="v-ideias">
       <h2>Ideias prontas</h2>
       <p class="sub">10 ideias de vídeo. Cada uma inspirada num vídeo que JÁ fez milhões — a prova está no cartão. Nada é copiado: refazemos tudo do zero, do nosso jeito.</p>
       <div class="grid g3" id="gridPautas"></div>
-    </div>
-
-    <!-- ═══════════ A RECEITA ═══════════ -->
-    <div class="view" id="v-receita">
-      <h2>A Receita do vídeo que dá certo</h2>
-      <p class="sub">O resumo prático de todo o estudo. É assim que cada vídeo nosso é feito:</p>
-
-      <div class="grid g3">
-        <div class="card"><p class="icoBig">✍</p><p class="k">Título</p>
-          <p class="d" style="margin:0"><b>Você</b> + <b>prazo</b> + <b>nome famoso</b></p></div>
-        <div class="card"><p class="icoBig">🖼</p><p class="k">Capa</p>
-          <p class="d" style="margin:0"><b>2–4 palavras 3D</b> · legível no celular</p></div>
-        <div class="card"><p class="icoBig">⏱</p><p class="k">Primeiros 15s</p>
-          <p class="d" style="margin:0"><b>Direto no assunto</b> · sem "olá"</p></div>
-        <div class="card"><p class="icoBig">📏</p><p class="k">Tamanho</p>
-          <p class="big" style="font-size:1.5rem">5–30<small> min</small></p></div>
-        <div class="card"><p class="icoBig">🙏</p><p class="k">Pedidos</p>
-          <p class="d" style="margin:0">comentário cedo · inscrição <b>na melhor parte</b></p></div>
-        <div class="card"><p class="icoBig">⚖</p><p class="k">Regra de ouro</p>
-          <p class="d" style="margin:0"><b>entregar o que o título promete</b></p></div>
-      </div>
-
-      <h2 style="font-size:.95rem;color:var(--dim);margin-top:26px">COMO SABER SE FUNCIONOU · toda segunda</h2>
-      <div class="grid g3">
-        <div class="card"><p class="k">As pessoas clicam?</p><p class="big" style="font-size:1.8rem">4<small> em cada 100</small></p><p class="d">que veem a capa devem clicar. Menos que 2? Trocamos a capa.</p></div>
-        <div class="card"><p class="k">As pessoas ficam?</p><p class="big" style="font-size:1.8rem">7<small> em cada 10</small></p><p class="d">devem passar dos 15 segundos. Menos? Refazemos o começo.</p></div>
-        <div class="card"><p class="k">Viram inscritos?</p><p class="big" style="font-size:1.8rem">↗</p><p class="d">cada vídeo deve trazer mais que o anterior.</p></div>
-      </div>
     </div>
 
   </main>
@@ -475,9 +485,11 @@ async function api(caminho, opts) {
 }
 
 /* páginas */
-const PAGINAS = ["inicio", "funciona", "videos", "equipe", "biblioteca", "repositorio", "ideias", "receita"];
+const PAGINAS = ["inicio", "videos", "biblioteca", "funciona", "ideias", "equipe"];
+const ALIAS = {capas: "videos", agente: "equipe", repositorio: "videos", cofre: "videos", receita: "funciona"};
 function navega() {
-  const alvo = ((location.hash || "#inicio").slice(1)) === "capas" ? "videos" : ((location.hash || "").slice(1)) === "agente" ? "equipe" : (location.hash || "#inicio").slice(1);
+  let alvo = (location.hash || "#inicio").slice(1);
+  alvo = ALIAS[alvo] || alvo;
   const pagina = PAGINAS.includes(alvo) ? alvo : "inicio";
   document.querySelectorAll(".view").forEach(v => v.classList.remove("ativa"));
   $("#v-" + pagina).classList.add("ativa");
@@ -619,6 +631,54 @@ async function gerarCapa(codigo, botao, instrucao) {
     alert((e.body && e.body.detail) || "A ponte de desenho não respondeu.");
     carregaPainel();
   }
+}
+
+/* o vídeo sendo preparado AGORA — capa + barra de progressão no Início */
+const ETAPAS_PROD = [
+  ["roteiro", "✍ roteiro"], ["narracao", "🎙 narração"], ["cenas", "🎨 cenas"],
+  ["montagem", "🎬 montagem"], ["audio", "🎵 áudio"], ["legendas", "💬 legendas"],
+  ["crivo", "🔬 crivo"], ["pronto", "✔ pronto"],
+];
+function montaProducao(d) {
+  const box = $("#blocoProducao");
+  const p = d.producao || {};
+  if (!p.codigo || !p.etapa) { box.classList.add("hide"); box.innerHTML = ""; return; }
+  box.classList.remove("hide");
+
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  const v = pipe.find(x => x.codigo === p.codigo) || {};
+  const capa = v.capa_url ? `${v.capa_url}?v=${Date.now()}` : "";
+  const pronto = p.estado === "pronto";
+  const parou = p.estado === "parou" || p.estado === "erro";
+  const pct = pronto ? 100 : Math.max(2, Math.min(100, p.pct || 0));
+  const idxAtual = ETAPAS_PROD.findIndex(e => e[0] === p.etapa);
+
+  const stepper = ETAPAS_PROD.map((e, i) => {
+    const cls = pronto || (idxAtual >= 0 && i < idxAtual) ? "feito"
+      : (i === idxAtual ? "agora" : "");
+    return `<span class="e ${cls}">${e[1]}</span>`;
+  }).join("");
+
+  const titulo = p.titulo || v.titulo_trabalho || p.codigo;
+  const chamada = pronto
+    ? `<span class="pill ok">✅ FICOU PRONTO</span>`
+    : parou ? `<span class="pill warn">⚠ ${esc(p.detalhe || "produção parada")}</span>`
+    : `<span class="pill prata">🎬 sendo preparado agora</span>`;
+
+  box.innerHTML = `
+    <div class="prodHero ${pronto ? "pronto" : ""}">
+      <div class="capa" style="${capa ? `background-image:url(${capa})` : ""}">
+        ${capa ? "" : '<span class="semcapa">a capa aparece quando ficar pronta</span>'}
+      </div>
+      <div>
+        ${chamada}
+        <p class="titulo-v" style="font-size:1.15rem;margin:8px 0 2px">${esc(titulo)}</p>
+        <p class="d" style="margin:0">${pronto ? "Passou no crivo do pesquisador — está esperando você assistir e aprovar (card laranja acima)."
+          : esc(p.detalhe || "trabalhando…")}</p>
+        <div class="prodBar ${pronto ? "pronto" : ""}"><i style="width:${pct}%"></i><b>${pct}%</b></div>
+        <div class="prodEtapas">${stepper}</div>
+      </div>
+    </div>`;
 }
 
 /* página O que funciona: vereditos calculados dos NOSSOS números */
@@ -818,6 +878,7 @@ let primeiraCarga = true;
 function desenhaResumo(d) {
   $("#falaEstudio").innerHTML = montaFala(d);
   montaTarefas(d);
+  montaProducao(d);
   montaProvasNossas(d);
   montaPesquisa(d);
   montaCapas(d);

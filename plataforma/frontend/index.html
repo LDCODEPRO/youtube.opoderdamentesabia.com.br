@@ -466,6 +466,7 @@
 <script>
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => n == null ? "—" : n.toLocaleString("pt-BR");
+const esc = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 async function api(caminho, opts) {
   const r = await fetch(caminho, Object.assign({headers: {"Content-Type": "application/json"}}, opts));
@@ -543,7 +544,7 @@ function montaTarefas(d) {
       ? `<video controls playsinline preload="metadata" style="width:100%;border-radius:11px;border:1px solid rgba(215,230,255,.25);margin:10px 0;background:#000" src="${v.preview_url}"></video>`
       : `<p class="d">⏳ subindo o vídeo para a plataforma…</p>`;
     cards.push(`<div class="card tarefa sua" style="grid-column:1/-1"><p class="icoBig">▶</p>
-      <p><b>Assistir e aprovar: ${v.titulo_trabalho}</b> <span class="d">(${v.duracao_real || ""})</span></p>
+      <p><b>Assistir e aprovar: ${esc(v.titulo_trabalho)}</b> <span class="d">(${v.duracao_real || ""})</span></p>
       ${player}
       <input type="text" id="mot_${v.codigo}" placeholder="Se reprovar: o que precisa mudar? (a fábrica refaz com essa ordem)"
         style="width:100%;padding:10px 12px;border-radius:9px;font-size:.85rem;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid rgba(215,230,255,.2);outline:none;margin:2px 0 9px">
@@ -556,7 +557,7 @@ function montaTarefas(d) {
   /* 3 · produção em andamento (comigo) */
   pipe.filter(v => v.status === "producao").forEach(v => {
     cards.push(`<div class="card tarefa minha"><p class="icoBig">🎬</p>
-      <p><b>Terminar "${v.titulo_trabalho}"</b></p>
+      <p><b>Terminar "${esc(v.titulo_trabalho)}"</b></p>
       <small>comigo · ${v.duracao_alvo || "5–30min"}</small>
       <div class="acoes"><button class="btn mini ghost" onclick="location.hash='#videos'">acompanhar →</button></div></div>`);
   });
@@ -566,7 +567,7 @@ function montaTarefas(d) {
     const dcapa = dec["capa_" + v.codigo] && dec["capa_" + v.codigo].decisao;
     if (v.capa_url && dcapa !== "aprovado" && v.capa_status !== "desenhando") {
       cards.push(`<div class="card tarefa sua"><p class="icoBig">🖼</p>
-        <p><b>Aprovar a capa de "${v.titulo_trabalho}"</b></p>
+        <p><b>Aprovar a capa de "${esc(v.titulo_trabalho)}"</b></p>
         <img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(255,165,61,.35);margin:8px 0">
         <div class="acoes">
           <button class="btn mini ok" onclick="decidir('capa_${v.codigo}','aprovado')">✔ Aprovar capa</button>
@@ -692,10 +693,10 @@ function montaPesquisa(d) {
     <div class="card tcard">
       <a class="thumb" href="https://www.youtube.com/watch?v=${v.id}" target="_blank" rel="noopener"
          style="background-image:url(https://i.ytimg.com/vi/${v.id}/mqdefault.jpg)">
-        <span class="pill cy tag">${v.duracao || ""}</span>
-        <div class="ovl"><b>${fmt(v.views)}</b><span>views · ${v.quando || ""}</span></div>
+        <span class="pill cy tag">${esc(v.duracao || "")}</span>
+        <div class="ovl"><b>${fmt(v.views)}</b><span>views · ${esc(v.quando || "")}</span></div>
       </a>
-      <p class="titulo-v">${(v.titulo || "").slice(0, 62)}</p>
+      <p class="titulo-v">${esc((v.titulo || "").slice(0, 62))}</p>
     </div>`).join("");
 }
 
@@ -743,7 +744,7 @@ function montaCapas(d) {
         <div class="acoes"><button class="btn mini" onclick="gerarCapa('${v.codigo}', this)">⚡ Desenhar capa agora</button></div>`;
     }
     return `<div class="card"><p class="k">${v.codigo} · palavras da capa: ${v.palavras_capa || "—"}</p>
-      <p class="titulo-v">${v.titulo_trabalho}</p>${montaPassos(v, decisao)}${corpo}</div>`;
+      <p class="titulo-v">${esc(v.titulo_trabalho)}</p>${montaPassos(v, decisao)}${corpo}</div>`;
   }).join("") || '<div class="card"><p class="d">Nenhum vídeo na fila — as capas nascem junto com os vídeos.</p></div>';
 }
 
@@ -756,8 +757,8 @@ function montaEquipe(d) {
   $("#gridEquipe").innerHTML = membros.map(m => `
     <div class="card"><p class="icoBig">${m.ico}</p>
       ${m.origem && m.origem.startsWith("FALTAVA") ? '<span class="pill cy">+ completado pelo agente</span>' : ""}
-      <p class="k">${m.papel}</p>
-      <p class="d" style="margin:0">${m.faz}</p>
+      <p class="k">${esc(m.papel)}</p>
+      <p class="d" style="margin:0">${esc(m.faz)}</p>
       <span class="pill ${pillEstado(m.estado)}" style="margin-top:10px">${m.estado}</span>
     </div>`).join("") || '<div class="card"><p class="d">Equipe não carregada.</p></div>';
 }
@@ -781,7 +782,7 @@ function montaBiblioteca(d) {
         ${v.views === melhor ? '<span class="pill prata tag">🏆 nº 1 do canal</span>' : ""}
         <div class="ovl"><b>${fmt(v.views)}</b><span>views</span><b style="margin-left:auto">👍 ${fmt(v.likes)}</b></div>
       </a>
-      <p class="titulo-v">${v.titulo.length > 60 ? v.titulo.slice(0, 60) + "…" : v.titulo}</p>
+      <p class="titulo-v">${esc(v.titulo.length > 60 ? v.titulo.slice(0, 60) + "…" : v.titulo)}</p>
       <div class="barraP" style="margin:8px 4px 2px"><div class="rot"><span>força vs. nº 1</span><b>${pct}%</b></div>
         <div class="tr" style="height:10px"><i style="width:${pct}%"></i></div></div>
       <p class="d" style="margin:7px 4px 2px">curtem <b>${tx}%</b> dos que assistem</p>
@@ -805,7 +806,7 @@ function montaRepositorio(d) {
         <span class="pill ok tag">✔ aprovado</span>
         <div class="ovl"><b>${v.codigo}</b><span>${v.duracao_alvo || ""}</span></div>
       </div>
-      <p class="titulo-v">${v.titulo_trabalho}</p>
+      <p class="titulo-v">${esc(v.titulo_trabalho)}</p>
       <span class="pill ok">🔓 PRONTO PARA SUBIR</span>
     </div>`;
   }).join("") || `<div class="card"><p class="icoBig">📦</p><p class="k">Cofre vazio</p>
@@ -871,7 +872,7 @@ function desenhaResumo(d) {
     return `
     <div class="card tcard">
       ${v.preview_url ? `<a href="${v.preview_url}" target="_blank" rel="noopener" style="text-decoration:none">${thumbMiolo}</a>` : thumbMiolo}
-      <p class="titulo-v">${v.titulo_trabalho}</p>
+      <p class="titulo-v">${esc(v.titulo_trabalho)}</p>
       <p style="margin:6px 0 8px">${semaforo}</p>
       ${selo}
     </div>`;
@@ -883,7 +884,7 @@ function desenhaResumo(d) {
          style="background-image:url(https://i.ytimg.com/vi/${v.id}/mqdefault.jpg)">
         <div class="ovl"><b>${fmt(v.views)}</b><span>views</span><b style="margin-left:auto">👍 ${fmt(v.likes)}</b></div>
       </a>
-      <p class="titulo-v">${v.titulo.length > 60 ? v.titulo.slice(0, 60) + "…" : v.titulo}</p>
+      <p class="titulo-v">${esc(v.titulo.length > 60 ? v.titulo.slice(0, 60) + "…" : v.titulo)}</p>
     </div>`;
   $("#gridLongos").innerHTML = longos.map(cardVideo).join("") ||
     '<div class="card"><p class="d">Os novos da fábrica entram aqui.</p></div>';
@@ -897,9 +898,9 @@ function desenhaResumo(d) {
     const prova = m ? m[1].replace(/\s*(M|mi)\b/i, " milhões").replace("milhõeslhões", "milhões") : "";
     return `
     <div class="card"><p class="icoBig">${ico}</p>
-      <p class="titulo-v">${p.titulo_candidato}</p>
+      <p class="titulo-v">${esc(p.titulo_candidato)}</p>
       ${prova ? `<p class="big" style="font-size:1.5rem;margin-top:8px">${prova}<small> views na prova</small></p>` : ""}
-      <p class="d">${p.duracao_alvo} · ${p.autor_ancora}</p>
+      <p class="d">${esc(p.duracao_alvo)} · ${esc(p.autor_ancora)}</p>
     </div>`;
   }).join("") || '<div class="card"><p class="d">Sem ideias no banco.</p></div>';
 

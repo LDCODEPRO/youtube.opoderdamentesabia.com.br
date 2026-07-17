@@ -9,10 +9,23 @@ Cache em memória + disco (data/cache.json) com TTL, para não martelar o YouTub
 import json
 import os
 import re
+import threading
 import time
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+
+_ESCRITA_LOCK = threading.Lock()
+
+
+def _grava_json_atomico(caminho: str, dados) -> None:
+    """Escrita atômica com lock: crash no meio nunca deixa JSON truncado."""
+    with _ESCRITA_LOCK:
+        os.makedirs(os.path.dirname(caminho), exist_ok=True)
+        tmp = caminho + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(dados, f, ensure_ascii=False, indent=2)
+        os.replace(tmp, caminho)
 
 CHANNEL_ID = os.getenv("YOUTUBE_OPODER_CHANNEL_ID", "UCjpdA-aERgsqep3Dn0giFig")
 CHANNEL_HANDLE = os.getenv("YOUTUBE_OPODER_HANDLE", "@opoderdamentesabia")
@@ -169,15 +182,44 @@ def carrega_decisoes() -> dict:
         return {}
 
 
-def grava_decisao(item: str, decisao: str, motivo: str = "") -> dict:
+def md5_arquivo(caminho: str):
+    """md5 barato com cache por (tamanho, mtime) — usado para amarrar decisão ao arquivo."""
+    import hashlib
+    try:
+        st = os.stat(caminho)
+    except OSError:
+        return None
+    cache = os.path.join(os.path.dirname(caminho), ".md5cache.json")
+    chave = os.path.basename(caminho)
+    try:
+        with open(cache, encoding="utf-8") as f:
+            c = json.load(f)
+        e = c.get(chave)
+        if e and e["size"] == st.st_size and e["mtime"] == int(st.st_mtime):
+            return e["md5"]
+    except Exception:
+        c = {}
+    h = hashlib.md5()
+    with open(caminho, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    c[chave] = {"size": st.st_size, "mtime": int(st.st_mtime), "md5": h.hexdigest()}
+    try:
+        _grava_json_atomico(cache, c)
+    except Exception:
+        pass
+    return h.hexdigest()
+
+
+def grava_decisao(item: str, decisao: str, motivo: str = "", arquivo_md5: str = "") -> dict:
     todas = carrega_decisoes()
     registro = {"decisao": decisao, "quando": datetime.now(timezone.utc).isoformat()}
     if motivo:
         registro["motivo"] = motivo[:400]
+    if arquivo_md5:
+        registro["arquivo_md5"] = arquivo_md5  # o carimbo vale só PARA ESTE arquivo
     todas[item] = registro
-    os.makedirs(os.path.dirname(DECISOES_PATH), exist_ok=True)
-    with open(DECISOES_PATH, "w", encoding="utf-8") as f:
-        json.dump(todas, f, ensure_ascii=False, indent=2)
+    _grava_json_atomico(DECISOES_PATH, todas)
     return todas
 
 

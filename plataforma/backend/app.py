@@ -13,7 +13,6 @@ Porta 5065 (systemd youtube_opoder.service), atrás do nginx.
 import json
 import os
 import re
-import secrets
 import time
 
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -23,17 +22,22 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from auth import check_password, require_auth
 from dados import (atualiza_status_video, carrega_decisoes, carrega_pipeline,
-                   grava_decisao, resumo)
+                   grava_decisao, md5_arquivo, resumo)
 
 APP_NAME = "youtube-opoder"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRONT = os.path.join(BASE_DIR, "frontend")
 INICIO = time.time()
 
+_SECRET = os.getenv("YOUTUBE_OPODER_SESSION_SECRET")
+if not _SECRET:
+    raise RuntimeError("YOUTUBE_OPODER_SESSION_SECRET ausente no .env — corrija antes de subir "
+                       "(sem ela, todo restart desloga o Diretor e multi-worker quebra o login).")
+
 app = FastAPI(title="Estúdio YouTube — O Poder da Mente Sábia", docs_url=None, redoc_url=None)
 app.add_middleware(
     SessionMiddleware,
-    secret_key=os.getenv("YOUTUBE_OPODER_SESSION_SECRET", secrets.token_hex(32)),
+    secret_key=_SECRET,
     max_age=30 * 24 * 3600,
     same_site="lax",
     https_only=True,
@@ -52,12 +56,14 @@ def status():
     contagem = {}
     for v in pipe.get("videos", []):
         contagem[v.get("status", "?")] = contagem.get(v.get("status", "?"), 0) + 1
+    # o hub só precisa de vida + agregados — decisões e instruções do Diretor NÃO vazam aqui
+    decisoes = carrega_decisoes()
     return {
         "ok": True,
         "loja": APP_NAME,
         "missao": "canal @opoderdamentesabia rumo ao YPP (1.000 inscritos + 4.000h)",
         "pipeline": contagem,
-        "decisoes_do_diretor": carrega_decisoes(),
+        "decisoes_registradas": len(decisoes),
         "uptime_s": int(time.time() - INICIO),
     }
 
@@ -104,7 +110,8 @@ def me(request: Request):
 # ── Dados do painel ──────────────────────────────────────────────────────────
 @app.get("/api/resumo")
 def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
-    dados = resumo(force=force)
+    import copy
+    dados = copy.deepcopy(resumo(force=force))  # nunca mutar o cache compartilhado
     dados["decisoes"] = carrega_decisoes()  # decisão do Diretor nunca espera cache
     dados["pipeline"] = carrega_pipeline()  # capa recém-salva aparece sem esperar cache
     for v in dados["pipeline"].get("videos", []):
@@ -140,7 +147,13 @@ def decidir(body: DecisaoIn, request: Request, _=Depends(require_auth)):
     """O Diretor decide no painel; a decisão fica registrada E MOVE a fila."""
     if not _decisao_permitida(body.item, body.decisao):
         raise HTTPException(status_code=400, detail="Decisão desconhecida")
-    decisoes = grava_decisao(body.item, body.decisao, body.motivo or "")
+    md5 = ""
+    if body.item.startswith("aprovar_video_") and body.decisao == "aprovado":
+        codigo0 = body.item.replace("aprovar_video_", "")
+        if not any(v.get("codigo") == codigo0 for v in carrega_pipeline().get("videos", [])):
+            raise HTTPException(status_code=400, detail="Vídeo não está na fila")
+        md5 = md5_arquivo(os.path.join(FRONT, "previews", f"{codigo0}.mp4")) or ""
+    decisoes = grava_decisao(body.item, body.decisao, body.motivo or "", md5)
     if body.item.startswith("aprovar_video_"):
         codigo = body.item.replace("aprovar_video_", "")
         from datetime import datetime
@@ -262,12 +275,7 @@ def carrega_crivo(codigo: str) -> dict:
 
 
 def _md5(caminho: str) -> str:
-    import hashlib
-    h = hashlib.md5()
-    with open(caminho, "rb") as f:
-        for bloco in iter(lambda: f.read(1 << 20), b""):
-            h.update(bloco)
-    return h.hexdigest()
+    return md5_arquivo(caminho) or ""  # com cache por (size, mtime) — não relê 100MB a cada poll
 
 
 _MEDICOES_EM_CURSO: set = set()
@@ -385,14 +393,20 @@ def _crivo_video(video: dict) -> dict:
 
 
 def pode_publicar(video: dict, decisoes: dict) -> dict:
-    """O PORTÃO: só publica com crivo 100% + aprovação do Diretor. O uploader usará isto."""
+    """O PORTÃO: só publica com crivo 100% + aprovação do Diretor AMARRADA ao arquivo atual."""
     crivo = _crivo_video(video)
-    dec = (decisoes.get(f"aprovar_video_{video.get('codigo')}") or {}).get("decisao")
+    reg = decisoes.get(f"aprovar_video_{video.get('codigo')}") or {}
     faltas = []
     if not crivo["aprovado"]:
         faltas.append("crivo do pesquisador")
-    if dec != "aprovado":
+    if reg.get("decisao") != "aprovado":
         faltas.append("aprovação do Diretor")
+    else:
+        # o carimbo vale só para o arquivo que o Diretor VIU (md5). Mudou o vídeo → reaprovar.
+        prev = os.path.join(FRONT, "previews", f"{video.get('codigo')}.mp4")
+        atual = md5_arquivo(prev)
+        if reg.get("arquivo_md5") and atual and reg["arquivo_md5"] != atual:
+            faltas.append("reaprovação do Diretor (o vídeo mudou desde o OK)")
     return {"pode": not faltas, "faltas": faltas, "crivo": crivo}
 
 
@@ -480,7 +494,8 @@ def kit(arquivo: str):
 
 
 @app.get("/capas/{arquivo}")
-def capa(arquivo: str):
+def capa(arquivo: str, request: Request, _=Depends(require_auth)):
+    # capa de vídeo não publicado é editorial — só o painel logado vê
     caminho = os.path.join(FRONT, "capas", os.path.basename(arquivo))
     if not os.path.isfile(caminho):
         raise HTTPException(status_code=404, detail="não existe")

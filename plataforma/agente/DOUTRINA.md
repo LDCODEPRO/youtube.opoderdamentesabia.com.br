@@ -33,6 +33,7 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 **O canal fica COMO ESTÁ.** "Não pedi outra versão do canal — quero que faça dar certo como é, assim que o público do Instagram e TikTok gosta."
 - Perfil/capa do canal: **não mexer** — a identidade é a atual (lâmpada-cérebro prata no preto cósmico), a mesma que o público das outras redes conhece.
 - Capas/thumbs dos vídeos novos: seguem a **identidade da marca atual** (P&B/prata cósmico + 2–4 palavras gigantes), NÃO o dourado.
+- **LETRAS 3D CROMADAS (ordem do Diretor, 16/07: "letras em 3D com essa fonte ficaria top")**: todo texto de capa sai em 3D — extrusão com profundidade, acabamento cromado/prata polido, reflexos de estúdio, bisel — principal gigante + subtítulo ~40% no mesmo efeito. Já é o padrão do `_prompt_capa`.
 - O kit dourado de 10/07 (avatar/banner/estilo de capa) está **arquivado** — só volta com ordem expressa do Diretor.
 
 ## Humanização (o que separa nosso vídeo de "conteúdo de robô")

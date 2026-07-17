@@ -159,12 +159,14 @@ def _prompt_capa(video: dict, instrucao: str = "", variar: bool = False) -> str:
         f"de Instagram, NÃO usar layout vertical. Vídeo: '{video.get('titulo_trabalho')}'. "
         "Cena única e forte: fundo preto cósmico com estrelas e névoa, um elemento prateado/cromado "
         "central (lâmpada com cérebro dentro, estilo do logo da marca), luz fria dramática. "
-        f"Texto GIGANTE legível em miniatura de celular: '{palavras}' em "
-        "branco/prata com brilho suave, sans-serif bold. "
+        f"Texto GIGANTE legível em miniatura de celular: '{palavras}' em LETRAS 3D — "
+        "tipografia sans-serif bold condensada com EXTRUSÃO de profundidade real, acabamento "
+        "CROMADO/prata metálico polido com reflexos de estúdio, bisel nas bordas, luz fria — "
+        "efeito premium de logo de cinema. "
     )
     if sub:
-        p += (f"Logo ABAIXO do texto principal, uma segunda linha MENOR (cerca de 40% do tamanho, "
-              f"mesma fonte, mesma cor): '{sub}'. ")
+        p += (f"Logo ABAIXO do texto principal, uma segunda linha MENOR (cerca de 40% do tamanho), "
+              f"mesma fonte e mesmo efeito 3D cromado: '{sub}'. ")
     p += ("Alto contraste, uma emoção só, sem poluição, sem rodapé de CTA, sem cards, "
           "sem rostos reais, sem marca d'água.")
     if variar:

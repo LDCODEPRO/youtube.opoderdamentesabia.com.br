@@ -36,6 +36,14 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 - **LETRAS 3D CROMADAS (ordem do Diretor, 16/07: "letras em 3D com essa fonte ficaria top")**: todo texto de capa sai em 3D — extrusão com profundidade, acabamento cromado/prata polido, reflexos de estúdio, bisel — principal gigante + subtítulo ~40% no mesmo efeito. Já é o padrão do `_prompt_capa`.
 - O kit dourado de 10/07 (avatar/banner/estilo de capa) está **arquivado** — só volta com ordem expressa do Diretor.
 
+## 🎬 PRODUÇÃO VISUAL — o fluxo oficial (ordem do Diretor, 17/07/2026)
+**"Fazer imagens e depois transformar em vídeo pelo ChatGPT."** Custo zero, pela assinatura:
+1. **Imagem da cena** → ChatGPT (ponte da assinatura, como já faz com as capas), na identidade da marca.
+2. **Imagem → VÍDEO** → Sora (a mesma assinatura ChatGPT anima a cena: pessoa respira, câmera desliza, luz vive).
+3. **Montagem mista**: clipes animados + vídeos reais no mesmo vídeo — "sendo algo muito bem feito" — e TUDO passa pelo crivo total antes do Diretor.
+- Estado (17/07): a ponte só tem `ask()` e `image()` — o **braço Sora (`video()`) precisa ser construído** no Studio (mesma sessão, nova aba). Enquanto não existe: cenas de imagem com zoom liso (anti-tremor base 4608) + clipes reais.
+- Clipes por serviço pago (Higgsfield etc.) só quando houver crédito — checar `balance` SEMPRE antes.
+
 ## Humanização (o que separa nosso vídeo de "conteúdo de robô")
 - **Roteiro:** fala de gente — 2ª pessoa, storytelling ("imagina você..."), pergunta retórica, exemplo concreto do dia a dia BR; frases curtas variadas com longas; NUNCA lista lida.
 - **Narração:** pausas de respiração, ênfase nas palavras-chave, variação de ritmo (acelera na tensão, desacelera na revelação); zero voz metálica/monótona.

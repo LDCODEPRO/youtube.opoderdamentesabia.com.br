@@ -111,7 +111,7 @@ class DecisaoIn(BaseModel):
     decisao: str
 
 
-ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer"}, "sessao_navegador": {"pronto"},
+ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer", "manter_atual"}, "sessao_navegador": {"pronto"},
                  "video_aprovacao": {"aprovado", "reprovado"}}
 
 

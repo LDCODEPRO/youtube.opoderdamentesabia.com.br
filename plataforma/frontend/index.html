@@ -188,22 +188,6 @@
 </head>
 <body>
 
-<div class="overlay hide" id="verKit">
-  <div class="caixa">
-    <h2>O novo visual do canal</h2>
-    <p class="sub" style="margin-bottom:14px">Foto de perfil e capa, prontas na identidade da marca. Se aprovar, eu aplico no canal e te aviso quando estiver no ar.</p>
-    <p class="k">Foto de perfil</p>
-    <img src="/kit/avatar.png" alt="Foto de perfil proposta" style="max-width:240px;border-radius:50%">
-    <p class="k">Capa do canal</p>
-    <img src="/kit/banner.png" alt="Capa proposta">
-    <div class="acoes" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-      <button class="btn mini ok" onclick="decidir('kit_visual','aprovado')">✔ Aprovado — pode aplicar</button>
-      <button class="btn mini no" onclick="decidir('kit_visual','refazer')">✖ Quero outra versão</button>
-      <button class="btn mini ghost" onclick="fechaKit()">Fechar</button>
-    </div>
-  </div>
-</div>
-
 <div id="telaLogin">
   <div class="loginCard" id="cardLogin">
     <div class="aura"><img src="/logo.png" alt="O Poder da Mente Sábia"></div>
@@ -390,23 +374,8 @@ function montaTarefas(d) {
   const cards = [];
   let n = 1;
 
-  /* 1 · visual do canal */
-  const kit = dec.kit_visual;
-  if (!kit) {
-    cards.push(`<div class="card tarefa sua"><p class="num">${n++}</p>
-      <p><b>Aprovar o novo visual do canal</b></p>
-      <small>Foto e capa prontas. Clique para ver e decidir na hora.</small>
-      <div class="acoes"><button class="btn mini" onclick="abreKit()">👁 Ver e decidir</button></div></div>`);
-  } else if (kit.decisao === "aprovado") {
-    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
-      <p><b>Aplicar o visual aprovado no canal</b></p>
-      <small>Você aprovou em ${new Date(kit.quando).toLocaleDateString("pt-BR")}. Agora é comigo — aplico e te aviso.</small>
-      <div class="acoes"><button class="btn mini ghost" onclick="abreKit()">rever visual</button></div></div>`);
-  } else {
-    cards.push(`<div class="card tarefa minha"><p class="num">${n++}</p>
-      <p><b>Refazer o visual do canal</b></p>
-      <small>Você pediu outra versão em ${new Date(kit.quando).toLocaleDateString("pt-BR")}. Estou refazendo.</small></div>`);
-  }
+  /* visual do canal: decisão do Diretor (16/07) = manter como está — a identidade
+     que o público do Instagram/TikTok já conhece. Só vira tarefa se ele mudar de ideia. */
 
   /* 2 · vídeos esperando aprovação (só aparece se existir) */
   pipe.filter(v => v.status === "aprovacao").forEach(v => {
@@ -443,16 +412,12 @@ function montaTarefas(d) {
   $("#gridTarefas").innerHTML = cards.join("");
 }
 
-function abreKit() { $("#verKit").classList.remove("hide"); }
-function fechaKit() { $("#verKit").classList.add("hide"); }
 async function decidir(item, decisao) {
   try {
     await api("/api/decisao", {method: "POST", body: JSON.stringify({item, decisao})});
-    fechaKit();
     carregaPainel();
   } catch (e) { alert("Não consegui gravar: " + ((e.body && e.body.detail) || e.message)); }
 }
-$("#verKit") && $("#verKit").addEventListener("click", (ev) => { if (ev.target.id === "verKit") fechaKit(); });
 
 let primeiraCarga = true;
 function desenhaResumo(d) {

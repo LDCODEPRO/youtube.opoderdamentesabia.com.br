@@ -17,10 +17,16 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 | 1 | Inteligência | Estudo + parâmetro guiam TUDO; re-estudar o território 1x/mês | ✅ feita (16/07) |
 | 2 | Pauta | Banco gerado pelo parâmetro: conceito COMPROVADO (prova em views) + autor-âncora + embalagem própria | 🟢 no ar (banco v1) |
 | 3 | Roteiro humanizado | Ver "Humanização" abaixo; 100% original (teste: "outro canal faria este exato vídeo?" → refazer) | 🔶 por sessão (automatizar via ponte da assinatura) |
-| 4 | Produção | Voz Sterling (ElevenLabs/Higgsfield) + visual dourado épico com MOVIMENTO real + ffmpeg (build.ps1/subs.ps1 provados) | 🔶 pipeline provado (vídeo-01/02), automação em construção |
+| 4 | Produção | Voz Sterling (ElevenLabs/Higgsfield) + visual na identidade da marca com MOVIMENTO real + ffmpeg (build.ps1/subs.ps1 provados) | 🔶 pipeline provado (vídeo-01/02), automação em construção |
 | 5 | Embalagem | Título = 3 das 4 peças do parâmetro · thumb fórmula da marca · SEO completo · flag de conteúdo sintético quando aplicável | 🟢 checklist no ar |
 | 6 | Aprovação | Preview no Telegram → `ok`/horário (padrão da casa); portão que some quando o Diretor soltar | ⏳ a ligar |
 | 7 | Publicação via navegador | Ver "Publicação" abaixo | ⏳ aguarda sessão logada (Diretor, 1x) |
+
+## 🎨 IDENTIDADE VISUAL (ordem do Diretor, 16/07/2026)
+**O canal fica COMO ESTÁ.** "Não pedi outra versão do canal — quero que faça dar certo como é, assim que o público do Instagram e TikTok gosta."
+- Perfil/capa do canal: **não mexer** — a identidade é a atual (lâmpada-cérebro prata no preto cósmico), a mesma que o público das outras redes conhece.
+- Capas/thumbs dos vídeos novos: seguem a **identidade da marca atual** (P&B/prata cósmico + 2–4 palavras gigantes), NÃO o dourado.
+- O kit dourado de 10/07 (avatar/banner/estilo de capa) está **arquivado** — só volta com ordem expressa do Diretor.
 
 ## Humanização (o que separa nosso vídeo de "conteúdo de robô")
 - **Roteiro:** fala de gente — 2ª pessoa, storytelling ("imagina você..."), pergunta retórica, exemplo concreto do dia a dia BR; frases curtas variadas com longas; NUNCA lista lida.

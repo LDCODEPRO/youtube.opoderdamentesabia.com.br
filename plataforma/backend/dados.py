@@ -118,10 +118,12 @@ def carrega_pipeline() -> dict:
             pipe = json.load(f)
     except Exception as e:
         return {"erro": f"pipeline.json ilegível: {e}", "videos": []}
-    # estado da capa de cada vídeo = existência real do arquivo (Zero Ghost)
+    # estado da capa e do preview de cada vídeo = existência real do arquivo (Zero Ghost)
     for v in pipe.get("videos", []):
         arq = os.path.join(CAPAS_DIR, f"{v.get('codigo', '')}.png")
         v["capa_url"] = f"/capas/{v['codigo']}.png" if os.path.isfile(arq) else None
+        prev = os.path.join(BASE_DIR, "frontend", "previews", f"{v.get('codigo', '')}.mp4")
+        v["preview_url"] = f"/previews/{v['codigo']}.mp4" if os.path.isfile(prev) else None
     return pipe
 
 

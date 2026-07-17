@@ -465,13 +465,17 @@ function montaTarefas(d) {
   /* visual do canal: decisão do Diretor (16/07) = manter como está — a identidade
      que o público do Instagram/TikTok já conhece. Só vira tarefa se ele mudar de ideia. */
 
-  /* 2 · vídeos esperando aprovação (só aparece se existir) */
+  /* 2 · vídeos esperando aprovação — com o PLAYER para assistir aqui mesmo */
   pipe.filter(v => v.status === "aprovacao").forEach(v => {
-    cards.push(`<div class="card tarefa sua"><p class="icoBig">▶</p>
-      <p><b>Aprovar: ${v.titulo_trabalho}</b></p>
+    const player = v.preview_url
+      ? `<video controls preload="metadata" style="width:100%;border-radius:11px;border:1px solid rgba(215,230,255,.25);margin:10px 0;background:#000" src="${v.preview_url}"></video>`
+      : `<p class="d">⏳ subindo o vídeo para a plataforma…</p>`;
+    cards.push(`<div class="card tarefa sua" style="grid-column:1/-1"><p class="icoBig">▶</p>
+      <p><b>Assistir e aprovar: ${v.titulo_trabalho}</b> <span class="d">(${v.duracao_real || ""})</span></p>
+      ${player}
       <div class="acoes">
-        <button class="btn mini ok" onclick="decidir('video_aprovacao','aprovado')">✔ Aprovar</button>
-        <button class="btn mini no" onclick="decidir('video_aprovacao','reprovado')">✖ Reprovar</button>
+        <button class="btn mini ok" onclick="decidir('aprovar_video_${v.codigo}','aprovado')">✔ Aprovar — pode publicar</button>
+        <button class="btn mini no" onclick="decidir('aprovar_video_${v.codigo}','reprovado')">✖ Reprovar — refazer</button>
       </div></div>`);
   });
 
@@ -688,12 +692,15 @@ function desenhaResumo(d) {
     const selo = pt.pode
       ? '<span class="pill ok">🔓 LIBERADO PARA POSTAR</span>'
       : `<span class="pill warn" title="falta: ${(pt.faltas || []).join(" + ")}">🔒 segura: falta ${(pt.faltas || []).join(" + ")}</span>`;
-    return `
-    <div class="card tcard">
+    const thumbMiolo = `
       <div class="thumb" style="${v.capa_url ? `background-image:url(${v.capa_url}?v=${Date.now()})` : ""}">
         ${pillStatus(v.status).replace('class="pill', 'class="pill tag')}
-        ${v.capa_url ? "" : '<div class="ovl"><span>capa sendo criada na página Capas</span></div>'}
-      </div>
+        ${v.preview_url ? '<div class="ovl"><b style="font-size:1.4rem">▶</b><span>clique para assistir</span></div>'
+                        : (v.capa_url ? "" : '<div class="ovl"><span>capa sendo criada na página Capas</span></div>')}
+      </div>`;
+    return `
+    <div class="card tcard">
+      ${v.preview_url ? `<a href="${v.preview_url}" target="_blank" rel="noopener" style="text-decoration:none">${thumbMiolo}</a>` : thumbMiolo}
       <p class="titulo-v">${v.titulo_trabalho}</p>
       <p style="margin:6px 0 8px">${semaforo}</p>
       ${selo}

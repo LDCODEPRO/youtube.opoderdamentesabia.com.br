@@ -383,3 +383,12 @@ def capa(arquivo: str):
     if not os.path.isfile(caminho):
         raise HTTPException(status_code=404, detail="não existe")
     return FileResponse(caminho, headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/previews/{arquivo}")
+def preview(arquivo: str, request: Request, _=Depends(require_auth)):
+    """O vídeo em revisão, para o Diretor assistir DENTRO da plataforma (só logado)."""
+    caminho = os.path.join(FRONT, "previews", os.path.basename(arquivo))
+    if not os.path.isfile(caminho):
+        raise HTTPException(status_code=404, detail="não existe")
+    return FileResponse(caminho, media_type="video/mp4")

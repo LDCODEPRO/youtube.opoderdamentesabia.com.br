@@ -269,6 +269,17 @@
       <h2>📈 O que funciona</h2>
       <p class="sub">O cérebro do canal: o que os NOSSOS números provaram e o que o território prova. Cada card tem o veredito e a prova.</p>
 
+      <div class="fala" style="margin-bottom:22px">
+        <div style="flex:1">
+          <p class="k">⚖ Ordem do Diretor (16/07)</p>
+          <p style="font-size:.95rem"><b>Esta página é REGRA</b>: todo vídeo obedece o que está aqui. A pesquisa se atualiza <b>sozinha toda segunda-feira às 08:05</b> (o robô varre o território de novo). E a <b>quantidade de posts é decidida pelos dados</b> — não por achismo.</p>
+        </div>
+      </div>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">🔥 ESTA SEMANA NO TERRITÓRIO · <span id="pesquisaQuando" style="letter-spacing:0">—</span></h2>
+      <div class="grid g3" id="gridPesquisaResumo" style="margin-bottom:14px"></div>
+      <div class="grid g3" id="gridPesquisaTop" style="margin-bottom:26px"></div>
+
       <h2 style="font-size:.95rem;color:var(--dim)">NOS NOSSOS NÚMEROS · provado no nosso próprio canal</h2>
       <div class="grid g3" id="gridProvasNossas" style="margin-bottom:26px"></div>
 
@@ -529,6 +540,35 @@ function montaProvasNossas(d) {
   $("#gridProvasNossas").innerHTML = cards.join("");
 }
 
+/* regra viva: a varredura semanal do território */
+function montaPesquisa(d) {
+  const p = d.pesquisa || {};
+  if (!p.varredura_em) {
+    $("#pesquisaQuando").textContent = "primeira varredura na segunda 08:05";
+    $("#gridPesquisaResumo").innerHTML = "";
+    $("#gridPesquisaTop").innerHTML = "";
+    return;
+  }
+  $("#pesquisaQuando").textContent = "varredura de " + new Date(p.varredura_em).toLocaleString("pt-BR") + " · atualiza toda segunda 08:05";
+  const pc = p.pecas_pct || {};
+  const dur = p.duracao || {};
+  $("#gridPesquisaResumo").innerHTML = `
+    <div class="card"><p class="k">Peças do título nos que estouram</p>
+      <p class="d" style="margin:0">Você no centro: <b>${pc["você no centro"] || 0}%</b> · Autoridade: <b>${pc["autoridade"] || 0}%</b> · Prazo: <b>${pc["prazo"] || 0}%</b> · Estado-limite: <b>${pc["estado-limite"] || 0}%</b></p>
+      <p class="d">REGRA: todo título nosso usa 3 das 4 peças.</p></div>
+    <div class="card"><p class="k">Duração dos que estouram</p>
+      <p class="big" style="font-size:1.7rem">${dur.mediana_min || "—"}<small> min (mediana)</small></p>
+      <p class="d"><b>${dur.dentro_da_regua_5a30_pct || 0}%</b> cabem na sua régua de 5–30min.</p></div>
+    <div class="card"><p class="k">Quantidade de posts · pelos dados</p>
+      <p class="big" style="font-size:1.7rem">3<small> / semana</small></p>
+      <p class="d">Vigente. Base: líderes do formato postam 3,5–7/semana. Revisto toda segunda com os NOSSOS resultados.</p></div>`;
+  $("#gridPesquisaTop").innerHTML = (p.quentes || []).slice(0, 6).map(v => `
+    <div class="card"><p class="k">${fmt(v.views)} views · ${v.duracao || "—"} · ${v.quando || ""}</p>
+      <p class="titulo-v">${(v.titulo || "").slice(0, 80)}</p>
+      <p class="d">${(v.pecas || []).length ? "peças: " + v.pecas.join(" · ") : ""}</p>
+    </div>`).join("");
+}
+
 /* página Capas */
 function montaCapas(d) {
   const dec = d.decisoes || {};
@@ -566,6 +606,7 @@ function desenhaResumo(d) {
   $("#falaEstudio").innerHTML = montaFala(d);
   montaTarefas(d);
   montaProvasNossas(d);
+  montaPesquisa(d);
   montaCapas(d);
 
   countUp($("#inscritos"), d.inscritos);

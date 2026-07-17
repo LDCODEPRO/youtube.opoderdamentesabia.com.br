@@ -134,6 +134,18 @@ def carrega_pautas() -> dict:
         return {"erro": f"pautas.json ilegível: {e}", "pautas": []}
 
 
+PESQUISA_PATH = os.path.join(BASE_DIR, "data", "pesquisa_semana.json")
+
+
+def carrega_pesquisa() -> dict:
+    """A regra viva: última varredura semanal do território (timer de segunda)."""
+    try:
+        with open(PESQUISA_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
 DECISOES_PATH = os.path.join(BASE_DIR, "data", "decisoes.json")
 
 
@@ -232,6 +244,7 @@ def resumo(force: bool = False) -> dict:
         _grava_historico(dados)
     dados["historico"] = carrega_historico()
     dados["decisoes"] = carrega_decisoes()
+    dados["pesquisa"] = carrega_pesquisa()
 
     _cache.update(quando=agora, dados=dados)
     _grava_cache_disco(dados)

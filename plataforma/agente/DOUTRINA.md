@@ -5,6 +5,13 @@
 ## Missão
 Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzindo e publicando vídeos **100% por IA com acabamento humano**, guiados pelo `ESTUDO_YOUTUBE_2026.md` e pelo **PARÂMETRO** dos virais.
 
+## ⚖ REGRA VIVA (ordem do Diretor, 16/07/2026)
+**"O que funciona de verdade, visto em pesquisa, é REGRA a ser usada nos vídeos — atualizada TODA SEMANA."**
+- A página **"O que funciona"** do painel é LEI de produção: nenhum vídeo sai desobedecendo os vereditos dela.
+- A pesquisa se atualiza **sozinha toda segunda-feira 08:05** (timer `youtube_pesquisa.timer` na VPS roda `backend/pesquisa_semanal.py`: varre as buscas do território por views, mede as peças do parâmetro nos títulos que estouram, mediana de duração) → `data/pesquisa_semana.json` → painel.
+- Se a varredura mostrar mudança RELEVANTE de padrão (peça nova dominando, duração migrando), a regra é ATUALIZADA e o Diretor é avisado.
+- **Quantidade de posts: decidida pelos DADOS, não por achismo.** Vigente: 3 vídeos/semana (base: líderes do formato publicam 3,5–7/semana). Revista toda segunda junto com a varredura — e, quando os NOSSOS vídeos tiverem números, são eles que mandam.
+
 ## 📏 RÉGUA DO DIRETOR (16/07/2026) — duração
 **Todo vídeo para o YouTube tem entre 5 e 30 minutos. Sem exceção sem ordem dele.**
 - Abaixo de 5min → não sobe (o vídeo-01 "Silêncio" de 4min05 foi arquivado por isso).

@@ -22,7 +22,8 @@ from pydantic import BaseModel
 from starlette.middleware.sessions import SessionMiddleware
 
 from auth import check_password, require_auth
-from dados import carrega_decisoes, carrega_pipeline, grava_decisao, resumo
+from dados import (atualiza_status_video, carrega_decisoes, carrega_pipeline,
+                   grava_decisao, resumo)
 
 APP_NAME = "youtube-opoder"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -119,6 +120,7 @@ def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
 class DecisaoIn(BaseModel):
     item: str
     decisao: str
+    motivo: str | None = None
 
 
 ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer", "manter_atual"}, "sessao_navegador": {"pronto"},
@@ -135,10 +137,23 @@ def _decisao_permitida(item: str, decisao: str) -> bool:
 
 @app.post("/api/decisao")
 def decidir(body: DecisaoIn, request: Request, _=Depends(require_auth)):
-    """O Diretor decide no painel; a decisão fica registrada e o agente executa."""
+    """O Diretor decide no painel; a decisão fica registrada E MOVE a fila."""
     if not _decisao_permitida(body.item, body.decisao):
         raise HTTPException(status_code=400, detail="Decisão desconhecida")
-    return {"ok": True, "decisoes": grava_decisao(body.item, body.decisao)}
+    decisoes = grava_decisao(body.item, body.decisao, body.motivo or "")
+    if body.item.startswith("aprovar_video_"):
+        codigo = body.item.replace("aprovar_video_", "")
+        from datetime import datetime
+        hoje = datetime.now().strftime("%d/%m %H:%M")
+        if body.decisao == "reprovado":
+            nota = f"⛔ REPROVADO pelo Diretor em {hoje}" + \
+                   (f" — motivo: {body.motivo}" if body.motivo else " (sem motivo informado)") + \
+                   ". Voltou para a fábrica; nova versão vai para sua aprovação."
+            atualiza_status_video(codigo, "producao", nota)
+        else:
+            atualiza_status_video(codigo, "aprovado",
+                                  f"✅ Aprovado pelo Diretor em {hoje} — no Repositório, pronto para publicar.")
+    return {"ok": True, "decisoes": decisoes}
 
 
 # ── Fábrica de capas: a ponte da assinatura (Studio, porta 5063) desenha ─────

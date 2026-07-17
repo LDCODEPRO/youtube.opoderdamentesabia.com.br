@@ -285,10 +285,10 @@
     <nav class="menu" id="menu">
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
       <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
-      <a href="#videos"><span class="ico">🎛</span> Studio</a>
+      <a href="#videos"><span class="ico">🏭</span> Fábrica</a>
       <a href="#equipe"><span class="ico">👥</span> Equipe</a>
       <a href="#biblioteca"><span class="ico">📚</span> Biblioteca</a>
-      <a href="#repositorio"><span class="ico">📦</span> Repositório</a>
+      <a href="#repositorio"><span class="ico">🔐</span> Cofre</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
       <a href="#receita"><span class="ico">📖</span> A Receita</a>
     </nav>
@@ -333,7 +333,7 @@
 
     <!-- ═══════════ VÍDEOS ═══════════ -->
     <div class="view" id="v-videos">
-      <h2>🎛 Studio</h2>
+      <h2>🏭 Fábrica</h2>
       <p class="sub">A fábrica: o que está sendo feito, as capas esperando seu OK e o que já saiu.</p>
 
       <h2 style="font-size:.95rem;color:var(--dim)">🔨 SENDO FEITOS</h2>
@@ -420,7 +420,7 @@
 
     <!-- ═══════════ REPOSITÓRIO ═══════════ -->
     <div class="view" id="v-repositorio">
-      <h2>📦 Repositório</h2>
+      <h2>🔐 Cofre</h2>
       <p class="sub">O cofre final: só entra vídeo <b>totalmente aprovado</b> — crivo do pesquisador + seu OK em tudo (vídeo, capa e título). Daqui ele só sai para o canal; depois de postado, muda para a Biblioteca.</p>
       <div class="grid gfill" id="gridRepositorio"></div>
     </div>
@@ -511,6 +511,7 @@ const STATUS_GENTE = {
   roteiro: ["prata", "✍ escrevendo roteiro"],
   ideia: ["prata", "💡 ideia"],
   publicado: ["ok", "✔ publicado"],
+  aprovado: ["ok", "✅ aprovado — pronto para publicar"],
 };
 function pillStatus(s) {
   const [cls, rotulo] = STATUS_GENTE[s] || ["prata", s];
@@ -539,14 +540,16 @@ function montaTarefas(d) {
   /* 2 · vídeos esperando aprovação — com o PLAYER para assistir aqui mesmo */
   pipe.filter(v => v.status === "aprovacao").forEach(v => {
     const player = v.preview_url
-      ? `<video controls preload="metadata" style="width:100%;border-radius:11px;border:1px solid rgba(215,230,255,.25);margin:10px 0;background:#000" src="${v.preview_url}"></video>`
+      ? `<video controls playsinline preload="metadata" style="width:100%;border-radius:11px;border:1px solid rgba(215,230,255,.25);margin:10px 0;background:#000" src="${v.preview_url}"></video>`
       : `<p class="d">⏳ subindo o vídeo para a plataforma…</p>`;
     cards.push(`<div class="card tarefa sua" style="grid-column:1/-1"><p class="icoBig">▶</p>
       <p><b>Assistir e aprovar: ${v.titulo_trabalho}</b> <span class="d">(${v.duracao_real || ""})</span></p>
       ${player}
+      <input type="text" id="mot_${v.codigo}" placeholder="Se reprovar: o que precisa mudar? (a fábrica refaz com essa ordem)"
+        style="width:100%;padding:10px 12px;border-radius:9px;font-size:.85rem;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid rgba(215,230,255,.2);outline:none;margin:2px 0 9px">
       <div class="acoes">
-        <button class="btn mini ok" onclick="decidir('aprovar_video_${v.codigo}','aprovado')">✔ Aprovar — pode publicar</button>
-        <button class="btn mini no" onclick="decidir('aprovar_video_${v.codigo}','reprovado')">✖ Reprovar — refazer</button>
+        <button class="btn mini ok" onclick="decidir('aprovar_video_${v.codigo}','aprovado')">✔ Aprovar — vai pro Repositório</button>
+        <button class="btn mini no" onclick="decidir('aprovar_video_${v.codigo}','reprovado', document.getElementById('mot_${v.codigo}').value)">✖ Reprovar — volta pra fábrica</button>
       </div></div>`);
   });
 
@@ -556,6 +559,20 @@ function montaTarefas(d) {
       <p><b>Terminar "${v.titulo_trabalho}"</b></p>
       <small>comigo · ${v.duracao_alvo || "5–30min"}</small>
       <div class="acoes"><button class="btn mini ghost" onclick="location.hash='#videos'">acompanhar →</button></div></div>`);
+  });
+
+  /* 3.5 · capa esperando o OK dele (não pode ficar escondida no Studio) */
+  pipe.forEach(v => {
+    const dcapa = dec["capa_" + v.codigo] && dec["capa_" + v.codigo].decisao;
+    if (v.capa_url && dcapa !== "aprovado" && v.capa_status !== "desenhando") {
+      cards.push(`<div class="card tarefa sua"><p class="icoBig">🖼</p>
+        <p><b>Aprovar a capa de "${v.titulo_trabalho}"</b></p>
+        <img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(255,165,61,.35);margin:8px 0">
+        <div class="acoes">
+          <button class="btn mini ok" onclick="decidir('capa_${v.codigo}','aprovado')">✔ Aprovar capa</button>
+          <button class="btn mini ghost" onclick="location.hash='#videos'">mudar algo →</button>
+        </div></div>`);
+    }
   });
 
   /* 4 · sessão do navegador */
@@ -574,9 +591,12 @@ function montaTarefas(d) {
   $("#gridTarefas").innerHTML = cards.join("");
 }
 
-async function decidir(item, decisao) {
+async function decidir(item, decisao, motivo) {
+  if (decisao === "reprovado" && !confirm("Refazer este vídeo? A versão atual sai da fila e a fábrica refaz" + (motivo ? " com a sua ordem: \"" + motivo + "\"" : "") + ".")) return;
+  const b = document.activeElement && document.activeElement.tagName === "BUTTON" ? document.activeElement : null;
+  if (b) { b.disabled = true; b.textContent = "enviando…"; }
   try {
-    await api("/api/decisao", {method: "POST", body: JSON.stringify({item, decisao})});
+    await api("/api/decisao", {method: "POST", body: JSON.stringify({item, decisao, motivo: motivo || null})});
     carregaPainel();
   } catch (e) { alert("Não consegui gravar: " + ((e.body && e.body.detail) || e.message)); }
 }
@@ -790,7 +810,7 @@ function montaRepositorio(d) {
     </div>`;
   }).join("") || `<div class="card"><p class="icoBig">📦</p><p class="k">Cofre vazio</p>
     <p class="d" style="margin:0">Nenhum vídeo 100% aprovado ainda — quando o último check do <b>Studio</b> ficar verde, ele entra aqui sozinho.</p>
-    <div class="acoes" style="display:flex;gap:8px;margin-top:12px"><button class="btn mini" onclick="location.hash='#videos'">ir para o Studio →</button></div></div>`;
+    <div class="acoes" style="display:flex;gap:8px;margin-top:12px"><button class="btn mini" onclick="location.hash='#videos'">ir para a Fábrica →</button></div></div>`;
 }
 
 let primeiraCarga = true;
@@ -915,7 +935,13 @@ $("#btnSair").addEventListener("click", async () => { await api("/api/logout", {
 (async function init() {
   try { (await api("/api/me")).autenticado ? mostraPainel() : mostraLogin(); }
   catch { mostraLogin(); }
-  setInterval(() => { if (!$("#painel").classList.contains("hide")) carregaPainel(); }, 60000);
+  setInterval(() => {
+    if ($("#painel").classList.contains("hide")) return;
+    const tocando = [...document.querySelectorAll("video")].some(v => !v.paused && !v.ended);
+    const digitando = document.activeElement && document.activeElement.tagName === "INPUT" && document.activeElement.type !== "password";
+    if (tocando || digitando) return; // nunca interromper o Diretor
+    carregaPainel();
+  }, 60000);
 })();
 </script>
 </body>

@@ -169,13 +169,36 @@ def carrega_decisoes() -> dict:
         return {}
 
 
-def grava_decisao(item: str, decisao: str) -> dict:
+def grava_decisao(item: str, decisao: str, motivo: str = "") -> dict:
     todas = carrega_decisoes()
-    todas[item] = {"decisao": decisao, "quando": datetime.now(timezone.utc).isoformat()}
+    registro = {"decisao": decisao, "quando": datetime.now(timezone.utc).isoformat()}
+    if motivo:
+        registro["motivo"] = motivo[:400]
+    todas[item] = registro
     os.makedirs(os.path.dirname(DECISOES_PATH), exist_ok=True)
     with open(DECISOES_PATH, "w", encoding="utf-8") as f:
         json.dump(todas, f, ensure_ascii=False, indent=2)
     return todas
+
+
+def atualiza_status_video(codigo: str, novo_status: str, nota: str = "") -> bool:
+    """A decisão do Diretor MOVE o vídeo na fila (reprovou → volta pra produção)."""
+    try:
+        with open(PIPELINE_PATH, encoding="utf-8") as f:
+            pipe = json.load(f)
+        for v in pipe.get("videos", []):
+            if v.get("codigo") == codigo:
+                v["status"] = novo_status
+                if nota:
+                    v["nota"] = nota
+                tmp = PIPELINE_PATH + ".tmp"
+                with open(tmp, "w", encoding="utf-8") as f:
+                    json.dump(pipe, f, ensure_ascii=False, indent=2)
+                os.replace(tmp, PIPELINE_PATH)
+                return True
+    except Exception:
+        pass
+    return False
 
 
 HIST_PATH = os.path.join(BASE_DIR, "data", "historico.jsonl")

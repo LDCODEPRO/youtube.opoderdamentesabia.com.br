@@ -44,6 +44,18 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 - Estado (17/07): a ponte só tem `ask()` e `image()` — o **braço Sora (`video()`) precisa ser construído** no Studio (mesma sessão, nova aba). Enquanto não existe: cenas de imagem com zoom liso (anti-tremor base 4608) + clipes reais.
 - Clipes por serviço pago (Higgsfield etc.) só quando houver crédito — checar `balance` SEMPRE antes.
 
+### 🧠 Direção criativa das cenas (Diretor, 17/07): SIMBÓLICO, não realista
+**"Não sou realista — quando fala 'sua mente', pode ser uma mente rodando etc."**
+- Cada trecho da narração ganha um **SÍMBOLO do mundo da marca** (prata cromada no preto cósmico), não uma pessoa de banco de imagem. Mapeamento-guia:
+  - "sua mente / cérebro" → cérebro cromado girando, sinapses acendendo
+  - "a ideia / a decisão" → lâmpada acendendo (o logo vivo)
+  - "reprogramar" → engrenagens, circuitos, fios de luz se reconectando
+  - "tempo / disciplina" → relógio, pêndulo, ampulheta metálica
+  - "crescer / vencer" → escada ao cosmos, porta se abrindo, horizonte
+  - "energia / poder" → partículas, ondas, raio contido
+- Vantagem tripla: é onde a IA gera MELHOR (zero rosto estranho), é 100% a identidade do canal, e diferencia dos concorrentes de banco de imagem.
+- Pessoas realistas podem aparecer, mas são tempero — o prato é o símbolo.
+
 ## Humanização (o que separa nosso vídeo de "conteúdo de robô")
 - **Roteiro:** fala de gente — 2ª pessoa, storytelling ("imagina você..."), pergunta retórica, exemplo concreto do dia a dia BR; frases curtas variadas com longas; NUNCA lista lida.
 - **Narração:** pausas de respiração, ênfase nas palavras-chave, variação de ritmo (acelera na tensão, desacelera na revelação); zero voz metálica/monótona.

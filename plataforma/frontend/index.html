@@ -4,18 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <title>Estúdio YouTube · O Poder da Mente Sábia</title>
 <style>
   :root{
     /* padrão da casa (cockpits Complexo X) com o acento PRATA da marca Mente Sábia */
-    --bg:#090C10; --card:#0F131A; --card2:#131823;
+    --bg:#07090E; --card:#0F131A; --card2:#141A26;
     --scr:215,230,255;              /* prata-gelo: o acento em rgb */
     --prata:#C9CDD8; --prata-hi:#F0F3FA;
     --ink:#E8EDF3; --dim:#9AA4B5; --faint:#5E6675;
     --ok:#2EE6A8; --warn:#FFA53D; --bad:#FF5D5D; --cy:#8FB8D9;
+    /* cromado: o metal das thumbnails, em texto */
+    --chrome:linear-gradient(180deg,#FFFFFF 0%,#DCE2EE 38%,#98A1B4 52%,#CBD2E0 66%,#F4F7FF 100%);
     --sans:'Segoe UI',system-ui,sans-serif;
-    --label:Bahnschrift,'Segoe UI',sans-serif;
+    --disp:Bahnschrift,'Avenir Next','Segoe UI',system-ui,sans-serif;
+    --label:Bahnschrift,'Avenir Next','Segoe UI',sans-serif;
   }
   *{box-sizing:border-box}
   html{color-scheme:dark}
@@ -26,36 +29,49 @@
       radial-gradient(1px 1px at 36% 58%, rgba(var(--scr),.3), transparent 100%),
       radial-gradient(1px 1px at 88% 44%, rgba(var(--scr),.3), transparent 100%),
       radial-gradient(1px 1px at 55% 84%, rgba(var(--scr),.35), transparent 100%),
-      radial-gradient(1100px 500px at 50% -8%, rgba(var(--scr),.08), transparent 60%),
-      radial-gradient(900px 600px at 92% 30%, rgba(96,116,152,.12), transparent 60%),
-      var(--bg);}
-  h1{font-weight:700;font-size:clamp(1.3rem,2.6vw,1.7rem);margin:0;line-height:1.15;letter-spacing:.01em}
-  h1 em{font-style:normal;color:var(--prata-hi);text-shadow:0 0 26px rgba(var(--scr),.5)}
-  h2{font-weight:700;font-size:1.12rem;color:var(--prata-hi);margin:0 0 6px;letter-spacing:.01em}
+      radial-gradient(1200px 520px at 50% -10%, rgba(var(--scr),.10), transparent 62%),
+      radial-gradient(900px 640px at 92% 28%, rgba(96,116,152,.14), transparent 60%),
+      radial-gradient(1000px 700px at -10% 110%, rgba(120,140,175,.10), transparent 60%),
+      var(--bg);
+    background-attachment:fixed;}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 38%, transparent 58%, rgba(2,3,6,.5) 100%)}
+  h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.3rem,2.6vw,1.7rem);margin:0;line-height:1.15;letter-spacing:.01em}
+  h1 em{font-style:normal;background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 16px rgba(var(--scr),.45))}
+  h2{font-family:var(--disp);font-weight:700;font-size:1.12rem;color:var(--prata-hi);margin:0 0 6px;letter-spacing:.02em}
   .sub{color:var(--dim);font-size:.88rem;margin:0 0 16px;max-width:72ch}
   .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.66rem;color:var(--prata);margin:0 0 8px}
   .grid{display:grid;gap:13px}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
-  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fill,minmax(225px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .gfill{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
 
   /* ── O CARD DA CASA: grafite + brilho no canto + glow + hover que levanta ── */
-  .card{position:relative;border-radius:14px;padding:17px;
+  .card{position:relative;border-radius:16px;padding:17px;
     background:
-      radial-gradient(320px 150px at 100% 0%, rgba(var(--scr),.13), transparent 70%),
+      radial-gradient(320px 150px at 100% 0%, rgba(var(--scr),.14), transparent 70%),
       linear-gradient(165deg,var(--card2),var(--card));
-    border:1px solid rgba(var(--scr),.26);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 1px 2px rgba(0,0,0,.55),
-      0 12px 32px rgba(0,0,0,.35), 0 0 22px rgba(var(--scr),.08);
+    border:1px solid rgba(var(--scr),.24);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 1px 2px rgba(0,0,0,.55),
+      0 14px 36px rgba(0,0,0,.42), 0 0 24px rgba(var(--scr),.07);
     transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
     animation:floatIn .55s ease backwards}
+  .card::before{content:"";position:absolute;top:0;left:16px;right:16px;height:1px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(var(--scr),.5),transparent)}
+  .card::after{content:"";position:absolute;top:9px;right:9px;width:13px;height:13px;pointer-events:none;opacity:.45;
+    border-top:1px solid rgba(var(--scr),.75);border-right:1px solid rgba(var(--scr),.75);border-radius:0 6px 0 0;
+    transition:opacity .22s ease}
+  .card:hover::after{opacity:1}
   .card:hover{transform:translateY(-3px);border-color:rgba(var(--scr),.6);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.09), 0 2px 4px rgba(0,0,0,.6),
-      0 22px 50px rgba(0,0,0,.55), 0 0 34px rgba(var(--scr),.22)}
+      0 24px 54px rgba(0,0,0,.55), 0 0 38px rgba(var(--scr),.22)}
   @keyframes floatIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   .k{font-family:var(--label);letter-spacing:.16em;text-transform:uppercase;font-size:.63rem;color:var(--dim);margin:0 0 7px}
-  .big{font-weight:700;font-size:2.15rem;line-height:1;color:var(--prata-hi);margin:0;font-variant-numeric:tabular-nums;
-    text-shadow:0 0 22px rgba(var(--scr),.28)}
-  .big small{font-weight:400;font-size:.78rem;color:var(--dim);text-shadow:none}
+  .big{font-family:var(--disp);font-weight:700;font-size:2.2rem;line-height:1;margin:0;font-variant-numeric:tabular-nums;
+    background:var(--chrome);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 14px rgba(var(--scr),.3))}
+  .big small{font-family:var(--sans);font-weight:400;font-size:.78rem;color:var(--dim)}
   .d{font-size:.85rem;color:var(--dim);margin:7px 0 0}
   .d b{color:var(--ink)}
   .bar{height:10px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px;position:relative}
@@ -69,12 +85,15 @@
   .pill.warn{color:var(--warn);border-color:rgba(255,165,61,.5);background:rgba(255,165,61,.09);box-shadow:0 0 14px rgba(255,165,61,.15)}
   .pill.prata{color:var(--prata-hi);border-color:rgba(var(--scr),.35);background:rgba(var(--scr),.07)}
   .pill.cy{color:var(--cy);border-color:rgba(143,184,217,.45);background:rgba(143,184,217,.08)}
+  .pill.bad{color:var(--bad);border-color:rgba(255,93,93,.45);background:rgba(255,93,93,.08);box-shadow:0 0 14px rgba(255,93,93,.15)}
   .titulo-v{font-weight:600;font-size:.97rem;color:var(--ink);margin:0 0 4px;text-wrap:balance}
 
-  .btn{font-family:var(--label);letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
-    background:linear-gradient(120deg,var(--prata),var(--prata-hi));border:0;border-radius:10px;padding:11px 20px;cursor:pointer;
-    box-shadow:0 6px 20px rgba(var(--scr),.28)}
-  .btn:hover{filter:brightness(1.1);box-shadow:0 8px 26px rgba(var(--scr),.4)}
+  .btn{font-family:var(--label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#0A0F16;
+    background:var(--chrome);border:0;border-radius:11px;padding:11px 20px;cursor:pointer;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.28), 0 6px 20px rgba(var(--scr),.25);
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease}
+  .btn:hover{filter:brightness(1.08);transform:translateY(-1px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.28), 0 10px 28px rgba(var(--scr),.4)}
   .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(var(--scr),.25);box-shadow:none;padding:8px 14px}
   .vivo{font-family:var(--label);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ok);
     border:1px solid rgba(46,230,168,.4);border-radius:999px;padding:5px 10px;background:rgba(46,230,168,.07);display:inline-block;
@@ -89,6 +108,8 @@
     border:1px solid rgba(var(--scr),.32);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 16px 44px rgba(0,0,0,.5), 0 0 40px rgba(var(--scr),.1);
     animation:floatIn .55s ease backwards}
+  .fala::before{content:"";position:absolute;top:0;left:18px;right:18px;height:1px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(var(--scr),.6),transparent)}
   .fala::after{content:"";position:absolute;top:0;bottom:0;width:38%;transform:translateX(-160%) skewX(-14deg);
     background:linear-gradient(100deg,transparent, rgba(var(--scr),.09), transparent);animation:sheen 5.5s ease infinite}
   @keyframes sheen{55%,100%{transform:translateX(340%) skewX(-14deg)}}
@@ -99,7 +120,7 @@
 
   /* tarefa = CARD (nunca linha) */
   .tarefa{text-align:left}
-  .tarefa .num{font-size:1.9rem;font-weight:700;line-height:1;margin:0 0 8px;
+  .tarefa .num{font-family:var(--disp);font-size:1.9rem;font-weight:700;line-height:1;margin:0 0 8px;
     color:var(--prata-hi);text-shadow:0 0 20px rgba(var(--scr),.4)}
   .tarefa.sua{border-color:rgba(255,165,61,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 1px 2px rgba(0,0,0,.55),0 12px 32px rgba(0,0,0,.35),0 0 24px rgba(255,165,61,.14)}
   .tarefa.sua:hover{border-color:rgba(255,165,61,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 22px 50px rgba(0,0,0,.55),0 0 34px rgba(255,165,61,.28)}
@@ -113,18 +134,22 @@
   .layout{display:flex;min-height:100vh}
   .side{width:228px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 14px;display:flex;flex-direction:column;
     border-right:1px solid rgba(var(--scr),.12);
-    background:linear-gradient(180deg,rgba(15,19,26,.95),rgba(9,12,16,.98))}
+    background:linear-gradient(180deg,rgba(15,19,26,.95),rgba(9,12,16,.98));
+    box-shadow:14px 0 44px rgba(0,0,0,.35)}
   .marca{display:flex;gap:11px;align-items:center;margin:2px 4px 20px}
   .marca .aura{width:46px;height:46px;margin:0}
-  .marca b{font-weight:700;font-size:.92rem;color:var(--prata-hi);line-height:1.2;display:block}
+  .marca b{font-family:var(--disp);font-weight:700;font-size:.92rem;color:var(--prata-hi);line-height:1.2;display:block}
   .marca span{font-size:.62rem;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;font-family:var(--label)}
   nav.menu{display:flex;flex-direction:column;gap:5px}
-  nav.menu a{display:flex;gap:10px;align-items:center;padding:11px 13px;border-radius:11px;border:1px solid transparent;
+  nav.menu a{position:relative;display:flex;gap:10px;align-items:center;padding:11px 13px;border-radius:11px;border:1px solid transparent;
     color:var(--dim);text-decoration:none;font-size:.92rem;font-weight:500;transition:all .18s ease}
   nav.menu a:hover{color:var(--ink);background:rgba(var(--scr),.05);transform:translateX(2px)}
   nav.menu a.ativo{color:var(--prata-hi);background:rgba(var(--scr),.09);border-color:rgba(var(--scr),.28);
     box-shadow:0 0 18px rgba(var(--scr),.1), inset 0 1px 0 rgba(255,255,255,.05)}
+  nav.menu a.ativo::before{content:"";position:absolute;left:-14px;top:10px;bottom:10px;width:3px;border-radius:2px;
+    background:linear-gradient(180deg,var(--prata-hi),rgba(var(--scr),.15));box-shadow:0 0 12px rgba(var(--scr),.8)}
   nav.menu .ico{width:20px;text-align:center;flex:none}
+  nav.menu a.ativo .ico{filter:drop-shadow(0 0 8px rgba(var(--scr),.8))}
   .side .rodape{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:10px}
   .conteudo{flex:1;min-width:0;padding:26px 26px 70px;max-width:1040px}
   .view{display:none}
@@ -136,7 +161,8 @@
   /* ── modo VISUAL: thumbs, anéis, barras ── */
   .thumb{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;display:block;
     background:#0A0D14 center/cover no-repeat;border:1px solid rgba(var(--scr),.2);
-    box-shadow:0 10px 26px rgba(0,0,0,.45)}
+    box-shadow:0 10px 26px rgba(0,0,0,.45);transition:filter .22s ease, border-color .22s ease}
+  .card.tcard:hover .thumb{filter:brightness(1.09);border-color:rgba(var(--scr),.5)}
   .thumb .ovl{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 8px;display:flex;gap:10px;align-items:flex-end;
     background:linear-gradient(180deg,transparent,rgba(3,4,8,.92));font-variant-numeric:tabular-nums}
   .thumb .ovl b{color:#fff;font-size:1.05rem;text-shadow:0 1px 8px #000}
@@ -147,11 +173,11 @@
   .anelWrap{display:flex;gap:18px;align-items:center}
   .anel{width:112px;height:112px;border-radius:50%;flex:none;position:relative;
     background:conic-gradient(var(--prata-hi) calc(var(--p)*1%), rgba(255,255,255,.07) 0);
-    box-shadow:0 0 30px rgba(var(--scr),.22)}
+    box-shadow:0 0 30px rgba(var(--scr),.22);outline:1px solid rgba(var(--scr),.14);outline-offset:5px}
   .anel::before{content:"";position:absolute;inset:11px;border-radius:50%;
     background:linear-gradient(165deg,var(--card2),var(--card))}
   .anel b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-size:1.3rem;color:var(--prata-hi);font-variant-numeric:tabular-nums;text-shadow:0 0 18px rgba(var(--scr),.4)}
+    font-family:var(--disp);font-size:1.3rem;color:var(--prata-hi);font-variant-numeric:tabular-nums;text-shadow:0 0 18px rgba(var(--scr),.4)}
   .barraP{margin:10px 0 0}
   .barraP .rot{display:flex;justify-content:space-between;font-size:.74rem;color:var(--dim);margin-bottom:4px}
   .barraP .rot b{color:var(--prata-hi)}
@@ -160,9 +186,23 @@
     box-shadow:0 0 14px rgba(var(--scr),.5);transition:width .9s ease}
   .icoBig{font-size:2rem;line-height:1;margin:0 0 8px;filter:drop-shadow(0 0 12px rgba(var(--scr),.35))}
 
+  /* esteira da capa: desenho → crivo → seu OK → repositório */
+  .passos{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 6px}
+  .passo{display:flex;gap:6px;align-items:center;font-family:var(--label);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+  .passo::before{content:"";width:8px;height:8px;border-radius:50%;flex:none;background:rgba(255,255,255,.12)}
+  .passo+.passo{position:relative;padding-left:14px}
+  .passo+.passo::after{content:"";position:absolute;left:1px;top:50%;width:9px;height:1px;background:rgba(var(--scr),.25)}
+  .passo.feito{color:var(--dim)}
+  .passo.feito::before{background:var(--ok);box-shadow:0 0 10px rgba(46,230,168,.6)}
+  .passo.agora{color:var(--prata-hi)}
+  .passo.agora::before{background:var(--prata-hi);box-shadow:0 0 12px rgba(var(--scr),.9);animation:pulsa 1.6s ease infinite}
+  @keyframes pulsa{50%{box-shadow:0 0 3px rgba(var(--scr),.3)}}
+
   /* login */
-  #telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .loginCard{width:min(384px,92vw);text-align:center;padding:36px 26px;border-radius:18px;
+  #telaLogin{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  #telaLogin::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(620px 460px at 50% 40%, rgba(var(--scr),.09), transparent 70%)}
+  .loginCard{width:min(384px,92vw);text-align:center;padding:38px 28px;border-radius:20px;
     background:
       radial-gradient(340px 170px at 100% 0%, rgba(var(--scr),.14), transparent 70%),
       linear-gradient(165deg,var(--card2),var(--card));
@@ -197,8 +237,15 @@
     box-shadow:0 10px 30px rgba(0,0,0,.5)}
   .overlay .caixa .k{margin-top:14px}
 
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(var(--scr),.16);border-radius:5px;border:2px solid var(--bg)}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(var(--scr),.3)}
+  :focus-visible{outline:2px solid rgba(var(--scr),.55);outline-offset:2px}
+
   @media (max-width:880px){
     .layout{flex-direction:column}
+    nav.menu a.ativo::before{display:none}
     .side{width:100%;height:auto;position:static;padding:14px}
     nav.menu{flex-direction:row;flex-wrap:wrap}
     nav.menu a{padding:9px 12px;font-size:.84rem}
@@ -207,8 +254,10 @@
   }
   @media (prefers-reduced-motion: reduce){
     .card,.fala,.loginCard{animation:none}
+    .btn{transition:none}
     .bar i::after,.fala::after{animation:none}
     .fala .aura,.loginCard .aura{animation:none}
+    .passo.agora::before{animation:none}
     .card{transition:none}
   }
 </style>
@@ -217,7 +266,7 @@
 
 <div id="telaLogin">
   <div class="loginCard" id="cardLogin">
-    <div class="aura"><img src="/logo.png" alt="O Poder da Mente Sábia"></div>
+    <div class="aura"><img src="logo.png" alt="O Poder da Mente Sábia"></div>
     <p class="eyebrow">Estúdio YouTube</p>
     <h1>O Poder da <em>Mente Sábia</em></h1>
     <p class="d">Painel do Diretor</p>
@@ -230,14 +279,15 @@
 <div class="layout hide" id="painel">
   <aside class="side">
     <div class="marca">
-      <div class="aura"><img src="/logo.png" alt=""></div>
+      <div class="aura"><img src="logo.png" alt=""></div>
       <div><b>O Poder da<br>Mente Sábia</b><span>Estúdio YouTube</span></div>
     </div>
     <nav class="menu" id="menu">
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
       <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
-      <a href="#videos"><span class="ico">📹</span> Vídeos</a>
-      <a href="#capas"><span class="ico">🖼</span> Capas</a>
+      <a href="#videos"><span class="ico">🎛</span> Studio</a>
+      <a href="#biblioteca"><span class="ico">📚</span> Biblioteca</a>
+      <a href="#repositorio"><span class="ico">📦</span> Repositório</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
       <a href="#receita"><span class="ico">📖</span> A Receita</a>
     </nav>
@@ -252,7 +302,7 @@
     <!-- ═══════════ INÍCIO ═══════════ -->
     <div class="view" id="v-inicio">
       <div class="fala">
-        <div class="aura"><img src="/logo.png" alt=""></div>
+        <div class="aura"><img src="logo.png" alt=""></div>
         <div style="flex:1">
           <p class="k">O Estúdio diz</p>
           <p id="falaEstudio">Carregando o retrato do canal…</p>
@@ -282,11 +332,19 @@
 
     <!-- ═══════════ VÍDEOS ═══════════ -->
     <div class="view" id="v-videos">
-      <h2>Vídeos</h2>
-      <p class="sub">Primeiro os que estão sendo feitos, depois os que já estão no canal.</p>
+      <h2>🎛 Studio</h2>
+      <p class="sub">A fábrica: o que está sendo feito, as capas esperando seu OK e o que já saiu.</p>
 
       <h2 style="font-size:.95rem;color:var(--dim)">🔨 SENDO FEITOS</h2>
       <div class="grid g3" id="gridPipeline" style="margin-bottom:26px"></div>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">🖼 CAPAS · eu desenho → crivo do pesquisador → seu OK → vai pro vídeo e pro repositório</h2>
+      <div class="grid g2" id="gridCapas" style="margin-bottom:14px"></div>
+      <div class="grid g3" style="margin-bottom:26px">
+        <div class="card"><p class="k">A regra · texto</p><p class="d" style="margin:0"><b>2 a 4 palavras gigantes</b>, brancas/prata — legível na miniatura do celular.</p></div>
+        <div class="card"><p class="k">A regra · visual</p><p class="d" style="margin:0"><b>Preto cósmico + prata cromada</b>, uma emoção só — a mesma cara do Instagram e TikTok.</p></div>
+        <div class="card"><p class="k">A regra · teste</p><p class="d" style="margin:0">Capa sem cliques em <b>72h</b> = trocamos. O YouTube permite e recomenda.</p></div>
+      </div>
 
       <h2 style="font-size:.95rem;color:var(--dim)">🎬 VÍDEOS DE YOUTUBE · o foco do projeto</h2>
       <div class="grid g3" id="gridLongos" style="margin-bottom:26px"></div>
@@ -340,18 +398,22 @@
         <p class="d" style="margin:0">Cada vídeo novo publicado entra na comparação automaticamente (visualizações, curtidas e ritmo por dia, direto do YouTube). Quando ligarmos a chave oficial do YouTube, entram também cliques na capa e tempo assistido — aí esta página vira o juiz de cada capa e título.</p></div>
     </div>
 
-    <!-- ═══════════ CAPAS ═══════════ -->
-    <div class="view" id="v-capas">
-      <h2>🖼 Capas</h2>
-      <p class="sub">A fábrica de thumbnails. Eu desenho na identidade da marca (prata no preto cósmico), você aprova aqui. Capa aprovada = capa que sobe junto com o vídeo.</p>
-      <div class="grid g2" id="gridCapas"></div>
+    <!-- ═══════════ BIBLIOTECA ═══════════ -->
+    <div class="view" id="v-biblioteca">
+      <h2>📚 Biblioteca</h2>
+      <p class="sub">Tudo que já foi postado, com os números do YouTube. O card mostra a força de cada vídeo comparada ao nosso nº 1.</p>
+      <div class="grid g3" id="gridBibResumo" style="margin-bottom:26px"></div>
+      <h2 style="font-size:.95rem;color:var(--dim)">🎬 VÍDEOS DO CANAL</h2>
+      <div class="grid g3" id="gridBibLongos" style="margin-bottom:26px"></div>
+      <h2 style="font-size:.95rem;color:var(--dim)">📱 CORTES</h2>
+      <div class="grid g3" id="gridBibCortes"></div>
+    </div>
 
-      <h2 style="font-size:.95rem;color:var(--dim);margin-top:26px">A REGRA DA CAPA</h2>
-      <div class="grid g3">
-        <div class="card"><p class="k">Texto</p><p class="d" style="margin:0"><b>2 a 4 palavras gigantes</b>, brancas/prata. Tem que dar pra ler na miniatura do celular.</p></div>
-        <div class="card"><p class="k">Visual</p><p class="d" style="margin:0">Identidade da marca: <b>preto cósmico + prata cromada</b> (a mesma cara do Instagram e TikTok). Uma emoção só.</p></div>
-        <div class="card"><p class="k">Teste</p><p class="d" style="margin:0">Se a capa não performar (poucos cliques em 72h), trocamos — a regra oficial do YouTube permite e recomenda.</p></div>
-      </div>
+    <!-- ═══════════ REPOSITÓRIO ═══════════ -->
+    <div class="view" id="v-repositorio">
+      <h2>📦 Repositório</h2>
+      <p class="sub">O cofre final: só entra vídeo <b>totalmente aprovado</b> — crivo do pesquisador + seu OK em tudo (vídeo, capa e título). Daqui ele só sai para o canal; depois de postado, muda para a Biblioteca.</p>
+      <div class="grid gfill" id="gridRepositorio"></div>
     </div>
 
     <!-- ═══════════ IDEIAS ═══════════ -->
@@ -403,9 +465,9 @@ async function api(caminho, opts) {
 }
 
 /* páginas */
-const PAGINAS = ["inicio", "funciona", "videos", "capas", "ideias", "receita"];
+const PAGINAS = ["inicio", "funciona", "videos", "biblioteca", "repositorio", "ideias", "receita"];
 function navega() {
-  const alvo = (location.hash || "#inicio").slice(1);
+  const alvo = ((location.hash || "#inicio").slice(1)) === "capas" ? "videos" : (location.hash || "#inicio").slice(1);
   const pagina = PAGINAS.includes(alvo) ? alvo : "inicio";
   document.querySelectorAll(".view").forEach(v => v.classList.remove("ativa"));
   $("#v-" + pagina).classList.add("ativa");
@@ -608,6 +670,16 @@ function montaPesquisa(d) {
     </div>`).join("");
 }
 
+/* a esteira da capa dentro do card */
+function montaPassos(v, decisao) {
+  const etapa = decisao === "aprovado" ? 4
+    : (!v.capa_url || v.capa_status === "desenhando") ? 1
+    : (v.crivo && v.crivo.aprovada) ? 3 : 2;
+  const nomes = ["🎨 desenho", "🔬 crivo do pesquisador", "👤 seu OK", "📚 no vídeo · repositório"];
+  return `<div class="passos">${nomes.map((n, i) =>
+    `<span class="passo ${i + 1 < etapa ? "feito" : i + 1 === etapa ? "agora" : ""}">${n}</span>`).join("")}</div>`;
+}
+
 /* página Capas */
 function montaCapas(d) {
   const dec = d.decisoes || {};
@@ -642,8 +714,59 @@ function montaCapas(d) {
         <div class="acoes"><button class="btn mini" onclick="gerarCapa('${v.codigo}', this)">⚡ Desenhar capa agora</button></div>`;
     }
     return `<div class="card"><p class="k">${v.codigo} · palavras da capa: ${v.palavras_capa || "—"}</p>
-      <p class="titulo-v">${v.titulo_trabalho}</p>${corpo}</div>`;
+      <p class="titulo-v">${v.titulo_trabalho}</p>${montaPassos(v, decisao)}${corpo}</div>`;
   }).join("") || '<div class="card"><p class="d">Nenhum vídeo na fila — as capas nascem junto com os vídeos.</p></div>';
+}
+
+/* página Biblioteca: o acervo publicado com as métricas do YouTube */
+function montaBiblioteca(d) {
+  const vids = d.videos || [];
+  const soma = (k) => vids.reduce((s, v) => s + (v[k] || 0), 0);
+  const melhor = Math.max(1, ...vids.map(v => v.views || 0));
+  const taxaGeral = soma("views") ? ((soma("likes") / soma("views")) * 100).toFixed(1) : "0";
+  $("#gridBibResumo").innerHTML = `
+    <div class="card"><p class="icoBig">👁</p><p class="k">Views no canal</p><p class="big">${fmt(soma("views"))}</p><p class="d">somando todos os vídeos</p></div>
+    <div class="card"><p class="icoBig">👍</p><p class="k">Curtidas</p><p class="big">${fmt(soma("likes"))}</p><p class="d"><b>${taxaGeral}%</b> de quem vê, curte</p></div>
+    <div class="card"><p class="icoBig">🎞</p><p class="k">Publicados</p><p class="big">${vids.length}</p><p class="d">${vids.filter(v => v.tipo === "longo").length} vídeos · ${vids.filter(v => v.tipo === "corte").length} cortes</p></div>`;
+  const cardBib = (v) => {
+    const tx = v.views ? ((v.likes / v.views) * 100).toFixed(1) : "0";
+    const pct = Math.max(1, Math.round(((v.views || 0) / melhor) * 100));
+    return `
+    <div class="card tcard">
+      <a class="thumb" href="${v.url}" target="_blank" rel="noopener" style="background-image:url(https://i.ytimg.com/vi/${v.id}/mqdefault.jpg)">
+        ${v.views === melhor ? '<span class="pill prata tag">🏆 nº 1 do canal</span>' : ""}
+        <div class="ovl"><b>${fmt(v.views)}</b><span>views</span><b style="margin-left:auto">👍 ${fmt(v.likes)}</b></div>
+      </a>
+      <p class="titulo-v">${v.titulo.length > 60 ? v.titulo.slice(0, 60) + "…" : v.titulo}</p>
+      <div class="barraP" style="margin:8px 4px 2px"><div class="rot"><span>força vs. nº 1</span><b>${pct}%</b></div>
+        <div class="tr" style="height:10px"><i style="width:${pct}%"></i></div></div>
+      <p class="d" style="margin:7px 4px 2px">curtem <b>${tx}%</b> dos que assistem</p>
+    </div>`;
+  };
+  $("#gridBibLongos").innerHTML = vids.filter(v => v.tipo === "longo").sort((a, b) => b.views - a.views).map(cardBib).join("") ||
+    '<div class="card"><p class="d">Nada publicado ainda — os novos da fábrica entram aqui sozinhos.</p></div>';
+  $("#gridBibCortes").innerHTML = vids.filter(v => v.tipo === "corte").sort((a, b) => b.views - a.views).map(cardBib).join("") ||
+    '<div class="card"><p class="d">Nenhum corte publicado.</p></div>';
+}
+
+/* página Repositório: kits com capa aprovada, prontos ou liberados para subir */
+function montaRepositorio(d) {
+  const dec = d.decisoes || {};
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  const prontos = pipe.filter(v => v.portao && v.portao.pode);
+  $("#gridRepositorio").innerHTML = prontos.map(v => {
+    return `
+    <div class="card tcard">
+      <div class="thumb" style="${v.capa_url ? `background-image:url(${v.capa_url}?v=${Date.now()})` : ""}">
+        <span class="pill ok tag">✔ aprovado</span>
+        <div class="ovl"><b>${v.codigo}</b><span>${v.duracao_alvo || ""}</span></div>
+      </div>
+      <p class="titulo-v">${v.titulo_trabalho}</p>
+      <span class="pill ok">🔓 PRONTO PARA SUBIR</span>
+    </div>`;
+  }).join("") || `<div class="card"><p class="icoBig">📦</p><p class="k">Cofre vazio</p>
+    <p class="d" style="margin:0">Nenhum vídeo 100% aprovado ainda — quando o último check do <b>Studio</b> ficar verde, ele entra aqui sozinho.</p>
+    <div class="acoes" style="display:flex;gap:8px;margin-top:12px"><button class="btn mini" onclick="location.hash='#videos'">ir para o Studio →</button></div></div>`;
 }
 
 let primeiraCarga = true;
@@ -653,6 +776,8 @@ function desenhaResumo(d) {
   montaProvasNossas(d);
   montaPesquisa(d);
   montaCapas(d);
+  montaBiblioteca(d);
+  montaRepositorio(d);
 
   countUp($("#inscritos"), d.inscritos);
   const pct = Math.min(100, ((d.inscritos || 0) / 1000) * 100);
@@ -696,7 +821,7 @@ function desenhaResumo(d) {
       <div class="thumb" style="${v.capa_url ? `background-image:url(${v.capa_url}?v=${Date.now()})` : ""}">
         ${pillStatus(v.status).replace('class="pill', 'class="pill tag')}
         ${v.preview_url ? '<div class="ovl"><b style="font-size:1.4rem">▶</b><span>clique para assistir</span></div>'
-                        : (v.capa_url ? "" : '<div class="ovl"><span>capa sendo criada na página Capas</span></div>')}
+                        : (v.capa_url ? "" : '<div class="ovl"><span>capa sendo criada logo abaixo</span></div>')}
       </div>`;
     return `
     <div class="card tcard">

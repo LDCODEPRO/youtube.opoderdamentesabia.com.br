@@ -487,10 +487,11 @@ function agendaPollCapas() {
   pollCapasAtivo = true;
   setTimeout(() => { pollCapasAtivo = false; carregaPainel(); }, 15000);
 }
-async function gerarCapa(codigo, botao) {
+async function gerarCapa(codigo, botao, instrucao) {
   if (botao) { botao.disabled = true; botao.textContent = "🎨 começando…"; }
   try {
-    await api("/api/capas/gerar/" + codigo, {method: "POST"});
+    await api("/api/capas/gerar/" + codigo, {method: "POST",
+      body: JSON.stringify({instrucao: instrucao || null})});
     carregaPainel();
   } catch (e) {
     alert((e.body && e.body.detail) || "A ponte de desenho não respondeu.");
@@ -587,10 +588,11 @@ function montaCapas(d) {
         <span class="pill ok">✔ capa aprovada por você</span>`;
     } else if (v.capa_url) {
       corpo = `<img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(215,230,255,.25);margin:10px 0">
-        <div class="acoes">
+        <input type="text" id="inst_${v.codigo}" placeholder="O que mudar? ex.: texto menor, lâmpada à esquerda… (opcional)"
+          style="width:100%;padding:10px 12px;border-radius:9px;font-size:.85rem;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid rgba(215,230,255,.2);outline:none;margin-bottom:9px">
+        <div class="acoes" style="margin-top:0">
           <button class="btn mini ok" onclick="decidir('capa_${v.codigo}','aprovado')">✔ Aprovar esta capa</button>
-          <button class="btn mini no" onclick="decidir('capa_${v.codigo}','refazer');">✖ Refazer</button>
-          <button class="btn mini ghost" onclick="gerarCapa('${v.codigo}', this)">🎨 Desenhar outra</button>
+          <button class="btn mini" onclick="gerarCapa('${v.codigo}', this, document.getElementById('inst_${v.codigo}').value)">🎨 Refazer (sai diferente)</button>
         </div>`;
     } else {
       corpo = `<p class="d">Ainda sem capa. Eu desenho na identidade da marca — leva ~2 minutos.</p>

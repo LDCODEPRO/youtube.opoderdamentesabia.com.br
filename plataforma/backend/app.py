@@ -151,27 +151,39 @@ MARCA_MENTE_SABIA = {
 }
 
 
-def _prompt_capa(video: dict) -> str:
+def _prompt_capa(video: dict, instrucao: str = "", variar: bool = False) -> str:
     palavras = video.get("palavras_capa") or video.get("titulo_trabalho", "")
-    return (
+    sub = video.get("subtitulo_capa") or ""
+    p = (
         f"CAPA (thumbnail) de vídeo do YouTube, formato HORIZONTAL 16:9 (1280x720) — NÃO é post "
         f"de Instagram, NÃO usar layout vertical. Vídeo: '{video.get('titulo_trabalho')}'. "
         "Cena única e forte: fundo preto cósmico com estrelas e névoa, um elemento prateado/cromado "
         "central (lâmpada com cérebro dentro, estilo do logo da marca), luz fria dramática. "
-        f"Texto GIGANTE legível em miniatura de celular: '{palavras}' (máx. 4 palavras) em "
-        "branco/prata com brilho suave, sans-serif bold. Alto contraste, uma emoção só, sem poluição, "
-        "sem rodapé de CTA, sem cards, sem rostos reais, sem marca d'água."
+        f"Texto GIGANTE legível em miniatura de celular: '{palavras}' em "
+        "branco/prata com brilho suave, sans-serif bold. "
     )
+    if sub:
+        p += (f"Logo ABAIXO do texto principal, uma segunda linha MENOR (cerca de 40% do tamanho, "
+              f"mesma fonte, mesma cor): '{sub}'. ")
+    p += ("Alto contraste, uma emoção só, sem poluição, sem rodapé de CTA, sem cards, "
+          "sem rostos reais, sem marca d'água.")
+    if variar:
+        p += (" IMPORTANTE: componha uma versão DIFERENTE da anterior — mude o ângulo, a posição "
+              "dos elementos ou o enquadramento, mantendo a mesma identidade da marca.")
+    if instrucao:
+        p += f" MUDANÇA PEDIDA PELO DIRETOR (obedecer exatamente): {instrucao.strip()}"
+    return p
 
 
 _CAPAS_EM_CURSO: dict = {}  # codigo -> "desenhando" | "erro: ..."
 
 
-def _job_capa(codigo: str, video: dict) -> None:
+def _job_capa(codigo: str, video: dict, instrucao: str = "", variar: bool = False) -> None:
     """Roda em thread: pede o desenho à ponte, baixa e salva. O painel acompanha pelo estado."""
     import urllib.request
     try:
-        payload = json.dumps({"descricao": _prompt_capa(video), "marca": MARCA_MENTE_SABIA,
+        payload = json.dumps({"descricao": _prompt_capa(video, instrucao, variar),
+                              "marca": MARCA_MENTE_SABIA,
                               "recipe_key": "dica_unica"}).encode("utf-8")
         req = urllib.request.Request(f"{PONTE_URL}/api/gerar-imagem", data=payload,
                                      headers={"Content-Type": "application/json"}, method="POST")
@@ -190,9 +202,15 @@ def _job_capa(codigo: str, video: dict) -> None:
         _CAPAS_EM_CURSO[codigo] = f"erro: {e}"
 
 
+class GerarCapaIn(BaseModel):
+    instrucao: str | None = None
+
+
 @app.post("/api/capas/gerar/{codigo}")
-def gerar_capa(codigo: str, request: Request, _=Depends(require_auth)):
-    """Dispara o desenho da capa em segundo plano (a ponte leva ~1-2 min)."""
+def gerar_capa(codigo: str, request: Request, body: GerarCapaIn | None = None,
+               _=Depends(require_auth)):
+    """Dispara o desenho da capa em segundo plano (a ponte leva ~1-2 min).
+    Se já existe capa, é um REFAZER: sai versão diferente, obedecendo a instrução do Diretor."""
     import threading
 
     if _CAPAS_EM_CURSO.get(codigo) == "desenhando":
@@ -201,8 +219,12 @@ def gerar_capa(codigo: str, request: Request, _=Depends(require_auth)):
     video = next((v for v in pipe.get("videos", []) if v.get("codigo") == codigo), None)
     if not video:
         raise HTTPException(status_code=404, detail="Vídeo não está na fila")
+    instrucao = (body.instrucao or "").strip() if body else ""
+    variar = bool(video.get("capa_url"))  # já tinha capa → a próxima tem que vir diferente
+    if instrucao:
+        grava_decisao(f"capa_{codigo}_instrucao", instrucao[:300])
     _CAPAS_EM_CURSO[codigo] = "desenhando"
-    threading.Thread(target=_job_capa, args=(codigo, video), daemon=True).start()
+    threading.Thread(target=_job_capa, args=(codigo, video, instrucao, variar), daemon=True).start()
     return {"ok": True, "status": "desenhando"}
 
 

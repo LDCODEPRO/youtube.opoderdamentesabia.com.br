@@ -4,6 +4,11 @@
 > elaborador de imagens e microvídeos, edição, compositor de áudio, legendador.
 > Completada pelo agente com os 3 que faltavam (avisado ao Diretor): Narrador, Embalador e Publicador.
 
+## As 3 leis da equipe (ordem do Diretor, 17/07/2026)
+1. **Cada membro é um SUBPROJETO** — pasta própria (`equipe/<funcao>/`) com `soul.md` (a alma, no molde da casa — roda via rodar_agente.py), `BIBLIOTECA/` (o conhecimento do ofício, começa com o 1º livro curado e cresce com a pesquisa) e `PESQUISA.md` (o mandato de excelência).
+2. **Todos pesquisam a própria função** — aprender o que há de mais novo TODA SEMANA (junto da varredura de segunda) e registrar na BIBLIOTECA. Excelência é o padrão mínimo.
+3. **Ajuda mútua** — qualquer membro pode e deve pedir ajuda aos colegas E a qualquer agente da federação do Agente-X (Ponte/Studio, Agente Vídeo, Agente Post, Postador, Mensageiro). Um ajuda o outro; ninguém trava sozinho.
+
 ## O fluxo da fábrica
 ```
 PESQUISADOR (regra viva semanal + crivo)

@@ -49,6 +49,12 @@ Levar o canal **@opoderdamentesabia** ao YPP (1.000 inscritos + 4.000h) produzin
 - **Portão duro:** se o Google/YouTube pedir verificação, captcha ou qualquer confirmação → o agente **PARA e chama o Diretor no Telegram**. Nunca contorna verificação. Publicar sem aprovação da etapa 6 também é proibido enquanto o portão existir.
 - **Fallback documentado:** YouTube Data API (grátis) fica como plano B — estável e oficial, mas exige verificação do app Google para o vídeo não ficar travado em privado; o Diretor escolheu navegador como via principal.
 
+## 🔒 O PORTÃO DE PUBLICAÇÃO (ordem do Diretor, 16/07/2026)
+**"Tudo tem que passar pelo crivo do pesquisador, e depois que for aprovado pode ser postado."**
+- NADA é publicado sem **os dois carimbos, nesta ordem**: (1) **crivo do pesquisador aprovado em TODAS as peças** — título (≥2 peças do parâmetro, ≤70c), capa (crivo visual vs virais da semana), duração (régua 5–30min), descrição SEO pronta; (2) **aprovação do Diretor**.
+- O código do portão é `pode_publicar()` (app.py) — o uploader via navegador NASCERÁ chamando essa função e se recusará a postar sem os dois carimbos.
+- O painel mostra o semáforo por vídeo na fila: ✔/✖ por peça + selo "🔓 LIBERADO PARA POSTAR" ou "🔒 segura: falta X".
+
 ## Leis herdadas da casa
 - **Zero Ghost:** o painel só mostra dado real; etapa não construída aparece como pendente, nunca como teatro.
 - **Anti-cópia:** conceito comprovado é inspiração; roteiro, texto e cena são SEMPRE refeitos do zero.

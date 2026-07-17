@@ -12,6 +12,7 @@ Porta 5065 (systemd youtube_opoder.service), atrás do nginx.
 """
 import json
 import os
+import re
 import secrets
 import time
 
@@ -111,6 +112,7 @@ def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
             v["capa_status"] = estado
         if v.get("capa_url"):
             v["crivo"] = carrega_crivo(v["codigo"])
+        v["portao"] = pode_publicar(v, dados["decisoes"])
     return JSONResponse(dados)
 
 
@@ -126,6 +128,8 @@ ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer", "manter_atual"}, "sessao_
 def _decisao_permitida(item: str, decisao: str) -> bool:
     if item.startswith("capa_"):
         return decisao in {"aprovado", "refazer"}
+    if item.startswith("aprovar_video_"):
+        return decisao in {"aprovado", "reprovado"}
     return item in ITENS_VALIDOS and decisao in ITENS_VALIDOS[item]
 
 
@@ -240,6 +244,54 @@ def carrega_crivo(codigo: str) -> dict:
             return json.load(f)
     except Exception:
         return {}
+
+
+def _crivo_video(video: dict) -> dict:
+    """CRIVO GERAL do vídeo (ordem do Diretor: TUDO passa pelo pesquisador antes de postar).
+    Julga título, capa, duração e descrição contra a pesquisa e as regras da casa."""
+    from pesquisa_semanal import _pecas
+
+    codigo = video.get("codigo", "")
+    checks = []
+
+    def check(nome, ok, detalhe):
+        checks.append({"nome": nome, "ok": bool(ok), "detalhe": detalhe})
+
+    titulo = video.get("titulo_youtube") or ""
+    pecas = _pecas(titulo) if titulo else []
+    check("Título com o parâmetro (≥2 peças)", titulo and len(pecas) >= 2,
+          f"'{titulo[:50]}…' → {', '.join(pecas) if pecas else 'nenhuma peça'}" if titulo
+          else "sem título de YouTube definido")
+    check("Título cabe no YouTube (≤70)", titulo and len(titulo) <= 70,
+          f"{len(titulo)} caracteres" if titulo else "—")
+
+    crivo_capa = carrega_crivo(codigo)
+    check("Capa aprovada no crivo visual", crivo_capa.get("aprovada"),
+          crivo_capa.get("resumo", "capa ainda não gerada/avaliada"))
+
+    faixa = re.findall(r"\d+", video.get("duracao_alvo") or "")
+    dur_ok = faixa and 5 <= int(faixa[0]) and int(faixa[-1]) <= 30
+    check("Duração na régua (5–30min)", dur_ok, video.get("duracao_alvo") or "sem alvo")
+
+    check("Descrição SEO pronta", bool((video.get("descricao_seo") or "").strip()),
+          "pronta" if (video.get("descricao_seo") or "").strip() else "ainda falta escrever")
+
+    aprovado = all(c["ok"] for c in checks)
+    return {"aprovado": aprovado, "checks": checks,
+            "resumo": "✔ liberado pelo pesquisador" if aprovado
+            else "✖ segura a publicação: " + "; ".join(c["nome"] for c in checks if not c["ok"])}
+
+
+def pode_publicar(video: dict, decisoes: dict) -> dict:
+    """O PORTÃO: só publica com crivo 100% + aprovação do Diretor. O uploader usará isto."""
+    crivo = _crivo_video(video)
+    dec = (decisoes.get(f"aprovar_video_{video.get('codigo')}") or {}).get("decisao")
+    faltas = []
+    if not crivo["aprovado"]:
+        faltas.append("crivo do pesquisador")
+    if dec != "aprovado":
+        faltas.append("aprovação do Diretor")
+    return {"pode": not faltas, "faltas": faltas, "crivo": crivo}
 
 
 def _gera_e_salva(codigo: str, video: dict, instrucao: str, variar: bool) -> None:

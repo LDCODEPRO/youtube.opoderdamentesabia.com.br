@@ -680,14 +680,25 @@ function desenhaResumo(d) {
     ? `Gravamos os inscritos todo dia: <b>${hist.length} registros</b> — primeiro ${fmt(hist[0].inscritos)}, hoje ${fmt(hist[hist.length-1].inscritos)}.`
     : `Começamos hoje a gravar os inscritos todo dia — em uma semana isso vira o gráfico do crescimento.`;
 
-  $("#gridPipeline").innerHTML = pipe.map(v => `
+  $("#gridPipeline").innerHTML = pipe.map(v => {
+    const pt = v.portao || {};
+    const cks = (pt.crivo && pt.crivo.checks) || [];
+    const semaforo = cks.map(c =>
+      `<span title="${c.detalhe}" style="font-size:.78rem;color:${c.ok ? "var(--ok)" : "var(--warn)"}">${c.ok ? "✔" : "✖"} ${c.nome.split(" ")[0].toLowerCase()}</span>`).join(" · ");
+    const selo = pt.pode
+      ? '<span class="pill ok">🔓 LIBERADO PARA POSTAR</span>'
+      : `<span class="pill warn" title="falta: ${(pt.faltas || []).join(" + ")}">🔒 segura: falta ${(pt.faltas || []).join(" + ")}</span>`;
+    return `
     <div class="card tcard">
       <div class="thumb" style="${v.capa_url ? `background-image:url(${v.capa_url}?v=${Date.now()})` : ""}">
         ${pillStatus(v.status).replace('class="pill', 'class="pill tag')}
         ${v.capa_url ? "" : '<div class="ovl"><span>capa sendo criada na página Capas</span></div>'}
       </div>
       <p class="titulo-v">${v.titulo_trabalho}</p>
-    </div>`).join("") || '<div class="card"><p class="d">Nada sendo feito agora.</p></div>';
+      <p style="margin:6px 0 8px">${semaforo}</p>
+      ${selo}
+    </div>`;
+  }).join("") || '<div class="card"><p class="d">Nada sendo feito agora.</p></div>';
 
   const cardVideo = (v) => `
     <div class="card tcard">

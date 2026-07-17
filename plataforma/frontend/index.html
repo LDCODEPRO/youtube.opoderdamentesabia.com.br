@@ -43,9 +43,9 @@
   .sub{color:var(--dim);font-size:.88rem;margin:0 0 16px;max-width:72ch}
   .eyebrow{font-family:var(--label);letter-spacing:.3em;text-transform:uppercase;font-size:.66rem;color:var(--prata);margin:0 0 8px}
   .grid{display:grid;gap:13px}
-  .g3{grid-template-columns:repeat(auto-fill,minmax(225px,1fr))}
-  .g2{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .gfill{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(228px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .gfill{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 
   /* ── O CARD DA CASA: grafite + brilho no canto + glow + hover que levanta ── */
   .card{position:relative;border-radius:16px;padding:17px;
@@ -151,7 +151,7 @@
   nav.menu .ico{width:20px;text-align:center;flex:none}
   nav.menu a.ativo .ico{filter:drop-shadow(0 0 8px rgba(var(--scr),.8))}
   .side .rodape{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:10px}
-  .conteudo{flex:1;min-width:0;padding:26px 26px 70px;max-width:1040px}
+  .conteudo{flex:1;min-width:0;padding:28px 34px 80px;width:100%;max-width:1340px;margin:0 auto}
   .view{display:none}
   .view.ativa{display:block}
   .aura{border-radius:50%;overflow:hidden;border:1px solid rgba(var(--scr),.4);
@@ -185,6 +185,10 @@
   .barraP .tr i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--prata),var(--prata-hi));
     box-shadow:0 0 14px rgba(var(--scr),.5);transition:width .9s ease}
   .icoBig{font-size:2rem;line-height:1;margin:0 0 8px;filter:drop-shadow(0 0 12px rgba(var(--scr),.35))}
+  /* card de métrica: preenchido, com marca-d'água grande no canto */
+  .card.stat{display:flex;flex-direction:column;min-height:158px;overflow:hidden;position:relative}
+  .card.stat .statWm{position:absolute;right:-8px;bottom:-14px;font-size:5rem;line-height:1;opacity:.06;pointer-events:none;filter:grayscale(1)}
+  .card.stat .big{font-size:2.7rem}
 
   /* ── bloco "sendo preparado agora": capa grande + barra de progressão ── */
   .prodHero{display:grid;grid-template-columns:minmax(220px,340px) 1fr;gap:20px;align-items:center;
@@ -308,9 +312,9 @@
     </div>
     <nav class="menu" id="menu">
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
+      <a href="#funciona"><span class="ico">🔬</span> Pesquisador</a>
       <a href="#videos"><span class="ico">🏭</span> Fábrica</a>
       <a href="#biblioteca"><span class="ico">📚</span> Biblioteca</a>
-      <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
       <a href="#equipe"><span class="ico">👥</span> Equipe</a>
     </nav>
@@ -333,13 +337,13 @@
       </div>
 
       <div class="grid g3">
-        <div class="card"><p class="k">Rumo à monetização</p>
+        <div class="card stat"><p class="k">Rumo à monetização</p>
           <div class="anelWrap">
             <div class="anel" id="anelMeta" style="--p:0"><b id="anelPct">0%</b></div>
             <div><p class="big" id="inscritos">—</p><p class="d" id="metaTxt" style="margin-top:4px">de 1.000 inscritos</p></div>
           </div></div>
-        <div class="card"><p class="icoBig">⏸</p><p class="k">Parado há</p><p class="big" id="diasParado">—</p><p class="d" id="ultimoUpload">—</p></div>
-        <div class="card"><p class="icoBig">🏭</p><p class="k">Na fábrica</p><p class="big" id="filaTotal">—</p><p class="d" id="filaDetalhe">—</p></div>
+        <div class="card stat"><span class="statWm">⏸</span><p class="k">Parado há</p><p class="big" id="diasParado">—</p><p class="d" id="ultimoUpload" style="margin-top:6px">—</p><p class="d" style="margin-top:auto;color:var(--warn)">precisa voltar a postar</p></div>
+        <div class="card stat"><span class="statWm">🏭</span><p class="k">Na fábrica</p><p class="big" id="filaTotal">—</p><p class="d" id="filaDetalhe" style="margin-top:6px">—</p><p class="d" style="margin-top:auto">um vídeo passa a cada etapa até você aprovar</p></div>
       </div>
 
       <h2 style="margin-top:28px">O que fazer agora</h2>
@@ -385,8 +389,8 @@
 
     <!-- ═══════════ O QUE FUNCIONA ═══════════ -->
     <div class="view" id="v-funciona">
-      <h2>📈 O que funciona</h2>
-      <p class="sub">O cérebro do canal: o que os NOSSOS números provaram e o que o território prova. Cada card tem o veredito e a prova.</p>
+      <h2>🔬 O Pesquisador — o que faz ter sucesso no YouTube HOJE</h2>
+      <p class="sub">A central de excelência do canal: o que está bombando no território esta semana, o que os nossos números provaram e a receita que todo vídeo obedece. Atualiza sozinha toda segunda.</p>
 
       <div class="fala" style="margin-bottom:22px">
         <div style="flex:1">

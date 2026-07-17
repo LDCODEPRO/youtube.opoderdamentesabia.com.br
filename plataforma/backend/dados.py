@@ -109,12 +109,20 @@ def _dias_desde(data_iso: str):
         return None
 
 
+CAPAS_DIR = os.path.join(BASE_DIR, "frontend", "capas")
+
+
 def carrega_pipeline() -> dict:
     try:
         with open(PIPELINE_PATH, encoding="utf-8") as f:
-            return json.load(f)
+            pipe = json.load(f)
     except Exception as e:
         return {"erro": f"pipeline.json ilegível: {e}", "videos": []}
+    # estado da capa de cada vídeo = existência real do arquivo (Zero Ghost)
+    for v in pipe.get("videos", []):
+        arq = os.path.join(CAPAS_DIR, f"{v.get('codigo', '')}.png")
+        v["capa_url"] = f"/capas/{v['codigo']}.png" if os.path.isfile(arq) else None
+    return pipe
 
 
 def carrega_pautas() -> dict:

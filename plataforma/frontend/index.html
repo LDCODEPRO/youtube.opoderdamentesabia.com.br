@@ -208,7 +208,9 @@
     </div>
     <nav class="menu" id="menu">
       <a href="#inicio"><span class="ico">🏠</span> Início</a>
+      <a href="#funciona"><span class="ico">📈</span> O que funciona</a>
       <a href="#videos"><span class="ico">📹</span> Vídeos</a>
+      <a href="#capas"><span class="ico">🖼</span> Capas</a>
       <a href="#ideias"><span class="ico">💡</span> Ideias</a>
       <a href="#receita"><span class="ico">📖</span> A Receita</a>
     </nav>
@@ -262,6 +264,54 @@
       <div class="grid g3" id="gridCortes"></div>
     </div>
 
+    <!-- ═══════════ O QUE FUNCIONA ═══════════ -->
+    <div class="view" id="v-funciona">
+      <h2>📈 O que funciona</h2>
+      <p class="sub">O cérebro do canal: o que os NOSSOS números provaram e o que o território prova. Cada card tem o veredito e a prova.</p>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">NOS NOSSOS NÚMEROS · provado no nosso próprio canal</h2>
+      <div class="grid g3" id="gridProvasNossas" style="margin-bottom:26px"></div>
+
+      <h2 style="font-size:.95rem;color:var(--dim)">NO TERRITÓRIO · medido nos canais que já deram certo (16/07/2026)</h2>
+      <div class="grid g3" style="margin-bottom:26px">
+        <div class="card"><span class="pill ok">FAZER</span>
+          <p class="titulo-v">Nome famoso no título puxa milhões</p>
+          <p class="d">"Aprenda a agir como se NADA o incomodasse <b>| Napoleon Hill</b>" = <b>5,1 milhões</b>. O mesmo conceito em outro canal = 2M. Autores que puxam em português: Hill, Murphy, Dispenza, Lipton, Cury, Jung.</p></div>
+        <div class="card"><span class="pill ok">FAZER</span>
+          <p class="titulo-v">Falar COM a pessoa e prometer prazo</p>
+          <p class="d">"REPROGRAME <b>sua</b> mente <b>em 8 semanas</b>" = 864 mil · "<b>Me dê 523 segundos</b> pra te viciar em disciplina" = 1,27M. Você no centro + prazo = clique.</p></div>
+        <div class="card"><span class="pill ok">FAZER</span>
+          <p class="titulo-v">Áudio para dormir/ouvir gera horas</p>
+          <p class="d">"OUÇA DORMINDO… APENAS 1 NOITE" = <b>10 milhões</b>. Adaptamos à sua régua: nossas versões saem com 25–30min.</p></div>
+        <div class="card"><span class="pill bad">NUNCA</span>
+          <p class="titulo-v">Título genérico ou só hashtag</p>
+          <p class="d">É o que matou nossos vídeos antigos (7–174 views). Todo título nosso agora usa a fórmula da Receita.</p></div>
+        <div class="card"><span class="pill bad">NUNCA</span>
+          <p class="titulo-v">Enganar no título</p>
+          <p class="d">O YouTube mede satisfação de quem assistiu. Promessa não cumprida = o vídeo morre e o canal junto.</p></div>
+        <div class="card"><span class="pill bad">NUNCA</span>
+          <p class="titulo-v">Misturar Instagram com YouTube</p>
+          <p class="d">Corte vertical é do Instagram/TikTok. No YouTube: vídeo de 5–30min. Shorts só dos nossos próprios vídeos.</p></div>
+      </div>
+
+      <div class="card"><p class="k">Como esta página evolui</p>
+        <p class="d" style="margin:0">Cada vídeo novo publicado entra na comparação automaticamente (visualizações, curtidas e ritmo por dia, direto do YouTube). Quando ligarmos a chave oficial do YouTube, entram também cliques na capa e tempo assistido — aí esta página vira o juiz de cada capa e título.</p></div>
+    </div>
+
+    <!-- ═══════════ CAPAS ═══════════ -->
+    <div class="view" id="v-capas">
+      <h2>🖼 Capas</h2>
+      <p class="sub">A fábrica de thumbnails. Eu desenho na identidade da marca (prata no preto cósmico), você aprova aqui. Capa aprovada = capa que sobe junto com o vídeo.</p>
+      <div class="grid g2" id="gridCapas"></div>
+
+      <h2 style="font-size:.95rem;color:var(--dim);margin-top:26px">A REGRA DA CAPA</h2>
+      <div class="grid g3">
+        <div class="card"><p class="k">Texto</p><p class="d" style="margin:0"><b>2 a 4 palavras gigantes</b>, brancas/prata. Tem que dar pra ler na miniatura do celular.</p></div>
+        <div class="card"><p class="k">Visual</p><p class="d" style="margin:0">Identidade da marca: <b>preto cósmico + prata cromada</b> (a mesma cara do Instagram e TikTok). Uma emoção só.</p></div>
+        <div class="card"><p class="k">Teste</p><p class="d" style="margin:0">Se a capa não performar (poucos cliques em 72h), trocamos — a regra oficial do YouTube permite e recomenda.</p></div>
+      </div>
+    </div>
+
     <!-- ═══════════ IDEIAS ═══════════ -->
     <div class="view" id="v-ideias">
       <h2>Ideias prontas</h2>
@@ -312,7 +362,7 @@ async function api(caminho, opts) {
 }
 
 /* páginas */
-const PAGINAS = ["inicio", "videos", "ideias", "receita"];
+const PAGINAS = ["inicio", "funciona", "videos", "capas", "ideias", "receita"];
 function navega() {
   const alvo = (location.hash || "#inicio").slice(1);
   const pagina = PAGINAS.includes(alvo) ? alvo : "inicio";
@@ -419,10 +469,104 @@ async function decidir(item, decisao) {
   } catch (e) { alert("Não consegui gravar: " + ((e.body && e.body.detail) || e.message)); }
 }
 
+/* fábrica de capas (assíncrona: dispara e acompanha) */
+let pollCapasAtivo = false;
+function agendaPollCapas() {
+  if (pollCapasAtivo) return;
+  pollCapasAtivo = true;
+  setTimeout(() => { pollCapasAtivo = false; carregaPainel(); }, 15000);
+}
+async function gerarCapa(codigo, botao) {
+  if (botao) { botao.disabled = true; botao.textContent = "🎨 começando…"; }
+  try {
+    await api("/api/capas/gerar/" + codigo, {method: "POST"});
+    carregaPainel();
+  } catch (e) {
+    alert((e.body && e.body.detail) || "A ponte de desenho não respondeu.");
+    carregaPainel();
+  }
+}
+
+/* página O que funciona: vereditos calculados dos NOSSOS números */
+function montaProvasNossas(d) {
+  const vids = d.videos || [];
+  const cortes = vids.filter(v => v.tipo === "corte");
+  const longos = vids.filter(v => v.tipo === "longo");
+  const semTag = (t) => t.replace(/#[\wÀ-ú]+/g, "").replace(/[✨🫵]/g, "").trim();
+  const comFrase = cortes.filter(v => semTag(v.titulo).length >= 15);
+  const soTag = cortes.filter(v => semTag(v.titulo).length < 15);
+  const media = (l) => l.length ? Math.round(l.reduce((s, v) => s + v.views, 0) / l.length) : 0;
+  const cards = [];
+  if (comFrase.length && soTag.length) {
+    const razao = media(soTag) ? Math.round(media(comFrase) / media(soTag)) : 0;
+    cards.push(`<div class="card"><span class="pill ok">PROVADO AQUI</span>
+      <p class="titulo-v">Frase-gancho no título = ${razao}x mais views</p>
+      <p class="d">Nossos cortes COM frase no título: média <b>${fmt(media(comFrase))}</b> views. Só com hashtags: <b>${fmt(media(soTag))}</b>. O mesmo conteúdo, embalagem diferente.</p></div>`);
+  }
+  if (longos.length) {
+    cards.push(`<div class="card"><span class="pill bad">PROVADO AQUI</span>
+      <p class="titulo-v">Título genérico mata o vídeo</p>
+      <p class="d">Nossos ${longos.length} vídeos antigos com título genérico: <b>${longos.map(v => fmt(v.views)).join(" e ")} views</b>. Por isso todo título novo usa a fórmula.</p></div>`);
+  }
+  const melhor = vids.slice().sort((a, b) => b.views - a.views)[0];
+  if (melhor && melhor.views > 0) {
+    const taxa = ((melhor.likes / melhor.views) * 100).toFixed(1);
+    cards.push(`<div class="card"><span class="pill ok">PROVADO AQUI</span>
+      <p class="titulo-v">Quando a pessoa vê, ela gosta</p>
+      <p class="d">Nosso mais visto tem <b>${taxa}% de curtidas por visualização</b> (ótimo). O problema nunca foi o conteúdo — era embalagem e constância.</p></div>`);
+  }
+  const hist = (d.historico || []).filter(p => p.inscritos != null);
+  if (hist.length >= 2) {
+    const delta = hist[hist.length - 1].inscritos - hist[0].inscritos;
+    cards.push(`<div class="card"><span class="pill ${delta > 0 ? "ok" : "prata"}">MEDINDO</span>
+      <p class="titulo-v">Crescimento desde que a plataforma nasceu</p>
+      <p class="d"><b>${delta >= 0 ? "+" : ""}${fmt(delta)} inscritos</b> em ${hist.length} medições. Cada vídeo novo aparece aqui.</p></div>`);
+  } else {
+    cards.push(`<div class="card"><span class="pill prata">MEDINDO</span>
+      <p class="titulo-v">O placar começou hoje</p>
+      <p class="d">A plataforma grava os inscritos todo dia. Assim que houver 2+ medições, o crescimento aparece aqui.</p></div>`);
+  }
+  $("#gridProvasNossas").innerHTML = cards.join("");
+}
+
+/* página Capas */
+function montaCapas(d) {
+  const dec = d.decisoes || {};
+  const pipe = (d.pipeline && d.pipeline.videos) || [];
+  $("#gridCapas").innerHTML = pipe.map(v => {
+    const decisao = dec["capa_" + v.codigo] && dec["capa_" + v.codigo].decisao;
+    let corpo;
+    if (v.capa_status === "desenhando") {
+      corpo = `<p class="d">🎨 <b>Desenhando a capa…</b> leva ~2 minutos. Pode navegar, eu aviso aqui.</p>`;
+      agendaPollCapas();
+    } else if (v.capa_status && v.capa_status.startsWith("erro")) {
+      corpo = `<p class="d">A ponte de desenho falhou: <b>${v.capa_status.slice(0, 120)}</b></p>
+        <div class="acoes"><button class="btn mini" onclick="gerarCapa('${v.codigo}', this)">↻ Tentar de novo</button></div>`;
+    } else if (v.capa_url && decisao === "aprovado") {
+      corpo = `<img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(46,230,168,.4);margin:10px 0">
+        <span class="pill ok">✔ capa aprovada por você</span>`;
+    } else if (v.capa_url) {
+      corpo = `<img src="${v.capa_url}?v=${Date.now()}" alt="capa" style="width:100%;border-radius:10px;border:1px solid rgba(215,230,255,.25);margin:10px 0">
+        <div class="acoes">
+          <button class="btn mini ok" onclick="decidir('capa_${v.codigo}','aprovado')">✔ Aprovar esta capa</button>
+          <button class="btn mini no" onclick="decidir('capa_${v.codigo}','refazer');">✖ Refazer</button>
+          <button class="btn mini ghost" onclick="gerarCapa('${v.codigo}', this)">🎨 Desenhar outra</button>
+        </div>`;
+    } else {
+      corpo = `<p class="d">Ainda sem capa. Eu desenho na identidade da marca — leva ~2 minutos.</p>
+        <div class="acoes"><button class="btn mini" onclick="gerarCapa('${v.codigo}', this)">⚡ Desenhar capa agora</button></div>`;
+    }
+    return `<div class="card"><p class="k">${v.codigo} · palavras da capa: ${v.palavras_capa || "—"}</p>
+      <p class="titulo-v">${v.titulo_trabalho}</p>${corpo}</div>`;
+  }).join("") || '<div class="card"><p class="d">Nenhum vídeo na fila — as capas nascem junto com os vídeos.</p></div>';
+}
+
 let primeiraCarga = true;
 function desenhaResumo(d) {
   $("#falaEstudio").innerHTML = montaFala(d);
   montaTarefas(d);
+  montaProvasNossas(d);
+  montaCapas(d);
 
   countUp($("#inscritos"), d.inscritos);
   const pct = Math.min(100, ((d.inscritos || 0) / 1000) * 100);

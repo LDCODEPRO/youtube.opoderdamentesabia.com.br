@@ -10,6 +10,7 @@ Plataforma da federação em youtube.opoderdamentesabia.com.br
 
 Porta 5065 (systemd youtube_opoder.service), atrás do nginx.
 """
+import json
 import os
 import secrets
 import time
@@ -103,6 +104,11 @@ def me(request: Request):
 def api_resumo(request: Request, force: bool = False, _=Depends(require_auth)):
     dados = resumo(force=force)
     dados["decisoes"] = carrega_decisoes()  # decisão do Diretor nunca espera cache
+    dados["pipeline"] = carrega_pipeline()  # capa recém-salva aparece sem esperar cache
+    for v in dados["pipeline"].get("videos", []):
+        estado = _CAPAS_EM_CURSO.get(v.get("codigo"))
+        if estado:
+            v["capa_status"] = estado
     return JSONResponse(dados)
 
 
@@ -115,12 +121,89 @@ ITENS_VALIDOS = {"kit_visual": {"aprovado", "refazer", "manter_atual"}, "sessao_
                  "video_aprovacao": {"aprovado", "reprovado"}}
 
 
+def _decisao_permitida(item: str, decisao: str) -> bool:
+    if item.startswith("capa_"):
+        return decisao in {"aprovado", "refazer"}
+    return item in ITENS_VALIDOS and decisao in ITENS_VALIDOS[item]
+
+
 @app.post("/api/decisao")
 def decidir(body: DecisaoIn, request: Request, _=Depends(require_auth)):
     """O Diretor decide no painel; a decisão fica registrada e o agente executa."""
-    if body.item not in ITENS_VALIDOS or body.decisao not in ITENS_VALIDOS[body.item]:
+    if not _decisao_permitida(body.item, body.decisao):
         raise HTTPException(status_code=400, detail="Decisão desconhecida")
     return {"ok": True, "decisoes": grava_decisao(body.item, body.decisao)}
+
+
+# ── Fábrica de capas: a ponte da assinatura (Studio, porta 5063) desenha ─────
+PONTE_URL = os.getenv("PONTE_ASSINATURA_URL", "http://127.0.0.1:8000")
+CAPAS_DIR = os.path.join(FRONT, "capas")
+
+
+MARCA_MENTE_SABIA = {
+    "name": "O Poder da Mente Sábia",
+    "niche": "mentalidade, psicologia e sabedoria (canal de YouTube)",
+    "style": ("preto cósmico com estrelas e névoa sutil; elementos metálicos PRATA/cromados "
+              "(lâmpada cromada, cérebro prateado, luz fria); premium, misterioso, monocromático "
+              "preto e branco. NUNCA: aves, animais, produtos, pessoas reais, verde, elementos de loja."),
+    "colors": ["preto #05060A", "prata #C9CDD8", "branco-gelo #F0F3FA"],
+    "tom": "sábio, direto, profundo",
+}
+
+
+def _prompt_capa(video: dict) -> str:
+    palavras = video.get("palavras_capa") or video.get("titulo_trabalho", "")
+    return (
+        f"CAPA (thumbnail) de vídeo do YouTube, formato HORIZONTAL 16:9 (1280x720) — NÃO é post "
+        f"de Instagram, NÃO usar layout vertical. Vídeo: '{video.get('titulo_trabalho')}'. "
+        "Cena única e forte: fundo preto cósmico com estrelas e névoa, um elemento prateado/cromado "
+        "central (lâmpada com cérebro dentro, estilo do logo da marca), luz fria dramática. "
+        f"Texto GIGANTE legível em miniatura de celular: '{palavras}' (máx. 4 palavras) em "
+        "branco/prata com brilho suave, sans-serif bold. Alto contraste, uma emoção só, sem poluição, "
+        "sem rodapé de CTA, sem cards, sem rostos reais, sem marca d'água."
+    )
+
+
+_CAPAS_EM_CURSO: dict = {}  # codigo -> "desenhando" | "erro: ..."
+
+
+def _job_capa(codigo: str, video: dict) -> None:
+    """Roda em thread: pede o desenho à ponte, baixa e salva. O painel acompanha pelo estado."""
+    import urllib.request
+    try:
+        payload = json.dumps({"descricao": _prompt_capa(video), "marca": MARCA_MENTE_SABIA,
+                              "recipe_key": "dica_unica"}).encode("utf-8")
+        req = urllib.request.Request(f"{PONTE_URL}/api/gerar-imagem", data=payload,
+                                     headers={"Content-Type": "application/json"}, method="POST")
+        with urllib.request.urlopen(req, timeout=280) as resp:
+            res = json.loads(resp.read().decode("utf-8"))
+        if not res.get("ok") or not res.get("image_url"):
+            raise RuntimeError("a ponte não devolveu imagem")
+        os.makedirs(CAPAS_DIR, exist_ok=True)
+        destino = os.path.join(CAPAS_DIR, f"{codigo}.png")
+        with urllib.request.urlopen(f"{PONTE_URL}{res['image_url']}", timeout=60) as img:
+            with open(destino, "wb") as f:
+                f.write(img.read())
+        grava_decisao(f"capa_{codigo}", "aguardando_diretor")
+        _CAPAS_EM_CURSO.pop(codigo, None)
+    except Exception as e:  # noqa: BLE001 — o erro vira estado visível, nunca silêncio
+        _CAPAS_EM_CURSO[codigo] = f"erro: {e}"
+
+
+@app.post("/api/capas/gerar/{codigo}")
+def gerar_capa(codigo: str, request: Request, _=Depends(require_auth)):
+    """Dispara o desenho da capa em segundo plano (a ponte leva ~1-2 min)."""
+    import threading
+
+    if _CAPAS_EM_CURSO.get(codigo) == "desenhando":
+        return {"ok": True, "status": "desenhando"}
+    pipe = carrega_pipeline()
+    video = next((v for v in pipe.get("videos", []) if v.get("codigo") == codigo), None)
+    if not video:
+        raise HTTPException(status_code=404, detail="Vídeo não está na fila")
+    _CAPAS_EM_CURSO[codigo] = "desenhando"
+    threading.Thread(target=_job_capa, args=(codigo, video), daemon=True).start()
+    return {"ok": True, "status": "desenhando"}
 
 
 # ── Frontend ─────────────────────────────────────────────────────────────────
@@ -142,3 +225,11 @@ def kit(arquivo: str):
     if not os.path.isfile(caminho):
         raise HTTPException(status_code=404, detail="não existe")
     return FileResponse(caminho)
+
+
+@app.get("/capas/{arquivo}")
+def capa(arquivo: str):
+    caminho = os.path.join(FRONT, "capas", os.path.basename(arquivo))
+    if not os.path.isfile(caminho):
+        raise HTTPException(status_code=404, detail="não existe")
+    return FileResponse(caminho, headers={"Cache-Control": "no-cache"})

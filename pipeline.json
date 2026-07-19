@@ -1,0 +1,46 @@
+{
+ "atualizado_em": "2026-07-16",
+ "nota": "Fila REAL de produção. RÉGUA DO DIRETOR (16/07): somente vídeos para YouTube com 5 a 30 minutos. Status: ideia | roteiro | producao | embalagem | aprovacao | publicado | arquivado",
+ "videos": [
+  {
+   "codigo": "video-02",
+   "titulo_trabalho": "As 5 Leis da Mentalidade Vencedora",
+   "titulo_youtube": "APRENDA AS 5 LEIS QUE REPROGRAMAM SUA MENTE | Napoleon Hill",
+   "descricao_seo": "Aprenda as 5 leis que reprogramam sua mente para a mentalidade vencedora — o método que Napoleon Hill ensinou e que a psicologia moderna confirma.\nNeste vídeo você descobre como treinar sua mente para vencer: as 5 leis explicadas de forma prática, com passos para aplicar hoje mesmo.\n\n🧠 Se este vídeo te ajudar, se inscreva — toda semana um novo ensinamento para destravar o poder da sua mente.\n\nMúsica: \"Inspired\" — Kevin MacLeod (incompetech.com) · Licença CC BY 4.0 · creativecommons.org/licenses/by/4.0/\n\nCAPÍTULOS\n0:00 O que separa os vencedores\n0:35 O sucesso deixa pistas\n1:08 Lei 1 — Responsabilidade total\n1:50 Lei 2 — Disciplina vence motivação\n2:30 Lei 3 — O ambiente é mais forte\n3:10 Lei 4 — Pague o preço primeiro\n3:51 Lei 5 — Aja com medo\n4:32 Três passos para hoje\n5:12 Você já é um deles\n\n#mentalidade #napoleonhill #poderdamente",
+   "status": "publicado",
+   "duracao_alvo": "5-30min",
+   "duracao_real": "5min37s",
+   "palavras_capa": "AS 5 LEIS",
+   "subtitulo_capa": "DA MENTALIDADE VENCEDORA",
+   "pasta": "E:\\youtuber-opoderdamentesabia\\video-02",
+   "nota": "NO AR desde 17/07 10:00 (youtu.be/zkVylQ4cXak). 1o video longo do canal. Legendas + capitulos ativos. Pesquisador mede as primeiras 24h.",
+   "publicar_em": "2026-07-17 10:00",
+   "youtube_id": "zkVylQ4cXak",
+   "publicado_em": "2026-07-17 10:00"
+  },
+  {
+   "codigo": "video-03",
+   "titulo_trabalho": "Aja Como Se Nada Pudesse Te Abalar",
+   "titulo_youtube": "AJA COMO SE NADA PUDESSE TE ABALAR | Napoleon Hill",
+   "descricao_seo": "Napoleon Hill passou a vida estudando pessoas inabaláveis — e descobriu que elas não sentem menos medo que você. Elas fazem UMA coisa nos 3 segundos antes de o medo tomar conta.\n\nNeste vídeo você aprende os 3 gestos que cabem em 3 segundos e mudam quem entra na sala: POSTURA, RESPIRAÇÃO e RESPOSTA ESCOLHIDA. Não é fingir coragem — é dar a ordem pela única porta que o cérebro escuta: o corpo. A postura vem antes do sentimento.\n\n🧠 Se este vídeo te destravou, se inscreve — toda semana um novo ensinamento pra fortalecer a sua mente.\n\nCAPÍTULOS\n0:00 O medo trava você antes de pensar\n0:33 Por que \"se acalma\" nunca funciona\n1:27 Seu corpo fabrica o medo\n2:00 A postura vem antes do sentimento\n2:28 O freio que desliga o alarme\n3:00 O homem parado diante da porta\n3:36 Gesto 1 — Postura\n4:13 Gesto 2 — Respiração\n4:45 Gesto 3 — Resposta escolhida\n5:18 Os 3 segundos, na ordem certa\n5:52 Isso não é fingir\n6:25 A próxima vez que a vida bater\n7:28 Encena até virar você\n\nMúsica: \"Inspired\" — Kevin MacLeod (incompetech.com) · Licença CC BY 4.0 · creativecommons.org/licenses/by/4.0/\n\n#napoleonhill #mentalidade #inteligenciaemocional #autocontrole #poderdamente #estoicismo #controleemocional #desenvolvimentopessoal",
+   "status": "aprovado",
+   "duracao_alvo": "5-30min",
+   "duracao_real": "7min53s",
+   "palavras_capa": "INABALÁVEL",
+   "subtitulo_capa": "NAPOLEON HILL",
+   "capa_url": "/capas/video-03.png",
+   "pasta": "E:\\youtuber-opoderdamentesabia\u000bideo-03",
+   "nota": "Aprovado pelo Diretor 17/07 — agendado para 18/07 08:00 (Brasilia).",
+   "publicar_em": "2026-07-18 08:00"
+  }
+ ],
+ "arquivados": [
+  {
+   "codigo": "video-01",
+   "titulo_trabalho": "O Poder do Silêncio",
+   "status": "arquivado",
+   "motivo": "4min05 — fora da régua do Diretor (mínimo 5min). Material bom: pode ser esticado/refeito depois usando as cenas prontas.",
+   "pasta": "E:\\youtuber-opoderdamentesabia\\video-01"
+  }
+ ]
+}

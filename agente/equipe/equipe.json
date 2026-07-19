@@ -1,0 +1,97 @@
+{
+  "atualizado_em": "2026-07-17",
+  "nota": "O time do Agente Gerente YouTube (ditado pelo Diretor + 3 papéis que faltavam, avisados). Estado honesto por membro. | Disparador criado 17/07 (divulgação em grupos do nicho).",
+  "membros": [
+    {
+      "papel": "Pesquisador",
+      "ico": "🔬",
+      "faz": "regra viva semanal + crivo total de tudo",
+      "estado": "no ar",
+      "origem": "já existia"
+    },
+    {
+      "papel": "Roteirista A · Contador de Histórias",
+      "ico": "📖",
+      "faz": "roteiro com emoção e narrativa",
+      "estado": "definido — roda via ponte",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Roteirista B · Professor",
+      "ico": "🎓",
+      "faz": "roteiro didático com ciência simples",
+      "estado": "definido — roda via ponte",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Roteirista C · Retórico do Parâmetro",
+      "ico": "🎯",
+      "faz": "roteiro de retenção máxima (ganchos, loops, CTAs)",
+      "estado": "definido — roda via ponte",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Sintetizador",
+      "ico": "⚖",
+      "faz": "junta os 3 e monta o melhor roteiro único",
+      "estado": "definido — roda via ponte",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Narrador",
+      "ico": "🎙",
+      "faz": "voz humanizada (Sterling/edge-tts)",
+      "estado": "provado nos vídeos 01/02",
+      "origem": "FALTAVA — avisado"
+    },
+    {
+      "papel": "Elaborador Visual",
+      "ico": "🎨",
+      "faz": "imagens + microvídeos simbólicos (ChatGPT → Sora) + motions",
+      "estado": "imagem no ar · Sora em construção",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Compositor de Áudio",
+      "ico": "🎵",
+      "faz": "trilha real + mix medido (voz ≥18dB acima)",
+      "estado": "provado na v3",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Legendador",
+      "ico": "💬",
+      "faz": "SRT sincronizado + queima no estilo da marca",
+      "estado": "provado nos vídeos 01/02",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Editor",
+      "ico": "🎬",
+      "faz": "montagem: mistura, ritmo 4-8s, P&B, 1080p",
+      "estado": "provado na v3",
+      "origem": "Diretor"
+    },
+    {
+      "papel": "Embalador",
+      "ico": "📦",
+      "faz": "título pelo parâmetro + capa 3D + SEO",
+      "estado": "capa e título no ar",
+      "origem": "FALTAVA — avisado"
+    },
+    {
+      "papel": "Publicador",
+      "ico": "🚀",
+      "faz": "sobe via navegador como humano, só com portão 100%",
+      "estado": "aguarda login do Diretor (1x)",
+      "origem": "FALTAVA — avisado"
+    },
+    {
+      "papel": "Disparador",
+      "ico": "📣",
+      "faz": "leva os vídeos aos grupos do nicho (WhatsApp/Telegram/Facebook) — valor antes do link, nunca sem carimbo",
+      "estado": "em formação",
+      "origem": "ordem do Diretor 17/07"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "nota": "Mensagens de UMA FRASE com o link (ordem do Diretor 17/07). Rodar em ordem variada, nunca a mesma duas vezes seguidas; cada frase carrega um insight do vídeo antes do link.",
+  "formato": "uma_frase_com_link",
+  "video": "video-02",
+  "titulo_video": "APRENDA AS 5 LEIS QUE REPROGRAMAM SUA MENTE | Napoleon Hill",
+  "link": "https://youtu.be/zkVylQ4cXak",
+  "mensagens": [
+    {"titulo": "Motivação depois da ação", "tom": "curta",
+     "texto": "A motivação vem DEPOIS da ação, não antes — é uma das 5 leis nesse vídeo de 5 min do nosso canal: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "Ambiente vence vontade", "tom": "curta",
+     "texto": "Seu ambiente é mais forte que sua força de vontade, e esse vídeo curtinho mostra por quê: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "Disciplina vence motivação", "tom": "curta",
+     "texto": "Disciplina vence motivação porque emoção vai embora e sistema fica — as 5 leis em 5 minutos: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "Preço primeiro", "tom": "curta",
+     "texto": "A vida cobra adiantado: primeiro o preço, depois o prêmio — vídeo rápido sobre isso: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "Responsabilidade total", "tom": "curta",
+     "texto": "Responsabilidade total não é se punir, é pegar o volante de volta: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "Aja com medo", "tom": "curta",
+     "texto": "A coragem nasce durante o movimento, não antes — por isso a lei é: aja com medo mesmo: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "As 5 leis (direto)", "tom": "curta",
+     "texto": "As 5 leis do Napoleon Hill que reprogramam a mente, resumidas em 5 minutos: https://youtu.be/zkVylQ4cXak"},
+    {"titulo": "O sucesso deixa pistas", "tom": "curta",
+     "texto": "O sucesso deixa pistas, e a gente juntou as 5 leis da mentalidade vencedora aqui: https://youtu.be/zkVylQ4cXak"}
+  ]
+}

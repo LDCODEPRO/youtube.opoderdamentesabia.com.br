@@ -1,0 +1,10 @@
+{
+  "papel": "Disparador",
+  "ico": "📣",
+  "faz": "leva os vídeos aos grupos do nicho (WhatsApp/Telegram/Facebook) com mensagem de valor — sem spam, sem disparo sem carimbo",
+  "entrada": "vídeo publicado (link + insight)",
+  "saida": "disparos registrados no diário de campanha",
+  "portao": "fila_disparo.json só executa com aprovação do Diretor (por leva)",
+  "criado_em": "2026-07-17",
+  "estado": "em formação — braço de disparo a construir com o Diretor"
+}

@@ -1,0 +1,204 @@
+{
+  "nota": "Catalogo de grupos publicos do nicho achados em diretorios publicos 17/07/2026. NADA de link inventado. ANTES de usar: entrar, ler regras, so divulgar onde permite. permite_divulgacao='verificar' = conferir na hora. Link nao garante que o grupo aceita divulgacao.",
+  "coletado_em": "2026-07-17",
+  "total": 24,
+  "por_plataforma": {
+    "whatsapp": 6,
+    "telegram": 12,
+    "facebook": 6
+  },
+  "grupos": [
+    {
+      "nome": "Empreenda100Dor",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/C9XbxbsEmCS4jBhEMbHJcq",
+      "tema": "Mentalidade empreendedora / como começar um negócio",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Disciplina para Novos Hábitos",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/LLICZRDW3cvG3TyV8SScoV",
+      "tema": "Disciplina e construção de novos hábitos",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Produtividade",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/G8Gv0E75YN5AjT3N5V6UZR",
+      "tema": "Produtividade e desenvolvimento pessoal",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Motivação",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/F12quvueTsQDejfgDXiKK1",
+      "tema": "Motivação diária / como se manter motivado",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Desenvolvimento Pessoal",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/CVgRZxCgj9s30OpsSBggZN",
+      "tema": "Desenvolvimento pessoal, autoconhecimento e mudança de mentalidade",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Generosidade no Empreendedorismo",
+      "plataforma": "whatsapp",
+      "link": "https://chat.whatsapp.com/FtDkbx1peJpFasjEm74zPP",
+      "tema": "Mentalidade empreendedora / empreendedorismo",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://blogdojordao.com/2022/10/24/50-grupos-de-whatsapp-que-vao-ajudar-voce-a-viver-melhor-e-vender-mais/"
+    },
+    {
+      "nome": "Palavra Que Transforma",
+      "plataforma": "telegram",
+      "link": "https://t.me/palavras_que_transforma",
+      "tema": "Motivação e reflexões que transformam",
+      "permite_divulgacao": "verificar nas regras do grupo (diretório declara politica geral de nao enviar links)",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/17705)"
+    },
+    {
+      "nome": "Grupo de Conselhos",
+      "plataforma": "telegram",
+      "link": "https://t.me/conselhosamigaveis",
+      "tema": "Conselhos, autoajuda e crescimento pessoal",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/17696)"
+    },
+    {
+      "nome": "Reflexoes e Conselhos",
+      "plataforma": "telegram",
+      "link": "https://t.me/reflexao_357",
+      "tema": "Reflexoes e motivacao",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/14458)"
+    },
+    {
+      "nome": "News SHD: Seja Hoje Diferente",
+      "plataforma": "telegram",
+      "link": "https://t.me/canalSHD",
+      "tema": "Desenvolvimento pessoal e motivacao (Seja Hoje Diferente)",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/13835)"
+    },
+    {
+      "nome": "Manual dos Homens de Sucesso",
+      "plataforma": "telegram",
+      "link": "https://t.me/HomensdeSucesso",
+      "tema": "Mentalidade de sucesso e desenvolvimento masculino",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/12482)"
+    },
+    {
+      "nome": "Lei da Atracao",
+      "plataforma": "telegram",
+      "link": "https://t.me/leidaatracaodiaria",
+      "tema": "Lei da atracao / mentalidade positiva",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/11086)"
+    },
+    {
+      "nome": "7 Taticas Para Reconquistar o Controle da Sua Vida",
+      "plataforma": "telegram",
+      "link": "https://t.me/taticaspararesconquistarsuavida",
+      "tema": "Desenvolvimento pessoal, disciplina e foco",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/10545)"
+    },
+    {
+      "nome": "Desenvolvimento Pessoal (top)",
+      "plataforma": "telegram",
+      "link": "https://t.me/DesenvolvimentoPessoaltop",
+      "tema": "Desenvolvimento pessoal",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://meusgrupos.com/grupo/3818/desenvolvimento-pessoal (redirect meusgrupos.com/entrar-no-grupo/3818)"
+    },
+    {
+      "nome": "Mulher Ambiciosa",
+      "plataforma": "telegram",
+      "link": "https://t.me/+q2J8edLGSms0Yjgx",
+      "tema": "Mentalidade e ambicao feminina / empreendedorismo",
+      "permite_divulgacao": "verificar nas regras do grupo (link de convite privado)",
+      "fonte": "https://meusgrupos.com/categoria/motivacao-autoajuda (redirect meusgrupos.com/entrar-no-grupo/16913)"
+    },
+    {
+      "nome": "Ela Escreve",
+      "plataforma": "telegram",
+      "link": "https://t.me/Ela_escreve",
+      "tema": "Frases, escritas e motivacao",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://t.me/s/canaisegrupos"
+    },
+    {
+      "nome": "Cafe com Pimenta",
+      "plataforma": "telegram",
+      "link": "https://t.me/cafecompimenta",
+      "tema": "Reflexao pessoal e conteudo motivacional",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://t.me/s/canaisegrupos"
+    },
+    {
+      "nome": "Mulher Empoderada",
+      "plataforma": "telegram",
+      "link": "https://t.me/mulherempoderada_1",
+      "tema": "Empoderamento, resiliencia e motivacao",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "https://t.me/s/canaisegrupos"
+    },
+    {
+      "nome": "Desenvolvimento Pessoal",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/188926581447711/",
+      "tema": "Desenvolvimento pessoal",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    },
+    {
+      "nome": "Clube do Livro para Desenvolvimento Pessoal",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/256612378795239/",
+      "tema": "Leitura e desenvolvimento pessoal",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    },
+    {
+      "nome": "Biblioteca Desenvolvimento Pessoal: O Poder da Mente",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/527155125090529/",
+      "tema": "Desenvolvimento pessoal e poder da mente",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    },
+    {
+      "nome": "Desenvolvimento Pessoal",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/688678757824909/",
+      "tema": "Desenvolvimento pessoal e autoajuda",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    },
+    {
+      "nome": "Empreendedorismo no Brasil",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/empreendedorismonobrasil.divulgueprodutoseservicos/",
+      "tema": "Empreendedorismo e divulgacao de produtos/servicos",
+      "permite_divulgacao": "o nome/descricao do grupo indica divulgacao permitida; confirmar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    },
+    {
+      "nome": "EMPREENDEDORES DO BRASIL",
+      "plataforma": "facebook",
+      "link": "https://www.facebook.com/groups/EMPDOBRASIL/",
+      "tema": "Empreendedorismo e mentalidade empreendedora",
+      "permite_divulgacao": "verificar nas regras do grupo",
+      "fonte": "Pesquisa Google (grupo publico indexado do Facebook)"
+    }
+  ]
+}

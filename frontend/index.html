@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<title>Estúdio · O Poder da Mente Sábia</title>
+<style>
+/* ═══════════ CROMO CÓSMICO — design system (PROMPT_MESTRE §1) ═══════════ */
+:root{
+  --bg-0:#05060A; --bg-1:#090C10;
+  --card-bg:linear-gradient(160deg, rgba(18,22,32,.92) 0%, rgba(9,12,16,.96) 100%);
+  --card-border:rgba(201,205,216,.10);
+  --card-border-hover:rgba(215,230,255,.28);
+  --glow-soft:0 0 0 1px rgba(215,230,255,.04), 0 8px 28px rgba(0,0,0,.55), 0 0 22px rgba(215,230,255,.05);
+  --glow-hover:0 0 0 1px rgba(215,230,255,.10), 0 10px 34px rgba(0,0,0,.6), 0 0 34px rgba(215,230,255,.12);
+  --glow-hero:0 0 60px rgba(215,230,255,.10), inset 0 1px 0 rgba(240,243,250,.08);
+  --prata-1:#F0F3FA; --prata-2:#C9CDD8; --prata-3:#8A93A6; --prata-4:#5A6274;
+  --cromo:linear-gradient(180deg,#F6F8FE 0%,#C9CDD8 42%,#7E8798 54%,#E8ECF6 78%,#AEB6C6 100%);
+  --ok:#2EE6A8; --warn:#FFA53D; --bad:#FF5D5D; --cy:#8FB8D9;
+  --ok-bg:rgba(46,230,168,.10); --warn-bg:rgba(255,165,61,.10); --bad-bg:rgba(255,93,93,.10);
+  --r-card:14px; --r-inner:10px;
+  --scr:215,230,255;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--bg-0)}
+body{margin:0;font:400 13px/1.45 Inter,system-ui,sans-serif;color:var(--prata-2);min-height:100vh;
+  background:
+    radial-gradient(1px 1px at 12% 20%, rgba(var(--scr),.5), transparent 100%),
+    radial-gradient(1px 1px at 78% 10%, rgba(var(--scr),.4), transparent 100%),
+    radial-gradient(1px 1px at 38% 60%, rgba(var(--scr),.3), transparent 100%),
+    radial-gradient(1px 1px at 88% 44%, rgba(var(--scr),.3), transparent 100%),
+    radial-gradient(1px 1px at 56% 86%, rgba(var(--scr),.35), transparent 100%),
+    radial-gradient(1200px 600px at 50% -10%, #0B0F18 0%, #05060A 55%);}
+h1{font:600 22px Orbitron,Inter,sans-serif;letter-spacing:.04em;color:var(--prata-1);margin:0}
+h2{font:600 15px Inter,sans-serif;color:var(--prata-1);margin:0 0 4px}
+.n-cromo{font-family:Rajdhani,Inter,sans-serif;font-weight:700;font-variant-numeric:tabular-nums;
+  background:var(--cromo);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 12px rgba(var(--scr),.25))}
+.n-hero{font-size:40px;line-height:1}.n-stat{font-size:32px;line-height:1}.n-mini{font-size:22px;line-height:1}
+.lbl{font:600 11px Inter;letter-spacing:.08em;text-transform:uppercase;color:var(--prata-3)}
+.micro{font-size:11px;color:var(--prata-4)}
+.sub{color:var(--prata-3);font-size:13px;margin:2px 0 0;max-width:78ch}
+a{color:var(--cy);text-decoration:none}
+
+/* card base */
+.card{position:relative;border-radius:var(--r-card);padding:14px;background:var(--card-bg);
+  border:1px solid var(--card-border);box-shadow:var(--glow-soft);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.card:hover{border-color:var(--card-border-hover);box-shadow:var(--glow-hover)}
+.card.hero{box-shadow:var(--glow-hero);border-color:rgba(var(--scr),.18)}
+.card.clic{cursor:pointer}
+.card.clic:hover{transform:translateY(-2px)}
+.grid{display:grid;gap:14px}
+.gA{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.gB{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.gC{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.gD{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.g66{grid-template-columns:1fr 1fr}
+@media (max-width:760px){.g66{grid-template-columns:1fr}}
+.sec{margin-top:28px}
+.sec>.titulo{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.sec>.titulo h2{font-size:14px;letter-spacing:.02em}
+.sec>.titulo .lbl{font-size:10px}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;
+  font:600 11px Inter;border:1px solid rgba(201,205,216,.16);color:var(--prata-2);background:rgba(201,205,216,.05)}
+.pill.ok{color:var(--ok);border-color:rgba(46,230,168,.4);background:var(--ok-bg)}
+.pill.warn{color:var(--warn);border-color:rgba(255,165,61,.45);background:var(--warn-bg)}
+.pill.bad{color:var(--bad);border-color:rgba(255,93,93,.45);background:var(--bad-bg)}
+.pill.neutra{color:var(--prata-3)}
+.pill.mini{padding:2px 7px;font-size:10px}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.dot.ok{background:var(--ok);box-shadow:0 0 8px rgba(46,230,168,.7)}
+.dot.warn{background:var(--warn)}.dot.bad{background:var(--bad)}
+.dot.pulsa{animation:pulsa 1.6s ease infinite}
+@keyframes pulsa{50%{opacity:.35}}
+
+/* barras / anéis / sparkline */
+.trilho{height:10px;border-radius:999px;background:rgba(201,205,216,.10);overflow:hidden;position:relative}
+.trilho>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8A93A6,#F0F3FA);
+  box-shadow:0 0 12px rgba(var(--scr),.35);transition:width .9s ease;position:relative;overflow:hidden}
+.trilho.vivo>i::after{content:"";position:absolute;inset:0;transform:translateX(-100%);
+  background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);animation:varre 2.2s linear infinite}
+@keyframes varre{to{transform:translateX(100%)}}
+.trilho.grosso{height:20px}
+.trilho .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font:700 11px Rajdhani;color:#0A0F16;text-shadow:0 0 6px rgba(255,255,255,.4)}
+.anel{--p:0;--tam:96px;width:var(--tam);height:var(--tam);border-radius:50%;flex:none;position:relative;
+  background:conic-gradient(#F0F3FA calc(var(--p)*1%), rgba(201,205,216,.08) 0);box-shadow:0 0 24px rgba(var(--scr),.18)}
+.anel::before{content:"";position:absolute;inset:9px;border-radius:50%;background:#0B0E15}
+.anel>b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font:700 20px Rajdhani;color:var(--prata-1)}
+.anel.ok{background:conic-gradient(var(--ok) calc(var(--p)*1%), rgba(201,205,216,.08) 0)}
+svg.spark{display:block;width:100%;height:56px}
+svg.spark .area{fill:url(#gspark);opacity:.35}
+svg.spark .linha{fill:none;stroke:#C9CDD8;stroke-width:1.6}
+svg.spark .fim{fill:#F0F3FA}
+
+/* skeleton / toast / popover / modal */
+.skel{background:linear-gradient(90deg,rgba(201,205,216,.06) 25%,rgba(201,205,216,.14) 50%,rgba(201,205,216,.06) 75%);
+  background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:var(--r-inner);color:transparent!important}
+@keyframes shimmer{to{background-position:-200% 0}}
+#toasts{position:fixed;right:16px;bottom:16px;z-index:99;display:flex;flex-direction:column;gap:8px}
+.toast{padding:10px 14px;border-radius:12px;background:#12161FEE;border:1px solid rgba(201,205,216,.2);
+  font-size:12px;color:var(--prata-1);box-shadow:0 10px 30px rgba(0,0,0,.6);animation:sobe .25s ease}
+.toast.ok{border-color:rgba(46,230,168,.5)}.toast.bad{border-color:rgba(255,93,93,.5)}
+@keyframes sobe{from{opacity:0;transform:translateY(8px)}}
+.overlay{position:fixed;inset:0;z-index:80;background:rgba(5,6,10,.88);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:18px}
+.overlay .caixa{max-width:900px;width:100%;border-radius:16px;padding:16px;background:var(--card-bg);
+  border:1px solid rgba(var(--scr),.3);box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.overlay video{width:100%;border-radius:12px;background:#000}
+input[type=text],textarea{width:100%;padding:9px 12px;border-radius:9px;font:400 12px Inter;color:var(--prata-1);
+  background:rgba(255,255,255,.05);border:1px solid rgba(var(--scr),.2);outline:none}
+input[type=text]:focus,textarea:focus{border-color:rgba(var(--scr),.5);box-shadow:0 0 0 3px rgba(var(--scr),.1)}
+input[type=password]{width:100%;padding:12px 14px;border-radius:10px;font-size:14px;color:var(--prata-1);
+  background:rgba(255,255,255,.05);border:1px solid rgba(var(--scr),.25);outline:none}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;gap:6px;font:700 11px Inter;letter-spacing:.06em;text-transform:uppercase;
+  color:#0A0F16;background:var(--cromo);border:0;border-radius:10px;padding:9px 16px;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.25), 0 5px 16px rgba(var(--scr),.22);
+  transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:default;transform:none}
+.btn.ok{background:linear-gradient(180deg,#7FF5CC,#2EE6A8);box-shadow:0 5px 16px rgba(46,230,168,.3)}
+.btn.no{background:none;color:var(--bad);border:1px solid rgba(255,93,93,.4);box-shadow:none}
+.btn.ghost{background:none;color:var(--prata-3);border:1px solid rgba(var(--scr),.22);box-shadow:none}
+.acoes{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+
+/* esteira da capa & stepper */
+.esteira{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.esteira .et{display:flex;gap:5px;align-items:center;font:600 10px Inter;letter-spacing:.05em;text-transform:uppercase;color:var(--prata-4)}
+.esteira .et::before{content:"";width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.12)}
+.esteira .et.feito{color:var(--prata-3)}.esteira .et.feito::before{background:var(--ok);box-shadow:0 0 8px rgba(46,230,168,.6)}
+.esteira .et.agora{color:var(--prata-1)}.esteira .et.agora::before{background:var(--prata-1);box-shadow:0 0 10px rgba(var(--scr),.9);animation:pulsa 1.4s ease infinite}
+.stepper{display:flex;gap:5px;margin-top:8px}
+.stepper i{flex:1;height:6px;border-radius:3px;background:rgba(201,205,216,.12)}
+.stepper i.feito{background:#C9CDD8;box-shadow:0 0 8px rgba(var(--scr),.4)}
+.stepper i.agora{background:var(--prata-1);animation:pulsa 1.4s ease infinite}
+
+/* thumbs */
+.thumb{position:relative;aspect-ratio:16/9;border-radius:var(--r-inner);overflow:hidden;display:block;
+  background:#0A0D14 center/cover no-repeat;border:1px solid rgba(var(--scr),.14)}
+.thumb .tag{position:absolute;top:6px;left:6px}
+.thumb .tag2{position:absolute;bottom:6px;right:6px}
+.thumb .ovl{position:absolute;left:0;right:0;bottom:0;padding:20px 8px 6px;display:flex;gap:8px;align-items:flex-end;
+  background:linear-gradient(180deg,transparent,rgba(3,4,8,.9))}
+.thumb .ovl b{color:#fff;font:700 14px Rajdhani}
+
+/* ═══════════ SHELL ═══════════ */
+.layout{display:flex;min-height:100vh}
+.side{width:232px;flex:none;position:sticky;top:0;height:100vh;overflow-y:auto;padding:18px 12px 14px;
+  display:flex;flex-direction:column;border-right:1px solid rgba(var(--scr),.10);
+  background:linear-gradient(180deg,rgba(13,16,23,.96),rgba(7,9,15,.98))}
+.marca{display:flex;gap:10px;align-items:center;margin:0 6px 16px}
+.marca img{width:42px;height:42px;border-radius:50%;object-fit:cover;transform:scale(1.0);
+  border:1px solid rgba(var(--scr),.35);box-shadow:0 0 22px rgba(var(--scr),.3)}
+.marca b{font:600 12px Orbitron;color:var(--prata-1);line-height:1.25;display:block;letter-spacing:.03em}
+.marca span{font:600 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--prata-4)}
+.menu{display:flex;flex-direction:column;gap:2px}
+.menu .cap{font:700 9px Inter;letter-spacing:.16em;text-transform:uppercase;margin:12px 10px 4px;
+  background:var(--cromo);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.8}
+.menu a{position:relative;display:flex;gap:9px;align-items:center;padding:9px 11px;border-radius:10px;
+  color:var(--prata-3);font:500 13px Inter;border:1px solid transparent;transition:all .15s ease}
+.menu a:hover{color:var(--prata-1);background:rgba(var(--scr),.05)}
+.menu a.ativo{color:var(--prata-1);background:rgba(var(--scr),.08);border-color:rgba(var(--scr),.22);
+  box-shadow:0 0 16px rgba(var(--scr),.08)}
+.menu a.ativo::before{content:"";position:absolute;left:-12px;top:8px;bottom:8px;width:3px;border-radius:2px;
+  background:linear-gradient(180deg,var(--prata-1),transparent);box-shadow:0 0 10px rgba(var(--scr),.8)}
+.menu .badge{margin-left:auto;min-width:18px;height:18px;border-radius:9px;background:var(--warn-bg);
+  border:1px solid rgba(255,165,61,.5);color:var(--warn);font:700 10px Rajdhani;
+  display:flex;align-items:center;justify-content:center;padding:0 5px;box-shadow:0 0 10px rgba(255,165,61,.25)}
+.side .rodape{margin-top:auto;padding-top:14px;border-top:1px solid rgba(var(--scr),.08);display:flex;flex-direction:column;gap:8px}
+.vivo{display:flex;gap:7px;align-items:center;font:600 10px Inter;letter-spacing:.08em;text-transform:uppercase;color:var(--ok)}
+.vivo.off{color:var(--warn)}
+.conteudo{flex:1;min-width:0;padding:26px 32px 90px;width:100%;max-width:1440px;margin:0 auto}
+.cab{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.cab .pill{margin-left:auto}
+.view{display:none}
+.view.ativa{display:block;animation:aparece .3s ease}
+@keyframes aparece{from{opacity:0;transform:translateY(8px)}}
+
+/* login */
+#telaLogin{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.loginCard{width:min(380px,92vw);text-align:center;padding:36px 28px;border-radius:18px;background:var(--card-bg);
+  border:1px solid rgba(var(--scr),.28);box-shadow:var(--glow-hero)}
+.loginCard img{width:92px;height:92px;border-radius:50%;object-fit:cover;margin-bottom:12px;
+  border:1px solid rgba(var(--scr),.4);box-shadow:0 0 34px rgba(var(--scr),.35);animation:logoGlow 3.4s ease-in-out infinite}
+@keyframes logoGlow{0%,100%{box-shadow:0 0 22px rgba(var(--scr),.3)}50%{box-shadow:0 0 44px rgba(var(--scr),.55)}}
+#erroLogin{color:var(--bad);font-size:12px;min-height:1.2em;margin:6px 0 0}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+.hide{display:none!important}
+
+/* prodHero (Início §3.4 e Fábrica §4.1) */
+.prodHero{display:grid;grid-template-columns:minmax(240px,420px) 1fr;gap:18px;align-items:center}
+@media (max-width:900px){.prodHero{grid-template-columns:1fr}}
+.letreiro{background:#07090F;border:1px solid rgba(var(--scr),.12);border-radius:10px;padding:10px 12px;
+  font:500 11px "Cascadia Mono",Consolas,monospace;color:var(--prata-3);max-height:150px;overflow:hidden}
+.letreiro div:first-child{color:var(--prata-1)}
+
+/* organograma equipe */
+.fluxo{display:flex;gap:8px;align-items:stretch;overflow-x:auto;padding:6px 2px}
+.estacao{flex:1;min-width:150px;border:1px solid rgba(var(--scr),.12);border-radius:12px;padding:10px;background:rgba(9,12,16,.6)}
+.estacao .cap{font:700 9px Inter;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--cromo);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px;display:block}
+.no{display:flex;gap:7px;align-items:center;padding:5px 7px;border-radius:9px;cursor:pointer;font-size:12px;color:var(--prata-2)}
+.no:hover{background:rgba(var(--scr),.06)}
+.no .ic{font-size:17px}
+.seta{align-self:center;color:var(--prata-4);font-size:16px;flex:none;
+  background:var(--cromo);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (max-width:880px){
+  .layout{flex-direction:column}
+  .side{width:100%;height:auto;position:static}
+  .menu{flex-direction:row;flex-wrap:wrap}
+  .menu .cap{display:none}
+  .side .rodape{flex-direction:row;align-items:center;justify-content:space-between}
+  .conteudo{padding:16px 14px 70px}
+  .fluxo{flex-direction:column}
+  .seta{transform:rotate(90deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .trilho.vivo>i::after,.dot.pulsa,.stepper i.agora,.loginCard img{animation:none}
+  .card,.btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ════ LOGIN ════ -->
+<div id="telaLogin">
+  <div class="loginCard">
+    <img src="logo.png" alt="O Poder da Mente Sábia">
+    <h1 style="font-size:16px">O PODER DA MENTE SÁBIA</h1>
+    <div class="lbl" style="margin:6px 0 18px">Estúdio YouTube · acesso do Diretor</div>
+    <input type="password" id="inSenha" placeholder="Senha do Diretor" autocomplete="current-password">
+    <div id="erroLogin"></div>
+    <button class="btn" id="btEntrar" style="width:100%;justify-content:center;margin-top:12px">Entrar no Estúdio</button>
+  </div>
+</div>
+
+<!-- ════ APP ════ -->
+<div id="app" class="layout hide">
+<aside class="side">
+  <div class="marca">
+    <img src="logo.png" alt="">
+    <div><b>MENTE SÁBIA</b><span>Estúdio YouTube</span></div>
+  </div>
+  <nav class="menu" id="menu">
+    <div class="cap">Comando</div>
+    <a href="#/inicio" data-v="inicio">🏠 Início <span class="badge hide" id="bgInicio"></span></a>
+    <a href="#/fabrica" data-v="fabrica">🎬 Fábrica <span class="badge hide" id="bgFabrica"></span></a>
+    <a href="#/cofre" data-v="cofre">🗝️ Repositório <span class="badge hide" id="bgCofre"></span></a>
+    <div class="cap">Inteligência</div>
+    <a href="#/pesquisador" data-v="pesquisador">🔬 Pesquisador <span class="badge hide" id="bgPesq"></span></a>
+    <a href="#/receita" data-v="receita">📜 A Receita</a>
+    <a href="#/ideias" data-v="ideias">💡 Ideias <span class="badge hide" id="bgIdeias"></span></a>
+    <a href="#/estudo" data-v="estudo">📖 O Estudo</a>
+    <div class="cap">Alcance</div>
+    <a href="#/disparador" data-v="disparador">📣 Disparador <span class="badge hide" id="bgDisp"></span></a>
+    <div class="cap">Acervo</div>
+    <a href="#/biblioteca" data-v="biblioteca">🗄️ Biblioteca</a>
+    <a href="#/equipe" data-v="equipe">🤖 Equipe</a>
+  </nav>
+  <div class="rodape">
+    <div class="vivo" id="stVivo"><span class="dot ok pulsa"></span> ESTÚDIO NO AR</div>
+    <div class="micro" id="stColeta">—</div>
+    <button class="btn ghost" id="btSair" style="padding:6px 12px">Sair</button>
+  </div>
+</aside>
+
+<main class="conteudo">
+
+<!-- ════ 1 · INÍCIO ════ -->
+<section class="view" id="v-inicio">
+  <div class="cab">
+    <h1>Bom dia, Diretor.</h1>
+    <span class="pill neutra" id="inicioAgora">—</span>
+  </div>
+  <div class="card hero" id="falaEstudio"><div class="skel" style="height:38px"></div></div>
+
+  <div class="sec"><div class="titulo"><h2>O canal agora</h2><span class="lbl" id="lblColeta"></span></div>
+    <div class="grid gA" id="gMetricas"></div>
+  </div>
+
+  <div class="sec" id="secTarefas"><div class="titulo"><h2>Esperando você</h2><span class="lbl">decisões do Diretor</span></div>
+    <div class="grid gB" id="gTarefas"></div>
+  </div>
+
+  <div class="sec" id="secProd"><div class="titulo"><h2>Na fábrica agora</h2><span class="lbl">produção ao vivo</span></div>
+    <div class="card hero" id="blocoProducao"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Rumo à monetização</h2><span class="lbl">1.000 inscritos · 4.000 horas</span></div>
+    <div class="grid g66">
+      <div class="card" id="cardMeta1"></div>
+      <div class="card" id="cardMeta2"></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Últimos vídeos no ar</h2><a class="micro" href="#/biblioteca">ver a biblioteca completa →</a></div>
+    <div class="grid gB" id="gUltimos"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>As salas do estúdio</h2></div>
+    <div class="grid gD" id="gPortas"></div>
+  </div>
+</section>
+
+<!-- ════ 2 · FÁBRICA ════ -->
+<section class="view" id="v-fabrica">
+  <div class="cab"><h1>🎬 A Fábrica</h1><span class="pill neutra">onde o vídeo nasce</span></div>
+  <p class="sub">Cada vídeo passa pela linha: roteiro → cenas simbólicas → narração → montagem → música medida → crivo do Pesquisador → <b>sua aprovação</b>. Nada pula etapa.</p>
+
+  <div class="sec"><div class="titulo"><h2>Produção ao vivo</h2><span class="lbl" id="fabSinal"></span></div>
+    <div class="card hero" id="fabHero"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>A fila da fábrica</h2><span class="lbl">do rascunho ao ar</span></div>
+    <div class="grid gC" id="gFila"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Bancada de capas</h2><span class="lbl">letras 3D cromadas · crivo automático</span></div>
+    <div class="grid gC" id="gCapas"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>As leis da linha de produção</h2></div>
+    <div class="grid gB">
+      <div class="card"><h2>⏱️ Régua 5–30</h2><p class="sub">Todo vídeo do canal tem entre 5 e 30 minutos. Menos que isso é corte de Instagram — outro mundo, outra fábrica.</p></div>
+      <div class="card"><h2>🎬 O visual CASA com a fala</h2><p class="sub">Pessoas reais na tela por padrão. O símbolo (cérebro girando, cofre, semente) entra só no instante em que a narração fala daquele conceito — nunca enfeite solto.</p></div>
+      <div class="card"><h2>🎵 Música de verdade</h2><p class="sub">Trilha licenciada real, medida: a voz fica no mínimo 18 dB acima da música. Zumbido é reprovado na hora.</p></div>
+      <div class="card"><h2>🔬 Crivo antes do Diretor</h2><p class="sub">Nada chega em você sem passar pela bateria do Pesquisador: duração, qualidade, tremor, som, capa e título — tudo medido, não achado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 3 · COFRE ════ -->
+<section class="view" id="v-cofre">
+  <div class="cab"><h1>🗝️ O Repositório</h1><span class="pill neutra">os prontos + portão da publicação</span></div>
+  <p class="sub">Aqui ficam os vídeos esperando para ser postados (com player — assista quando quiser) e o carimbo de cada decisão sua. Um vídeo só sai daqui para o YouTube quando o portão fecha 100%: crivo completo <b>+</b> seu carimbo amarrado à impressão digital do arquivo (md5). Se o arquivo mudar depois do carimbo, o portão tranca de novo.</p>
+
+  <div class="sec"><div class="titulo"><h2>Como o portão funciona</h2></div>
+    <div class="card">
+      <div class="esteira" style="gap:14px">
+        <span class="et feito">vídeo montado</span><span class="seta">→</span>
+        <span class="et feito">crivo mede tudo</span><span class="seta">→</span>
+        <span class="et feito">Diretor carimba</span><span class="seta">→</span>
+        <span class="et feito">md5 confere</span><span class="seta">→</span>
+        <span class="et agora">portão abre</span>
+      </div>
+      <p class="micro" style="margin-top:10px">O robô nunca publica por conta própria. Sem carimbo + crivo, o botão de publicar nem existe.</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Prontos para publicar</h2><span class="lbl">portão aberto</span></div>
+    <div class="grid gC" id="gProntos"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Carimbos do Diretor</h2><span class="lbl">cada decisão registrada</span></div>
+    <div class="grid gB" id="gDecisoes"></div>
+  </div>
+</section>
+
+<!-- ════ 4 · PESQUISADOR ════ -->
+<section class="view" id="v-pesquisador">
+  <div class="cab"><h1>🔬 O Pesquisador</h1><span class="pill ok" id="pesqQuando">—</span></div>
+  <div class="card hero prodHero">
+    <div style="text-align:center"><span style="font-size:64px">🔬</span></div>
+    <div>
+      <h2>O guardião do que funciona</h2>
+      <p class="sub">Toda <b>segunda-feira às 08:05</b> ele varre o YouTube sozinho: mede os vídeos que estão bombando no nicho, extrai as peças do Parâmetro e refaz o gabarito visual das capas. O resultado vira <b>lei da semana</b> — e todo vídeo, capa e título da fábrica passa pelo crivo dele antes de chegar em você.</p>
+      <div class="acoes"><span class="pill mini" id="pesqTotalAnalisados">—</span><span class="pill mini" id="pesqBuscas">—</span></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>O que está bombando esta semana</h2><span class="lbl">medido, não achado</span>
+    <span style="margin-left:auto;display:flex;gap:6px" id="pesqFiltros"></span></div>
+    <div class="grid gB" id="pesqQuentes"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>O Parâmetro — as 4 peças do viral</h2><span class="lbl" id="parametroBase"></span></div>
+    <div class="grid gB" id="gParametro"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Gabarito visual das capas</h2><span class="lbl">medido nas thumbs dos virais</span></div>
+    <div class="grid gB" id="gGabarito"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Crivos recentes</h2><span class="lbl">o que o Pesquisador aprovou e segurou</span></div>
+    <div class="grid gB" id="gCrivos"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Manda / Não manda</h2></div>
+    <div class="grid g66">
+      <div class="card"><h2 style="color:var(--ok)">✔ Fazer sempre</h2><ul class="sub" id="listaFazer" style="margin:8px 0 0;padding-left:18px"></ul></div>
+      <div class="card"><h2 style="color:var(--bad)">✖ Nunca fazer</h2><ul class="sub" id="listaNunca" style="margin:8px 0 0;padding-left:18px"></ul></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>A agenda do canal</h2><span class="lbl">quantos vídeos e quando — palavra do Pesquisador</span></div>
+    <div class="grid gB" id="gAgenda"></div>
+  </div>
+
+  <div class="sec"><div class="card" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:28px">⏰</span>
+    <div><b style="color:var(--prata-1)">Próxima varredura automática</b><div class="micro" id="pesqProxima">—</div></div>
+    <span class="pill mini neutra" style="margin-left:auto">regra do Diretor: pesquisa TODA segunda</span>
+  </div></div>
+</section>
+
+<!-- ════ 5 · RECEITA ════ -->
+<section class="view" id="v-receita">
+  <div class="cab"><h1>📜 A Receita</h1><span class="pill neutra">as leis que todo vídeo obedece</span></div>
+  <p class="sub">A Receita nasce do Estudo + da varredura semanal do Pesquisador. Não é opinião: é o que os números mostraram. A fábrica inteira obedece a isto.</p>
+  <div class="sec"><div class="card hero" id="recAval"></div></div>
+
+  <div class="sec"><div class="titulo"><h2>Os 4 medidores do vídeo perfeito</h2></div>
+    <div class="grid gD" id="gAneis"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>O caderno de regras</h2><span class="lbl">atualizado toda segunda</span></div>
+    <div class="grid gB" id="gCaderno"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Palavra do Diretor</h2><span class="lbl">ordens permanentes</span></div>
+    <div class="grid gB">
+      <div class="card"><h2>🎨 Capas</h2><p class="sub">Letras <b>3D cromadas</b>, fundo escuro, rosto/símbolo grande. Mandou refazer? Vem a corrigida E mais uma alternativa.</p></div>
+      <div class="card"><h2>📏 Duração</h2><p class="sub">Régua <b>5 a 30 minutos</b>. A quantidade de posts por semana quem decide são os dados, não a pressa.</p></div>
+      <div class="card"><h2>🚫 IG ≠ YouTube</h2><p class="sub">Corte vertical é outro mundo. Aqui só entra vídeo horizontal, longo, feito para o YouTube.</p></div>
+      <div class="card"><h2>👁️ Crivo total</h2><p class="sub">Tudo — som, imagem, capa, título — passa pelo crivo do Pesquisador ANTES de chegar ao Diretor.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 6 · IDEIAS ════ -->
+<section class="view" id="v-ideias">
+  <div class="cab"><h1>💡 Banco de Ideias</h1><span class="pill neutra" id="ideiasTotal">—</span></div>
+  <p class="sub">Cada pauta nasce com uma <b>prova</b>: um vídeo do nicho que já validou o tema. Você escolhe a próxima, adia ou descarta — a fábrica obedece.</p>
+  <div class="sec"><div class="grid gB" id="gPautas"></div></div>
+  <div class="sec"><div class="titulo"><h2>Como uma ideia vira vídeo</h2></div>
+    <div class="card"><div class="esteira" style="gap:14px">
+      <span class="et feito">pauta com prova</span><span class="seta">→</span>
+      <span class="et feito">você escolhe</span><span class="seta">→</span>
+      <span class="et feito">3 roteiristas disputam</span><span class="seta">→</span>
+      <span class="et feito">fábrica produz</span><span class="seta">→</span>
+      <span class="et feito">crivo mede</span><span class="seta">→</span>
+      <span class="et agora">você carimba</span>
+    </div></div>
+  </div>
+</section>
+
+<!-- ════ 7 · ESTUDO ════ -->
+<section class="view" id="v-estudo">
+  <div class="cab"><h1>📖 O Estudo</h1><span class="pill neutra">a fundação de tudo</span></div>
+  <p class="sub">O estudo completo de 2026 sobre o que faz um vídeo dar certo no YouTube — retenção, CTR, capas, títulos, o Parâmetro dos virais. É daqui que a Receita e o Pesquisador partem.</p>
+  <div class="sec"><div class="card" id="estudoBox" style="max-width:900px;padding:22px 26px"><div class="skel" style="height:60px"></div></div></div>
+</section>
+
+<!-- ════ 8 · BIBLIOTECA ════ -->
+<section class="view" id="v-biblioteca">
+  <div class="cab"><h1>🗄️ Biblioteca</h1><span class="pill neutra" id="bibTotal">—</span></div>
+
+  <div class="sec"><div class="grid gA" id="gKpisBib"></div></div>
+
+  <div class="sec"><div class="titulo"><h2>Crescimento do canal</h2><span class="lbl">cada ponto = uma coleta real</span></div>
+    <div class="card" id="cresceBib"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Vídeos longos — o produto do canal</h2>
+    <span style="margin-left:auto;display:flex;gap:6px" id="bibOrdem"></span></div>
+    <div class="grid gB" id="gLongos"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Cortes antigos (era Instagram)</h2><span class="lbl">acervo — não é o padrão novo</span></div>
+    <div class="grid gB" id="gCortes"></div>
+  </div>
+</section>
+
+<!-- ════ 9 · EQUIPE ════ -->
+<section class="view" id="v-equipe">
+  <div class="cab"><h1>🤖 A Equipe</h1><span class="pill neutra" id="eqTotal">—</span></div>
+  <p class="sub">Doze especialistas, cada um com sua sala, sua biblioteca e sua pesquisa. Um ajuda o outro — e todos respondem ao Gerente, que responde a você.</p>
+
+  <div class="sec"><div class="titulo"><h2>A linha de montagem</h2><span class="lbl">quem passa o bastão pra quem</span></div>
+    <div class="card"><div class="fluxo" id="orgFluxo"></div></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>As fichas</h2></div>
+    <div class="grid gB" id="gFichas"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>As 3 leis da equipe</h2></div>
+    <div class="grid gC">
+      <div class="card"><h2>1 · Excelência</h2><p class="sub">Cada agente estuda a própria função toda semana e guarda o que aprende na sua biblioteca.</p></div>
+      <div class="card"><h2>2 · Um ajuda o outro</h2><p class="sub">Qualquer agente pode pedir ajuda a qualquer outro da federação Agente-X. Ninguém trava sozinho.</p></div>
+      <div class="card"><h2>3 · Ninguém pula o crivo</h2><p class="sub">O trabalho de todos passa pelo Pesquisador antes de chegar ao Diretor. Sem exceção.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 10 · DISPARADOR ════ -->
+<section class="view" id="v-disparador">
+  <div class="cab"><h1>📣 O Disparador</h1><span class="pill neutra">leva o canal aos grupos do nicho</span></div>
+  <p class="sub">Ele divulga nossos vídeos onde o público JÁ está — grupos de mentalidade, motivação, lei da atração — trazendo gente interessada, sem virar spam. <b>Nada dispara sem o seu carimbo.</b></p>
+
+  <div class="card hero" style="margin-top:14px;border-color:rgba(255,165,61,.35)">
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <span style="font-size:30px">🖥️</span>
+      <div style="flex:1;min-width:240px"><b style="color:var(--prata-1)">Lei anti-ban: tudo pelo navegador do PC</b>
+      <div class="micro" style="margin-top:3px">O disparo real acontece no Chrome logado desta máquina, agindo como gente (digita devagar, pausas, volume baixo). Nunca por API, nunca do servidor. Verificação ou captcha → o robô para e chama você.</div></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>As 5 leis do Disparador</h2></div>
+    <div class="grid gB">
+      <div class="card"><h2>1 · Só com carimbo</h2><p class="sub">A fila só executa depois do seu OK, por leva. Nunca dispara sozinho.</p></div>
+      <div class="card"><h2>2 · Anti-spam é sobrevivência</h2><p class="sub">Mensagem sempre variada, cadência baixa e espaçada, só em grupo cujas regras permitem.</p></div>
+      <div class="card"><h2>3 · Valor antes do link</h2><p class="sub">Cada mensagem entrega um insight do vídeo antes do convite. Quem lê ganha algo mesmo sem clicar.</p></div>
+      <div class="card"><h2>4 · Honestidade</h2><p class="sub">Nunca fingir ser um terceiro empolgado. Tom de participante, sem máscara.</p></div>
+      <div class="card"><h2>5 · Sinal de bloqueio = parar</h2><p class="sub">Aviso da plataforma, captcha ou verificação: para na hora e chama o Diretor.</p></div>
+    </div>
+  </div>
+
+  <!-- BANCADA: montar um disparo em 3 passos -->
+  <div class="sec"><div class="titulo"><h2>🛠️ Montar um disparo</h2><span class="lbl">1 procurar · 2 escolher a mensagem · 3 disparar</span></div>
+
+    <div class="card hero">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:22px">🛰️</span>
+        <div style="flex:1;min-width:220px"><b style="color:var(--prata-1)">Busca automática todo dia</b>
+          <div class="micro" id="dispNichosLbl">o catalogador varre um lote de nichos por dia e aumenta a lista sozinho</div></div>
+        <span class="pill mini ok" id="dispNichosCount">—</span>
+      </div>
+      <div style="display:flex;gap:5px;margin-top:10px;flex-wrap:wrap;max-height:88px;overflow-y:auto" id="dispNichosLista"></div>
+      <div style="border-top:1px solid rgba(201,205,216,.1);margin:12px 0 10px"></div>
+      <div class="lbl">procurar um nicho agora (além da busca diária)</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <input type="text" id="dispBuscaInput" placeholder="ex.: lei da atração, disciplina, prosperidade…" style="flex:1;min-width:220px">
+        <button class="btn" id="dispBuscaBtn">🔎 Procurar e adicionar à lista</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap" id="dispSugestoes"></div>
+      <div class="micro" id="dispBuscaStatus" style="margin-top:8px"></div>
+    </div>
+
+    <div class="card hero" style="margin-top:14px">
+      <div class="lbl">Passo 2 · escolher a mensagem que vai ser disparada</div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap" id="dispMsgChips"></div>
+      <div class="micro" style="margin:10px 0 6px">Prévia (é exatamente isso que chega no grupo):</div>
+      <div id="dispPreview"></div>
+    </div>
+
+    <div class="card hero" style="margin-top:14px">
+      <div class="lbl">Passo 3 · disparar</div>
+      <div class="micro" style="margin:6px 0 2px">O envio é feito pelo navegador do PC, como gente, respeitando a régua (5 grupos/dia por plataforma). Este botão APROVA a leva (seu carimbo) e a coloca na fila para o navegador executar.</div>
+      <div class="acoes"><button class="btn ok" id="dispDispararBtn">📣 Disparar esta mensagem</button></div>
+    </div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>A fila de disparo</h2><span class="lbl">levas aprovadas por você</span></div>
+    <div id="dispFila"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Grupos já disparados</h2><span class="lbl" id="dispHistLbl">histórico de envios</span></div>
+    <div class="grid gA" id="dispHistKpis" style="margin-bottom:12px"></div>
+    <div id="dispHist"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Grupos do nicho</h2><span class="lbl" id="dispGruposLbl">catalogados</span></div>
+    <p class="micro" style="margin:-4px 0 10px">⚠️ Cada grupo tem suas regras. O Disparador entra, lê as regras e observa o clima ANTES de compartilhar — grupo que proíbe link fica de fora.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px" id="dispColunas"></div>
+  </div>
+
+  <div class="sec"><div class="titulo"><h2>Régua de segurança</h2><span class="lbl">para não queimar a conta</span></div>
+    <div class="grid gA" id="dispRegua"></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<div id="toasts"></div>
+<div id="overlay" class="overlay hide" role="dialog"><div class="caixa" id="overlayCaixa"></div></div>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <linearGradient id="gspark" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#C9CDD8" stop-opacity=".6"/><stop offset="100%" stop-color="#C9CDD8" stop-opacity="0"/>
+  </linearGradient>
+</defs></svg>
+<script>
+"use strict";
+/* ═══════════ ESTÚDIO MENTE SÁBIA v2 — segue o PROMPT_MESTRE (Cromo Cósmico) ═══════════
+   Zero Ghost: todo número vem do /api/resumo real; sem dado → estado vazio honesto. */
+
+const S = { d: null, filtroPeca: null, ordemBib: "views", estudoMd: null, timer: null };
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => (n === null || n === undefined || isNaN(+n)) ? "—" : new Intl.NumberFormat("pt-BR").format(+n);
+
+function dtBR(iso){ try{ const d=new Date(iso); if(isNaN(d)) return "—";
+  return d.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});}catch(e){return "—"}}
+function haQuanto(iso){ try{ const s=(Date.now()-new Date(iso))/1000; if(isNaN(s)) return "—";
+  if(s<90) return "agora mesmo"; if(s<3600) return `há ${Math.round(s/60)} min`;
+  if(s<86400) return `há ${Math.round(s/3600)} h`; return `há ${Math.round(s/86400)} dias`;}catch(e){return "—"}}
+function toast(msg, tipo){ const t=document.createElement("div"); t.className="toast "+(tipo||"");
+  t.textContent=msg; $("#toasts").appendChild(t); setTimeout(()=>t.remove(), 5200); }
+
+/* números que sobem contando (só na primeira pintura de cada elemento) */
+function countUp(el, alvo){ if(el.dataset.contado===String(alvo)){ return; } el.dataset.contado=String(alvo);
+  const n=+alvo; if(isNaN(n)||n<=0||n>9e9){ el.textContent=fmt(alvo); return; }
+  const t0=performance.now(), dur=700;
+  (function passo(t){ const p=Math.min(1,(t-t0)/dur), v=Math.round(n*(1-Math.pow(1-p,3)));
+    el.textContent=fmt(v); if(p<1) requestAnimationFrame(passo); })(t0); }
+
+/* sparkline SVG a partir do histórico real */
+function sparkline(pontos, chave){
+  const vals = pontos.map(p=>p[chave]).filter(v=>v!==null&&v!==undefined);
+  if(vals.length<2) return `<div class="micro">o gráfico nasce sozinho: um ponto novo a cada coleta real (${vals.length} até agora)</div>`;
+  const W=560,H=56,min=Math.min(...vals),max=Math.max(...vals),faixa=(max-min)||1;
+  const xy=vals.map((v,i)=>[(i/(vals.length-1))*W, H-6-((v-min)/faixa)*(H-14)]);
+  const linha=xy.map(p=>p.map(n=>n.toFixed(1)).join(",")).join(" ");
+  const fim=xy[xy.length-1];
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="evolução">
+    <polygon class="area" points="0,${H} ${linha} ${W},${H}"/>
+    <polyline class="linha" points="${linha}"/>
+    <circle class="fim" cx="${fim[0].toFixed(1)}" cy="${fim[1].toFixed(1)}" r="3"/></svg>
+  <div class="micro" style="display:flex;justify-content:space-between"><span>${fmt(min)}</span><b style="color:var(--prata-1)">${fmt(vals[vals.length-1])}</b><span>${fmt(max)}</span></div>`;
+}
+
+/* ── API (cookie de sessão; 401 → volta pro login) ── */
+async function api(caminho, corpo){
+  const r = await fetch(caminho, corpo!==undefined
+    ? {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(corpo)} : {});
+  if(r.status===401){ mostraLogin(); throw new Error("sessão expirada"); }
+  if(!r.ok){ let d=""; try{ d=(await r.json()).detail||"" }catch(e){}
+    throw new Error(d||`erro ${r.status}`); }
+  return r.json();
+}
+
+/* ── dicionários de gente (nunca jargão) ── */
+const STATUS_HUM = {
+  rascunho:["Rascunho","neutra"], roteiro:["Roteiro em disputa","warn"], producao:["Na linha de produção","warn"],
+  aprovacao:["Esperando seu carimbo","warn"], aprovado:["Carimbado — pronto","ok"],
+  publicado:["No ar","ok"], arquivado:["Arquivado","neutra"] };
+const DECISAO_HUM = { aprovado:["✔ Aprovado","ok"], reprovado:["✖ Reprovado","bad"], refazer:["↻ Mandou refazer","warn"],
+  manter_atual:["Manter como está","neutra"], pronto:["Pronto","ok"], escolhida:["★ Escolhida","ok"],
+  adiada:["Adiada","neutra"], descartada:["Descartada","bad"], concordo:["Concordo","ok"], discordo:["Discordo","bad"],
+  aprovada:["✔ Aprovada","ok"], revisar:["Revisar","warn"], definida:["📅 Marcada","ok"] };
+const NOME_DECISAO = c => {
+  if(c.startsWith("aprovar_video_")) return "Carimbo do vídeo "+c.slice(14);
+  if(c.startsWith("agenda_")) return "Dia e hora de publicar "+c.slice(7);
+  if(c.startsWith("capa_")&&c.endsWith("_instrucao")) return "Instrução de capa "+c.slice(5,-10);
+  if(c.startsWith("capa_")) return "Capa do "+c.slice(5);
+  if(c.startsWith("pauta_")) return "Pauta "+c.slice(6);
+  if(c.startsWith("crivo_")) return "Crivo "+c.slice(6).replace(/_/g," · ");
+  return {kit_visual:"Kit visual do canal", sessao_navegador:"Sessão do navegador", receita_semana:"Receita da semana"}[c]||c;
+};
+const ETAPAS_FAB = ["pauta","roteiro","cenas","narração","montagem","música","crivo","seu carimbo"];
+
+/* ── ações do Diretor ── */
+async function decidir(item, decisao, precisaMotivo, btn){
+  let motivo="";
+  if(precisaMotivo){ motivo=prompt("Diga em uma frase o motivo (a fábrica obedece a isso):")||"";
+    if(!motivo.trim()) return false; }
+  if(btn){ btn.disabled=true; btn.dataset.txt=btn.textContent; btn.textContent="enviando…"; }
+  try{ await api("/api/decisao",{item,decisao,motivo});
+    toast("Carimbado: "+(DECISAO_HUM[decisao]?.[0]||decisao),"ok"); fechaModal(); await atualiza(true);
+    return true;
+  }catch(e){ toast("Não gravou: "+e.message,"bad"); return false; }
+  finally{ if(btn){ btn.disabled=false; btn.textContent=btn.dataset.txt; } }
+}
+async function gerarCapa(codigo, comInstrucao, btn){
+  let instrucao="";
+  if(comInstrucao){ const r=prompt("O que a nova capa precisa ter? (ex.: AS 5 LEIS grande, embaixo menor DA MENTALIDADE VENCEDORA)");
+    if(r===null) return; instrucao=r; }
+  const rotulo=btn?btn.textContent:"";
+  if(btn){ btn.disabled=true; btn.textContent="chamando o Capista…"; }
+  try{ await api(`/api/capas/gerar/${encodeURIComponent(codigo)}`,{instrucao});
+    toast("Capista desenhando — letras 3D cromadas levam 1–2 min","ok"); await atualiza(true);
+  }catch(e){ toast("Capista não atendeu: "+e.message,"bad");
+    if(btn){ btn.disabled=false; btn.textContent=rotulo; } }
+}
+
+/* ── agenda de publicação (quem dita horário e cadência é o PESQUISADOR) ── */
+const DIA_PT={"domingo":0,"segunda":1,"terca":2,"terça":2,"quarta":3,"quinta":4,"sexta":5,"sabado":6,"sábado":6};
+function proxSlot(diaSemana,hora){
+  const agora=new Date();
+  for(let d=0;d<8;d++){
+    const x=new Date(agora.getFullYear(),agora.getMonth(),agora.getDate()+d);
+    if(x.getDay()===diaSemana){ const [H,M]=(hora||"19:00").split(":"); x.setHours(+H,+M,0,0);
+      if(x>agora) return x; } }
+  return null;
+}
+function abreAgenda(codigo){
+  const v=(S.d?.pipeline?.videos||[]).find(x=>x.codigo===codigo)||{};
+  const ag=S.d?.agenda_canal||{}; const p=n=>String(n).padStart(2,"0");
+  const slots=(ag.slots||[]).map(s=>{
+    const d=proxSlot(DIA_PT[(s.dia||"").toLowerCase()],s.hora);
+    if(!d) return null;
+    return {rot:`${s.dia} ${s.hora}`, val:`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${s.hora}`, base:s.base||""};
+  }).filter(Boolean);
+  abreModal(`
+   <h2>📅 Quando «${esc(v.titulo||codigo)}» vai ao ar?</h2>
+   <p class="micro" style="margin:6px 0 12px">${ag.videos_por_semana
+     ?`Palavra do Pesquisador: <b style="color:var(--prata-1)">${esc(ag.videos_por_semana)} vídeos por semana</b>, nos horários abaixo. Ele mede as primeiras 24 h de cada estreia e ajusta a regra toda segunda — os dados mandam.`
+     :"O Pesquisador ainda não assinou a agenda do canal — escolha manualmente (horário de Brasília)."}</p>
+   <div class="acoes">${slots.map(s=>
+     `<button class="btn" title="${esc(s.base)}" onclick="agendar('${esc(codigo)}','${esc(s.val)}',this)">🔬 ${esc(s.rot)} · ${esc(s.val.slice(8,10))}/${esc(s.val.slice(5,7))}</button>`).join("")}</div>
+   <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+     <input type="datetime-local" id="inAgenda" value="${esc((v.publicar_em||"").replace(" ","T"))}"
+       style="width:auto;padding:9px 12px;border-radius:9px;font:400 13px Inter;color:var(--prata-1);background:rgba(255,255,255,.05);border:1px solid rgba(var(--scr),.2);color-scheme:dark">
+     <button class="btn ghost" onclick="agendar('${esc(codigo)}',($('#inAgenda').value||'').replace('T',' '),this)">📅 Marcar este dia e hora</button>
+   </div>
+   <div class="acoes" style="margin-top:10px"><button class="btn ghost" onclick="fechaModal()">deixo para depois</button></div>`);
+}
+async function agendar(codigo,quando,btn){
+  if(!quando||!quando.trim()) return;
+  if(btn) btn.disabled=true;
+  try{ await api("/api/agendar",{codigo,quando:quando.trim()});
+    toast("Publicação marcada: "+quando.trim()+" (Brasília)","ok"); fechaModal(); await atualiza(true);
+  }catch(e){ toast("Não marcou: "+e.message,"bad"); if(btn) btn.disabled=false; }
+}
+async function aprovarVideo(codigo,btn){
+  await decidir("aprovar_video_"+codigo,"aprovado",false,btn);
+  abreAgenda(codigo);
+}
+
+/* ── modal (player de aprovação) ── */
+function abreModal(html){ $("#overlayCaixa").innerHTML=html; $("#overlay").classList.remove("hide"); }
+function fechaModal(){ $("#overlay").classList.add("hide"); $("#overlayCaixa").innerHTML=""; }
+$("#overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") fechaModal(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") fechaModal(); });
+
+function abrePlayer(codigo){
+  const v=(S.d?.pipeline?.videos||[]).find(x=>x.codigo===codigo); if(!v||!v.preview_url) return;
+  const cv=v.portao?.crivo||{}; const okCrivo=cv.aprovado; const decidindo=v.status==="aprovacao";
+  abreModal(`
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px">
+     <h2>🎬 ${esc(v.titulo_youtube||v.titulo||codigo)}</h2>
+     <button class="btn ghost" onclick="fechaModal()">fechar ✕</button></div>
+   <video controls preload="metadata" src="${esc(v.preview_url)}"></video>
+   <div style="margin:10px 0" class="${okCrivo?'pill ok':'pill warn'}">${esc(cv.resumo||"crivo ainda medindo…")}</div>
+   ${(cv.checks||[]).map(c=>`<span class="pill mini ${c.ok?'ok':'bad'}" title="${esc(c.detalhe)}">${c.ok?"✔":"✖"} ${esc(c.nome)}</span>`).join(" ")}
+   <div class="acoes" style="margin-top:14px">
+     ${decidindo?`<button class="btn ok" onclick="aprovarVideo('${esc(codigo)}',this)">✔ Aprovar — escolher quando publica</button>`
+       :`<span class="pill ok">✔ carimbado por você</span>
+         ${v.publicar_em?`<span class="pill ok">📅 vai ao ar: ${esc(v.publicar_em)}</span>`
+           :`<button class="btn" onclick="abreAgenda('${esc(codigo)}')">📅 Escolher quando publicar</button>`}`}
+     <button class="btn no" onclick="decidir('aprovar_video_${esc(codigo)}','reprovado',true,this)">✖ ${decidindo?"Reprovar e mandar refazer":"Voltar atrás — mandar refazer"}</button>
+   </div>
+   <p class="micro" style="margin-top:8px">O carimbo fica amarrado à impressão digital (md5) DESTE arquivo. Se o vídeo mudar, ele volta pra sua mesa.</p>`);
+}
+
+/* ── barra de produção (Início + Fábrica) ── */
+function htmlProducao(p, comLetreiro){
+  if(!p||!p.codigo) return `<div style="display:flex;gap:12px;align-items:center">
+    <span style="font-size:30px">😴</span><div><b style="color:var(--prata-1)">Fábrica em silêncio</b>
+    <div class="micro">nenhum vídeo em produção agora — escolha uma pauta em 💡 Ideias</div></div></div>`;
+  const vd=(S.d?.pipeline?.videos||[]).find(x=>x.codigo===p.codigo)||{};
+  const pct=Math.max(0,Math.min(100,+p.pct||0));
+  const cor = p.estado==="trabalhando"?"ok":(p.estado==="pronto"?"ok":"bad");
+  const rot = {trabalhando:"TRABALHANDO AGORA",pronto:"PRONTO",reprovado:"REPROVADO — refazendo",erro:"DEU ERRO",parou:"SEM SINAL — pode ter travado"}[p.estado]||p.estado;
+  const idx=Math.max(0,(+p.etapa_num||1)-1);
+  return `<div class="prodHero">
+    <div class="thumb" style="background-image:url('${esc(vd.capa_url||"")}')">${vd.capa_url?"":`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px">🎬</div>`}
+      <span class="tag pill mini ${cor==="bad"?"bad":"ok"}"><span class="dot ${cor==="bad"?"bad":"ok"} ${p.estado==="trabalhando"?"pulsa":""}"></span>${rot}</span></div>
+    <div>
+      <div class="lbl">na linha de produção</div>
+      <h2 style="font-size:17px;margin:2px 0 8px">${esc(p.titulo||vd.titulo||p.codigo)}</h2>
+      <div class="trilho grosso ${p.estado==="trabalhando"?"vivo":""}"><i style="width:${pct}%"></i><span class="pct">${pct}%</span></div>
+      <div class="stepper">${ETAPAS_FAB.map((e,i)=>`<i class="${i<idx?"feito":i===idx?"agora":""}" title="${esc(e)}"></i>`).join("")}</div>
+      <div class="micro" style="margin-top:6px">etapa ${esc(p.etapa_num||"?")}/${esc(p.etapa_total||8)} · <b style="color:var(--prata-2)">${esc(p.etapa||"")}</b> · sinal ${haQuanto(p.atualizado_em)}</div>
+      ${comLetreiro?`<div class="letreiro" style="margin-top:8px"><div>▸ ${esc(p.detalhe||"…")}</div><div>etapas: ${ETAPAS_FAB.join(" → ")}</div></div>`
+        :`<div class="micro" style="margin-top:4px">${esc(p.detalhe||"")}</div>`}
+    </div></div>`;
+}
+
+/* ── tarefas do Diretor (derivadas dos dados reais) ── */
+function tarefas(d){
+  const T=[]; const dec=d.decisoes||{};
+  for(const v of d.pipeline?.videos||[]){
+    if(v.status==="aprovacao"&&v.preview_url)
+      T.push({pg:"fabrica",ico:"🎬",titulo:`Assistir e carimbar «${v.titulo||v.codigo}»`,
+        sub:v.portao?.crivo?.aprovado?"crivo do Pesquisador: ✔ liberado":"crivo ainda segurando — veja o porquê",
+        acao:()=>abrePlayer(v.codigo)});
+    if(v.capa_url&&!dec["capa_"+v.codigo]&&v.status!=="arquivado")
+      T.push({pg:"fabrica",ico:"🖼️",titulo:`Dar o OK na capa do «${v.titulo||v.codigo}»`,sub:"aprovar ou mandar refazer",rota:"#/fabrica"});
+    if(v.status==="aprovado"&&!v.publicar_em)
+      T.push({pg:"cofre",ico:"📅",titulo:`Escolher quando «${v.titulo||v.codigo}» vai ao ar`,
+        sub:"aprovado — falta marcar dia e hora (o Pesquisador recomenda)",acao:()=>abreAgenda(v.codigo)});
+  }
+  const pautas=d.agente?.pautas||[];
+  if(pautas.length&&!pautas.some(p=>dec["pauta_"+p.id]?.decisao==="escolhida"))
+    T.push({pg:"ideias",ico:"💡",titulo:"Escolher a próxima pauta",sub:`${pautas.length} ideias com prova esperando`,rota:"#/ideias"});
+  for(const c of d.crivos_recentes||[]){
+    if(c.aprovada===false) T.push({pg:"pesquisador",ico:"🔬",titulo:`Crivo segurou ${c.tipo==="capa"?"a capa":"o vídeo"} ${c.codigo}`,
+      sub:c.resumo,rota:"#/pesquisador"});
+  }
+  if(d.pesquisa?.varredura_em&&!dec["receita_semana"])
+    T.push({pg:"receita",ico:"📜",titulo:"Aprovar a receita da semana",sub:"a varredura de segunda virou regra — dê o aval",rota:"#/receita"});
+  return T;
+}
+
+/* ═══════════ RENDERS ═══════════ */
+function rInicio(d){
+  $("#inicioAgora").textContent="retrato de "+dtBR(d.coletado_em);
+  $("#lblColeta").textContent="coleta real "+haQuanto(d.coletado_em);
+  const p=d.producao||{}; const T=tarefas(d);
+  /* fala do estúdio */
+  let fala;
+  if(p.estado==="trabalhando") fala=`A fábrica está trabalhando agora: <b>${esc(p.titulo||p.codigo)}</b> — ${esc(p.etapa||"")} (${p.pct||0}%).`;
+  else if(T.length) fala=`Diretor, ${T.length===1?"tem 1 decisão esperando você":`tem ${T.length} decisões esperando você`} — a primeira: ${esc(T[0].titulo)}.`;
+  else if(d.dias_sem_postar>7) fala=`O canal está há <b>${d.dias_sem_postar} dias</b> sem vídeo novo. A fábrica está pronta — escolha uma pauta.`;
+  else fala="Tudo em ordem. O Pesquisador vigia o território e a fábrica está a postos.";
+  $("#falaEstudio").innerHTML=`<div style="display:flex;gap:14px;align-items:center"><span style="font-size:34px">🧠</span>
+    <div style="font-size:15px;line-height:1.5">${fala}</div></div>`;
+  /* métricas */
+  const M=[["Inscritos",d.inscritos,"meta 1.000"],["Views no feed",d.views_somadas_feed,`${d.total_videos_no_feed||0} vídeos`],
+    ["Dias sem postar",d.dias_sem_postar,d.ultimo_upload?"último: "+esc(d.ultimo_upload):"—"],
+    ["Vídeos longos",(d.videos||[]).filter(v=>v.tipo==="longo").length,"o produto do canal"],
+    ["Cortes antigos",(d.videos||[]).filter(v=>v.tipo==="corte").length,"era Instagram"],
+    ["Na fila da fábrica",(d.pipeline?.videos||[]).filter(v=>v.status!=="arquivado"&&v.status!=="publicado").length,"em andamento"]];
+  $("#gMetricas").innerHTML=M.map(([r,v,s])=>`<div class="card"><div class="lbl">${r}</div>
+    <div class="n-cromo n-stat" data-v="${v??""}">—</div><div class="micro">${s}</div></div>`).join("");
+  $$("#gMetricas .n-cromo").forEach(el=>countUp(el,el.dataset.v===""?null:+el.dataset.v));
+  /* tarefas */
+  $("#gTarefas").innerHTML = T.length? T.map((t,i)=>`
+    <div class="card clic" data-t="${i}"><div style="display:flex;gap:10px;align-items:flex-start">
+      <span style="font-size:24px">${t.ico}</span><div><b style="color:var(--prata-1)">${esc(t.titulo)}</b>
+      <div class="micro" style="margin-top:3px">${esc(t.sub||"")}</div></div></div>
+      <div class="acoes"><span class="pill warn mini">decidir →</span></div></div>`).join("")
+    : `<div class="card" style="display:flex;gap:10px;align-items:center"><span style="font-size:24px">✅</span>
+       <div><b style="color:var(--prata-1)">Nada esperando você</b><div class="micro">quando algo precisar do seu carimbo, aparece aqui primeiro</div></div></div>`;
+  $$("#gTarefas .card.clic").forEach(c=>c.onclick=()=>{ const t=T[+c.dataset.t]; t.acao?t.acao():(location.hash=t.rota); });
+  /* produção */
+  $("#blocoProducao").innerHTML=htmlProducao(p,false);
+  /* metas */
+  const insc=d.inscritos, pMeta=insc?Math.min(100,insc/10):0;
+  $("#cardMeta1").innerHTML=`<div style="display:flex;gap:16px;align-items:center">
+    <div class="anel ok" style="--p:${pMeta.toFixed(1)}"><b>${pMeta.toFixed(1)}%</b></div>
+    <div><div class="lbl">inscritos</div><div class="n-cromo n-mini">${fmt(insc)} / 1.000</div>
+    <div class="micro">faltam ${fmt(insc?1000-insc:null)} — cada vídeo longo bom é um degrau</div></div></div>`;
+  $("#cardMeta2").innerHTML=`<div style="display:flex;gap:16px;align-items:center"><span style="font-size:34px">⏳</span>
+    <div><div class="lbl">horas assistidas</div><div class="n-cromo n-mini">meta 4.000 h</div>
+    <div class="micro">o YouTube só mostra esse número no Studio (login do canal) — leitura automática é o próximo passo da plataforma. Sem número medido, aqui não se inventa.</div></div></div>`;
+  /* últimos vídeos */
+  const longos=(d.videos||[]).filter(v=>v.tipo==="longo").slice(0,6);
+  $("#gUltimos").innerHTML = longos.length? longos.map(v=>`
+    <a class="card clic" href="${esc(v.url)}" target="_blank" rel="noopener">
+      <div class="thumb" style="background-image:url('https://i.ytimg.com/vi/${esc(v.id)}/mqdefault.jpg')">
+        <div class="ovl"><b>${fmt(v.views)} views</b></div></div>
+      <div style="margin-top:8px;font-weight:600;color:var(--prata-1);font-size:12px">${esc(v.titulo)}</div>
+      <div class="micro">${esc(v.publicado)} · ${fmt(v.likes)} curtidas · ${fmt(v.views_por_dia)}/dia</div></a>`).join("")
+    : `<div class="card"><b style="color:var(--prata-1)">Ainda não há vídeo longo no ar</b>
+       <div class="micro">o primeiro está na fábrica — este espaço vira a vitrine do canal</div></div>`;
+  /* portas */
+  const portas=[["#/fabrica","🎬","Fábrica","acompanhar a produção"],["#/pesquisador","🔬","Pesquisador","o que está bombando"],
+    ["#/cofre","🗝️","Repositório","vídeos prontos + carimbos"],["#/ideias","💡","Ideias","escolher a próxima"],
+    ["#/receita","📜","Receita","as leis do vídeo"],["#/biblioteca","🗄️","Biblioteca","tudo que está no ar"],
+    ["#/equipe","🤖","Equipe","os especialistas"],["#/disparador","📣","Disparador","divulgar nos grupos"],["#/estudo","📖","O Estudo","a fundação de tudo"]];
+  $("#gPortas").innerHTML=portas.map(([h,i,t,s])=>`<a class="card clic" href="${h}" style="text-align:center">
+    <div style="font-size:30px">${i}</div><b style="color:var(--prata-1)">${t}</b><div class="micro">${s}</div></a>`).join("");
+}
+
+function rFabrica(d){
+  const p=d.producao||{};
+  $("#fabSinal").textContent = p.atualizado_em? "sinal "+haQuanto(p.atualizado_em) : "sem produção agora";
+  $("#fabHero").innerHTML=htmlProducao(p,true);
+  const fila=(d.pipeline?.videos||[]).filter(v=>v.status!=="arquivado");
+  $("#gFila").innerHTML = fila.length? fila.map(v=>{
+    const [rot,cor]=STATUS_HUM[v.status]||[v.status,"neutra"]; const g=v.portao||{};
+    return `<div class="card ${v.status==="aprovacao"?"hero":""}">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="pill ${cor}">${rot}</span><span class="micro">${esc(v.codigo)}</span>
+        ${v.duracao_real?`<span class="pill mini neutra">${esc(v.duracao_real)}</span>`:""}</div>
+      <h2 style="margin-top:8px">${esc(v.titulo_youtube||v.titulo||v.codigo)}</h2>
+      ${v.nota?`<p class="micro" style="margin:4px 0 0">${esc(v.nota)}</p>`:""}
+      <div style="margin-top:10px">${(g.crivo?.checks||[]).map(c=>`<span class="pill mini ${c.ok?"ok":"bad"}" title="${esc(c.detalhe)}">${c.ok?"✔":"✖"} ${esc(c.nome)}</span>`).join(" ")||`<span class="micro">crivo mede quando o arquivo chega</span>`}</div>
+      <div class="acoes">
+        ${v.preview_url?`<button class="btn" onclick="abrePlayer('${esc(v.codigo)}')">▶ ${v.status==="aprovacao"?"Assistir e decidir":"Assistir"}</button>`:""}
+        ${g.pode?`<span class="pill ok">🔓 portão aberto — pronto pro Cofre</span>`
+          :(g.faltas||[]).map(f=>`<span class="pill mini warn">falta: ${esc(f)}</span>`).join(" ")}
+        ${v.publicar_em?`<span class="pill ok mini">📅 vai ao ar: ${esc(v.publicar_em)} (Brasília)</span>`
+          :(v.status==="aprovado"?`<button class="btn" onclick="abreAgenda('${esc(v.codigo)}')">📅 Escolher quando publicar</button>`:"")}
+      </div></div>`;}).join("")
+    : `<div class="card"><b style="color:var(--prata-1)">Fila vazia</b><div class="micro">escolha uma pauta em 💡 Ideias para dar partida</div></div>`;
+  /* bancada de capas */
+  $("#gCapas").innerHTML = fila.map(v=>{
+    const dec=(d.decisoes||{})["capa_"+v.codigo]?.decisao; const cri=v.crivo;
+    if(v.capa_status==="desenhando"||(v.capa_status||"").startsWith("erro"))
+      return `<div class="card"><div class="thumb skel"></div><div style="margin-top:8px">
+        ${v.capa_status==="desenhando"?`<span class="pill warn"><span class="dot warn pulsa"></span> Capista desenhando…</span>`
+        :`<span class="pill bad">${esc(v.capa_status)}</span> <button class="btn ghost" onclick="gerarCapa('${esc(v.codigo)}',false,this)">tentar de novo</button>`}
+        <div class="micro" style="margin-top:4px">${esc(v.titulo||v.codigo)}</div></div></div>`;
+    if(!v.capa_url)
+      return `<div class="card"><div class="thumb" style="display:flex;align-items:center;justify-content:center"><span style="font-size:34px">🖼️</span></div>
+        <div class="acoes"><button class="btn" onclick="gerarCapa('${esc(v.codigo)}',false,this)">Desenhar capa 3D cromada</button></div>
+        <div class="micro" style="margin-top:4px">${esc(v.titulo||v.codigo)}</div></div>`;
+    return `<div class="card"><a class="thumb" href="${esc(v.capa_url)}" target="_blank" style="background-image:url('${esc(v.capa_url)}')">
+        ${dec?`<span class="tag pill mini ${DECISAO_HUM[dec]?.[1]||"neutra"}">${DECISAO_HUM[dec]?.[0]||esc(dec)}</span>`:""}
+        ${cri?`<span class="tag2 pill mini ${cri.aprovada?"ok":"bad"}" title="${esc(cri.resumo||"")}">crivo ${cri.aprovada?"✔":"✖"}</span>`:""}</a>
+      <div class="micro" style="margin:6px 0 0">${esc(v.titulo||v.codigo)} ${cri?`· <span title="${esc((cri.checks||[]).map(c=>(c.ok?"✔ ":"✖ ")+c.nome).join(" | "))}">${esc(cri.resumo||"")}</span>`:""}</div>
+      <div class="acoes">
+        ${dec!=="aprovado"?`<button class="btn ok" onclick="decidir('capa_${esc(v.codigo)}','aprovado',false,this)">✔ Aprovar capa</button>`:""}
+        <button class="btn no" onclick="decidir('capa_${esc(v.codigo)}','refazer',true,this).then(ok=>{if(ok)gerarCapa('${esc(v.codigo)}',false)})">↻ Refazer</button>
+        <button class="btn ghost" onclick="gerarCapa('${esc(v.codigo)}',true,this)">＋ outra com instrução</button>
+      </div></div>`;}).join("") || `<div class="card"><div class="micro">nenhum vídeo na fila — capas nascem junto com o vídeo</div></div>`;
+}
+
+function rCofre(d){
+  const vids=(d.pipeline?.videos||[]);
+  const prontos=vids.filter(v=>v.portao?.pode);
+  $("#gProntos").innerHTML = prontos.length? prontos.map(v=>`
+    <div class="card hero" style="max-width:440px">
+      <div class="thumb clic" onclick="abrePlayer('${esc(v.codigo)}')" style="background-image:url('${esc(v.capa_url||"")}');cursor:pointer">
+        <span class="tag pill mini ok">🔓 portão aberto</span>
+        <div class="ovl"><b>▶ assistir</b></div>
+        ${v.duracao_real?`<span class="tag2 pill mini neutra">${esc(v.duracao_real)}</span>`:""}</div>
+      <h2 style="margin-top:8px">${esc(v.titulo_youtube||v.titulo)}</h2>
+      <p class="micro">Crivo 100% + seu carimbo conferido no md5. O robô nunca publica sem você saber.</p>
+      <div class="acoes">
+        <button class="btn" onclick="abrePlayer('${esc(v.codigo)}')">▶ Assistir</button>
+        ${v.publicar_em
+        ?`<span class="pill ok">📅 vai ao ar: ${esc(v.publicar_em)} (Brasília)</span>`
+        :`<button class="btn ghost" onclick="abreAgenda('${esc(v.codigo)}')">📅 Escolher quando publicar</button>`}</div></div>`).join("")
+    : `<div class="card"><b style="color:var(--prata-1)">Nenhum vídeo com portão aberto ainda</b>
+       <div class="micro">o portão abre com crivo 100% + seu carimbo no arquivo exato — acompanhe na 🎬 Fábrica</div></div>`;
+  const dec=Object.entries(d.decisoes||{}).sort((a,b)=>(b[1].quando||"").localeCompare(a[1].quando||""));
+  $("#gDecisoes").innerHTML = dec.length? dec.map(([k,r])=>{
+    const [rot,cor]=DECISAO_HUM[r.decisao]||[r.decisao,"neutra"];
+    return `<div class="card"><div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <b style="color:var(--prata-1)">${esc(NOME_DECISAO(k))}</b><span class="pill mini ${cor}">${rot}</span></div>
+      <div class="micro" style="margin-top:6px">${dtBR(r.quando)}${r.motivo?` · motivo: “${esc(r.motivo)}”`:""}${r.arquivo_md5?` · 🔏 md5 ${esc(r.arquivo_md5.slice(0,8))}…`:""}</div></div>`;}).join("")
+    : `<div class="card"><div class="micro">nenhuma decisão registrada ainda</div></div>`;
+}
+
+function rPesquisador(d){
+  const q=d.pesquisa||{};
+  $("#pesqQuando").textContent = q.varredura_em? "varredura "+haQuanto(q.varredura_em) : "1ª varredura: segunda 08:05";
+  $("#pesqTotalAnalisados").textContent=(q.total_analisado?fmt(q.total_analisado):"—")+" vídeos medidos";
+  $("#pesqBuscas").textContent=(q.queries||[]).length+" frentes de busca";
+  /* quentes + filtro por peça */
+  const pecas=Object.keys(q.pecas_pct||{});
+  $("#pesqFiltros").innerHTML=[`<button class="pill mini ${!S.filtroPeca?"ok":""}" data-p="">todas</button>`,
+    ...pecas.map(p=>`<button class="pill mini ${S.filtroPeca===p?"ok":""}" data-p="${esc(p)}">${esc(p)}</button>`)].join("");
+  $$("#pesqFiltros .pill").forEach(b=>{ b.style.cursor="pointer"; b.onclick=()=>{ S.filtroPeca=b.dataset.p||null; rPesquisador(S.d); };});
+  const quentes=(q.quentes||[]).filter(v=>!S.filtroPeca||(v.pecas||[]).includes(S.filtroPeca));
+  $("#pesqQuentes").innerHTML = quentes.length? quentes.slice(0,12).map(v=>`
+    <a class="card clic" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener">
+      <div class="thumb" style="background-image:url('https://i.ytimg.com/vi/${esc(v.id)}/mqdefault.jpg')">
+        <div class="ovl"><b>${fmt(v.views)} views</b></div><span class="tag2 pill mini neutra">${esc(v.duracao||"")}</span></div>
+      <div style="margin-top:8px;font-weight:600;color:var(--prata-1);font-size:12px">${esc(v.titulo)}</div>
+      <div class="micro">${esc(v.canal)} · ${esc(v.quando||"")}</div>
+      <div style="margin-top:6px">${(v.pecas||[]).map(p=>`<span class="pill mini ok">${esc(p)}</span>`).join(" ")||`<span class="micro">sem peça do parâmetro</span>`}</div></a>`).join("")
+    : `<div class="card"><b style="color:var(--prata-1)">${q.varredura_em?"Nenhum vídeo com esse filtro":"A primeira varredura ainda não rodou"}</b>
+       <div class="micro">${q.varredura_em?"limpe o filtro acima":"ela roda sozinha toda segunda às 08:05 — o resultado aparece aqui"}</div></div>`;
+  /* parâmetro */
+  $("#parametroBase").textContent=q.total_analisado?`medido em ${fmt(q.total_analisado)} vídeos do nicho`:"";
+  const DESC={"você no centro":"o título fala COM a pessoa (você/sua)","prazo":"promete resultado num tempo (em 7 dias…)",
+    "autoridade":"ancora num nome forte (Napoleon Hill…)","estado-limite":"emoção extrema (nunca mais, o que ninguém conta)"};
+  $("#gParametro").innerHTML=Object.entries(q.pecas_pct||{}).map(([p,pc])=>`
+    <div class="card"><div class="lbl">${esc(p)}</div><div class="n-cromo n-stat">${esc(pc)}%</div>
+    <div class="trilho" style="margin:8px 0 6px"><i style="width:${Math.min(100,+pc||0)}%"></i></div>
+    <div class="micro">${DESC[p]||"peça do parâmetro"} — presença nos virais da semana</div></div>`).join("")
+    ||`<div class="card"><div class="micro">o parâmetro nasce na primeira varredura</div></div>`;
+  /* gabarito visual */
+  const g=q.padrao_visual||{};
+  $("#gGabarito").innerHTML = g.amostra? [
+    ["Fundo escuro",g.escuro_pct_mediana+"%","da capa em tons escuros (mediana dos virais)"],
+    ["Contraste",g.contraste_mediana,"letra clara ↔ fundo escuro (quanto maior, mais estala)"],
+    ["Luminância",g.luminancia_mediana,"brilho médio — capa escura com letra que grita"],
+    ["Amostra",g.amostra+" capas","thumbnails de virais medidas pixel a pixel"]]
+    .map(([r,v,s])=>`<div class="card"><div class="lbl">${r}</div><div class="n-cromo n-stat">${esc(v)}</div><div class="micro">${s}</div></div>`).join("")
+    : `<div class="card"><div class="micro">o gabarito visual nasce na primeira varredura</div></div>`;
+  /* crivos recentes */
+  const cr=d.crivos_recentes||[];
+  $("#gCrivos").innerHTML = cr.length? cr.map(c=>{
+    const chave=`crivo_${c.codigo}_${c.tipo}`; const minha=(d.decisoes||{})[chave]?.decisao;
+    return `<div class="card"><div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <b style="color:var(--prata-1)">${c.tipo==="capa"?"🖼️ Capa":"🎬 Vídeo"} · ${esc(c.codigo)}</b>
+      <span class="pill mini ${c.aprovada?"ok":"bad"}">${c.aprovada?"✔ liberou":"✖ segurou"}</span></div>
+      <div class="micro" style="margin:6px 0">${esc(c.resumo||"")}</div>
+      <div>${(c.checks||[]).map(x=>`<span class="pill mini ${x.ok?"ok":"bad"}" title="${esc(x.detalhe)}">${x.ok?"✔":"✖"} ${esc(x.nome)}</span>`).join(" ")}</div>
+      <div class="acoes">${minha?`<span class="pill mini ${DECISAO_HUM[minha]?.[1]}">você: ${DECISAO_HUM[minha]?.[0]}</span>`
+        :`<button class="btn ghost" onclick="decidir('${chave}','concordo',false,this)">Concordo</button>
+          <button class="btn no" onclick="decidir('${chave}','discordo',true,this)">Discordo</button>`}</div></div>`;}).join("")
+    : `<div class="card"><div class="micro">nenhum crivo emitido ainda — eles aparecem quando capa ou vídeo passam pela mesa do Pesquisador</div></div>`;
+  /* fazer/nunca — nascem das medições */
+  const fazer=[
+    q.duracao?.mediana_min?`Mirar perto de ${q.duracao.mediana_min} min — a mediana dos virais desta semana`:null,
+    pecas.length?`Título com ≥2 peças do parâmetro (as fortes: ${pecas.filter(p=>+q.pecas_pct[p]>=30).join(", ")||"—"})`:null,
+    g.escuro_pct_mediana?`Capa com ~${g.escuro_pct_mediana}% de área escura e letras 3D cromadas grandes`:null,
+    "Gancho nos primeiros 30 segundos: prometa e cumpra",
+    "Voz sempre ≥18 dB acima da música (medido, não no ouvido)"].filter(Boolean);
+  const nunca=["Vídeo fora da régua 5–30 min","Corte vertical de Instagram no YouTube (outro mundo)",
+    "Símbolo que não casa com a fala (engrenagem sem a narração falar disso)",
+    "Zumbido no lugar de música de verdade","Publicar sem crivo 100% + carimbo do Diretor"];
+  $("#listaFazer").innerHTML=fazer.map(f=>`<li>${esc(f)}</li>`).join("");
+  $("#listaNunca").innerHTML=nunca.map(f=>`<li>${esc(f)}</li>`).join("");
+  /* agenda do canal — palavra do Pesquisador */
+  const ag=d.agenda_canal||{};
+  $("#gAgenda").innerHTML = ag.slots? [
+    `<div class="card"><div class="lbl">cadência</div><div class="n-cromo n-stat">${esc(ag.videos_por_semana)}/sem</div>
+     <div class="micro">${esc(ag.cadencia_base||"consistência vale mais que rajada")}</div></div>`,
+    ...ag.slots.map(s=>`<div class="card"><div class="lbl">estreia</div>
+     <div class="n-cromo n-mini">${esc(s.dia)} ${esc(s.hora)}</div><div class="micro">${esc(s.base||"")}</div></div>`),
+    `<div class="card"><h2>Como ele decide</h2><p class="sub" style="font-size:12px">${esc(ag.plano||"")}</p>
+     <div class="micro" style="margin-top:6px">${(ag.fontes||[]).map((u,i)=>`<a href="${esc(u)}" target="_blank" rel="noopener">fonte ${i+1}</a>`).join(" · ")}</div></div>`
+  ].join("") : `<div class="card"><div class="micro">a agenda do canal nasce na mesa do Pesquisador — em preparação</div></div>`;
+  /* próxima varredura */
+  const agora=new Date(); const prox=new Date(agora);
+  prox.setDate(agora.getDate()+((8-agora.getDay())%7||7));
+  $("#pesqProxima").textContent=`segunda-feira ${prox.toLocaleDateString("pt-BR")} de manhã — roda sozinha e atualiza a Receita`;
+}
+
+function rReceita(d){
+  const q=d.pesquisa||{}; const g=q.padrao_visual||{};
+  /* aval do Diretor na receita da semana */
+  const minhaRec=(d.decisoes||{})["receita_semana"]?.decisao;
+  $("#recAval").innerHTML=`<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:30px">📜</span>
+    <div style="flex:1;min-width:220px"><b style="color:var(--prata-1)">A receita desta semana ${q.varredura_em?`nasceu da varredura de ${dtBR(q.varredura_em)}`:"ainda espera a primeira varredura"}</b>
+    <div class="micro">seu aval vira carimbo no Repositório — se mandar revisar, o Pesquisador refaz</div></div>
+    ${minhaRec?`<span class="pill ${DECISAO_HUM[minhaRec]?.[1]}">você: ${DECISAO_HUM[minhaRec]?.[0]}</span>`
+      :`<span style="display:flex;gap:8px"><button class="btn ok" onclick="decidir('receita_semana','aprovada',false,this)">✔ Aprovar a receita</button>
+        <button class="btn no" onclick="decidir('receita_semana','revisar',true,this)">↻ Revisar</button></span>`}</div>`;
+  const aneis=[
+    ["Duração na régua", q.duracao?`${q.duracao.dentro_da_regua_5a30_pct}%`:null, q.duracao?+q.duracao.dentro_da_regua_5a30_pct:0, "dos virais cabem na régua 5–30 min"],
+    ["Você no centro", q.pecas_pct?.["você no centro"]!=null?q.pecas_pct["você no centro"]+"%":null, +(q.pecas_pct?.["você no centro"]||0), "dos títulos virais falam COM você"],
+    ["Capa escura", g.escuro_pct_mediana?g.escuro_pct_mediana+"%":null, +(g.escuro_pct_mediana||0), "de área escura (mediana medida)"],
+    ["Autoridade", q.pecas_pct?.autoridade!=null?q.pecas_pct.autoridade+"%":null, +(q.pecas_pct?.autoridade||0), "ancoram num nome forte"]];
+  $("#gAneis").innerHTML=aneis.map(([r,v,p,s])=>`<div class="card" style="display:flex;gap:14px;align-items:center">
+    <div class="anel" style="--p:${Math.min(100,p)}"><b>${v??"—"}</b></div>
+    <div><div class="lbl">${r}</div><div class="micro">${v?s:"nasce na varredura de segunda"}</div></div></div>`).join("");
+  const top2=Object.entries(q.pecas_pct||{}).sort((a,b)=>+b[1]-+a[1]).slice(0,2);
+  const cad=[["⏱️","Régua 5–30 min",q.duracao?`mediana dos virais: ${q.duracao.mediana_min} min — mire a faixa 8–15 para começar`:"vídeo longo, nunca corte"],
+    ["✍️","Título com ≥2 peças",top2.length===2?`a dupla mais forte desta semana (medida): ${top2[0][0]} (${top2[0][1]}%) + ${top2[1][0]} (${top2[1][1]}%)`:"a dupla mais forte nasce na varredura de segunda"],
+    ["🖼️","Capa: gabarito medido",g.amostra?`${g.escuro_pct_mediana}% escuro, contraste ${g.contraste_mediana}, letras 3D cromadas`:"escura, contraste alto, letras 3D cromadas"],
+    ["🎬","Visual que CASA com a fala","pessoas reais por padrão; símbolo só quando a narração fala do conceito"],
+    ["🎵","Som medido","voz ≥18 dB acima da música; LUFS de YouTube; nada de zumbido"],
+    ["🔬","Crivo antes do Diretor","tudo passa pelo Pesquisador; só chega em você o que já foi medido"]];
+  $("#gCaderno").innerHTML=cad.map(([i,t,s])=>`<div class="card"><h2>${i} ${t}</h2><p class="sub">${esc(s)}</p></div>`).join("");
+}
+
+function rIdeias(d){
+  const dec=d.decisoes||{}; const pautas=(d.agente?.pautas||[]);
+  $("#ideiasTotal").textContent=pautas.length+" pautas com prova";
+  const ordem={escolhida:0,undefined:1,adiada:2,descartada:3};
+  const lista=[...pautas].sort((a,b)=>(ordem[dec["pauta_"+a.id]?.decisao]??1)-(ordem[dec["pauta_"+b.id]?.decisao]??1));
+  $("#gPautas").innerHTML = lista.length? lista.map(p=>{
+    const minha=dec["pauta_"+p.id]?.decisao;
+    return `<div class="card ${minha==="escolhida"?"hero":""}" ${minha==="descartada"?'style="opacity:.55"':""}>
+      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <span class="micro">${esc(p.id)} · ${esc(p.formato||"")} · ${esc(p.duracao_alvo||"")}</span>
+        ${minha?`<span class="pill mini ${DECISAO_HUM[minha]?.[1]}">${DECISAO_HUM[minha]?.[0]}</span>`:""}</div>
+      <h2 style="margin-top:6px">${esc(p.titulo_candidato)}</h2>
+      <div class="micro" style="margin:4px 0">📌 prova: ${esc(p.conceito_fonte||"—")}</div>
+      <div>${(p.pecas_parametro||[]).map(x=>`<span class="pill mini ok">${esc(x)}</span>`).join(" ")}</div>
+      ${minha!=="escolhida"?`<div class="acoes">
+        <button class="btn ok" onclick="decidir('pauta_${esc(p.id)}','escolhida',false,this)">★ Essa é a próxima</button>
+        <button class="btn ghost" onclick="decidir('pauta_${esc(p.id)}','adiada',false,this)">adiar</button>
+        <button class="btn no" onclick="decidir('pauta_${esc(p.id)}','descartada',true,this)">descartar</button></div>`
+      :`<p class="micro" style="margin-top:8px">★ escolhida — a fábrica pega essa depois do vídeo atual</p>`}</div>`;}).join("")
+    : `<div class="card"><b style="color:var(--prata-1)">Banco vazio</b><div class="micro">o Agente Youtuber repõe pautas com prova a cada varredura</div></div>`;
+}
+
+function mdSimples(md){
+  const linhas=esc(md).split("\n"); let html="",lista=false;
+  for(const l of linhas){
+    if(/^\s*[-*] /.test(l)){ if(!lista){html+="<ul>";lista=true;} html+="<li>"+l.replace(/^\s*[-*] /,"")+"</li>"; continue; }
+    if(lista){html+="</ul>";lista=false;}
+    if(/^### /.test(l)) html+="<h3 style='color:var(--prata-1);margin:16px 0 4px'>"+l.slice(4)+"</h3>";
+    else if(/^## /.test(l)) html+="<h2 style='margin:22px 0 6px;font-size:16px'>"+l.slice(3)+"</h2>";
+    else if(/^# /.test(l)) html+="<h1 style='font-size:19px;margin:10px 0'>"+l.slice(2)+"</h1>";
+    else if(/^---+\s*$/.test(l)) html+="<hr style='border:0;border-top:1px solid rgba(201,205,216,.15);margin:16px 0'>";
+    else if(l.trim()==="") html+="";
+    else html+="<p class='sub' style='margin:6px 0'>"+l+"</p>";
+  }
+  if(lista) html+="</ul>";
+  return html.replace(/\*\*([^*]+)\*\*/g,"<b style='color:var(--prata-1)'>$1</b>");
+}
+async function rEstudo(){
+  if(S.estudoMd===null){ try{ const r=await api("/api/estudo"); S.estudoMd=r.markdown||""; }
+    catch(e){ S.estudoMd=""; } }
+  $("#estudoBox").innerHTML = S.estudoMd? mdSimples(S.estudoMd)
+    : `<div class="micro">o estudo ainda não chegou nesta máquina — ele mora no repositório e sobe junto com o deploy</div>`;
+}
+
+function rBiblioteca(d){
+  const vids=d.videos||[]; const longos=vids.filter(v=>v.tipo==="longo"), cortes=vids.filter(v=>v.tipo==="corte");
+  $("#bibTotal").textContent=`${vids.length} no feed público`;
+  const K=[["Views somadas",d.views_somadas_feed],["Vídeos no feed",d.total_videos_no_feed],
+    ["Longos",longos.length],["Cortes",cortes.length],
+    ["Curtidas somadas",vids.reduce((s,v)=>s+(+v.likes||0),0)],["Inscritos",d.inscritos]];
+  $("#gKpisBib").innerHTML=K.map(([r,v])=>`<div class="card"><div class="lbl">${r}</div>
+    <div class="n-cromo n-stat" data-v="${v??""}">—</div></div>`).join("");
+  $$("#gKpisBib .n-cromo").forEach(el=>countUp(el,el.dataset.v===""?null:+el.dataset.v));
+  $("#cresceBib").innerHTML=`<div class="lbl" style="margin-bottom:6px">inscritos</div>${sparkline(d.historico||[],"inscritos")}
+    <div class="lbl" style="margin:14px 0 6px">views do feed</div>${sparkline(d.historico||[],"views_feed")}`;
+  const ORD={views:(a,b)=>b.views-a.views, dia:(a,b)=>(b.views_por_dia||0)-(a.views_por_dia||0), data:(a,b)=>(b.publicado||"").localeCompare(a.publicado||"")};
+  $("#bibOrdem").innerHTML=[["views","mais views"],["dia","views/dia"],["data","recentes"]]
+    .map(([k,r])=>`<button class="pill mini ${S.ordemBib===k?"ok":""}" data-k="${k}" style="cursor:pointer">${r}</button>`).join("");
+  $$("#bibOrdem .pill").forEach(b=>b.onclick=()=>{S.ordemBib=b.dataset.k; rBiblioteca(S.d);});
+  const cardVid=v=>`<a class="card clic" href="${esc(v.url)}" target="_blank" rel="noopener">
+    <div class="thumb" style="background-image:url('https://i.ytimg.com/vi/${esc(v.id)}/mqdefault.jpg')">
+      <div class="ovl"><b>${fmt(v.views)} views</b></div></div>
+    <div style="margin-top:8px;font-weight:600;color:var(--prata-1);font-size:12px">${esc(v.titulo)}</div>
+    <div class="micro">${esc(v.publicado)} · ${fmt(v.likes)} 👍 · ${fmt(v.views_por_dia)}/dia · há ${fmt(v.dias_no_ar)} dias no ar</div></a>`;
+  $("#gLongos").innerHTML=[...longos].sort(ORD[S.ordemBib]).map(cardVid).join("")
+    ||`<div class="card"><b style="color:var(--prata-1)">O primeiro longo está na fábrica</b><div class="micro">quando publicar, a vitrine nasce aqui</div></div>`;
+  $("#gCortes").innerHTML=[...cortes].sort(ORD[S.ordemBib]).slice(0,9).map(cardVid).join("")
+    ||`<div class="card"><div class="micro">sem cortes no feed</div></div>`;
+}
+
+function rEquipe(d){
+  const m=d.equipe?.membros||[];
+  $("#eqTotal").textContent=`${m.filter(x=>x.estado==="no ar").length} de ${m.length} no ar`;
+  /* linha de montagem: agrupa na ordem de produção */
+  const ESTACOES=[["Inteligência",["Pesquisador","Estrategista de SEO"]],
+    ["Roteiro",["Roteirista A","Roteirista B","Roteirista C"]],
+    ["Imagem",["Diretor de Cenas","Capista"]],
+    ["Som",["Narrador","Compositor de Áudio"]],
+    ["Acabamento",["Editor de Vídeo","Legendador"]],
+    ["Entrega",["Publicador"]],
+    ["Divulgação",["Disparador"]]];
+  $("#orgFluxo").innerHTML=ESTACOES.map(([nome,papeis],i)=>{
+    const nos=papeis.map(p=>{ const x=m.find(y=>y.papel===p||y.papel?.startsWith(p)); return x||{papel:p,ico:"·",estado:"?"};});
+    return `${i?'<span class="seta">→</span>':""}<div class="estacao"><span class="cap">${nome}</span>
+      ${nos.map(x=>`<div class="no" title="${esc(x.faz||"")}"><span class="ic">${esc(x.ico||"🤖")}</span>
+        <span>${esc(x.papel)}</span><span class="dot ${x.estado==="no ar"?"ok":"warn"}" style="margin-left:auto"></span></div>`).join("")}</div>`;
+  }).join("");
+  $("#gFichas").innerHTML = m.length? m.map(x=>`
+    <div class="card"><div style="display:flex;gap:10px;align-items:center">
+      <span style="font-size:26px">${esc(x.ico||"🤖")}</span>
+      <div><b style="color:var(--prata-1)">${esc(x.papel)}</b>
+      <div class="micro">${esc(x.faz||"")}</div></div>
+      <span class="pill mini ${x.estado==="no ar"?"ok":"warn"}" style="margin-left:auto">${esc(x.estado||"—")}</span></div>
+      ${x.origem?`<div class="micro" style="margin-top:6px">origem: ${esc(x.origem)}</div>`:""}</div>`).join("")
+    : `<div class="card"><div class="micro">equipe ainda não carregada</div></div>`;
+}
+
+const PLAT_ICO={whatsapp:["💬","WhatsApp","ok"],telegram:["✈️","Telegram","cy"],facebook:["📘","Facebook","neutra"]};
+const NICHOS_SUG=["mentalidade","motivação","lei da atração","disciplina","desenvolvimento pessoal","prosperidade","hábitos","estoicismo","foco","empreendedorismo"];
+let dispMsgSel=0;
+async function dispBuscar(nicho){
+  const st=$("#dispBuscaStatus"); const bt=$("#dispBuscaBtn");
+  if(!nicho||nicho.trim().length<3){ st.textContent="digite um nicho (mín. 3 letras)"; return; }
+  bt.disabled=true; bt.textContent="procurando…"; st.textContent=`varrendo diretórios por «${nicho}»…`;
+  try{ const r=await api("/api/disparador/buscar",{nicho:nicho.trim()});
+    if(r.novos>0){ st.innerHTML=`✅ achei <b style="color:var(--prata-1)">${r.novos}</b> grupos novos de «${esc(nicho)}» — já entraram no catálogo abaixo. Total: ${r.total_catalogo}.`;
+      toast(`${r.novos} grupos novos de "${nicho}"`,"ok"); }
+    else{ st.innerHTML=`nenhum grupo novo na hora — o pedido de «${esc(nicho)}» ficou registrado e o catalogador vai varrer a fundo esse nicho (aparecem aqui depois).`; }
+    await atualiza(true);
+  }catch(e){ st.textContent="não deu pra buscar agora: "+e.message; }
+  finally{ bt.disabled=false; bt.textContent="🔎 Procurar grupos"; }
+}
+async function dispDisparar(){
+  const msgs=(S.d?.disparador?.mensagens?.mensagens)||[];
+  if(!msgs.length){ toast("sem mensagem para disparar","bad"); return; }
+  if(!confirm("Aprovar o disparo desta mensagem? Ela entra na fila e o envio é feito pelo navegador do PC, respeitando a régua.")) return;
+  const bt=$("#dispDispararBtn"); bt.disabled=true; bt.textContent="aprovando…";
+  try{ await api("/api/disparador/leva",{mensagem_idx:dispMsgSel,grupos:[]});
+    toast("Leva aprovada — na fila para o navegador do PC","ok"); await atualiza(true);
+  }catch(e){ toast("não gravou: "+e.message,"bad"); }
+  finally{ bt.disabled=false; bt.textContent="📣 Disparar esta mensagem"; }
+}
+function rDisparador(d){
+  const dp=d.disparador||{}; const grupos=(dp.grupos&&dp.grupos.grupos)||[];
+  const msgs=(dp.mensagens&&dp.mensagens.mensagens)||[]; const fila=(dp.fila&&dp.fila.levas)||[];
+  const hist=dp.disparados||[];
+  if(dispMsgSel>=msgs.length) dispMsgSel=0;
+  /* PASSO 1 · busca automática diária + lista de nichos */
+  const nj=(dp.nichos)||{}; const nichos=[...(nj.nichos||[]),...(nj.descobertos||[])];
+  $("#dispNichosCount").textContent=`${nichos.length} nichos`;
+  $("#dispNichosLbl").innerHTML=`varre ${nj.lote_por_dia||8} nichos por dia (rodízio) e aumenta a lista sozinho · ${nj.ultima_caca?"última caça "+haQuanto(nj.ultima_caca):"1ª caça diária em breve"}`;
+  $("#dispNichosLista").innerHTML=nichos.map(n=>`<span class="pill mini neutra">${esc(n)}</span>`).join("")||`<span class="micro">lista em preparação</span>`;
+  /* PASSO 1 · busca manual */
+  $("#dispSugestoes").innerHTML=NICHOS_SUG.map(n=>`<button class="pill mini" data-n="${esc(n)}" style="cursor:pointer">${esc(n)}</button>`).join("");
+  $$("#dispSugestoes .pill").forEach(b=>b.onclick=()=>{$("#dispBuscaInput").value=b.dataset.n;dispBuscar(b.dataset.n);});
+  $("#dispBuscaBtn").onclick=()=>dispBuscar($("#dispBuscaInput").value);
+  $("#dispBuscaInput").onkeydown=e=>{if(e.key==="Enter")dispBuscar(e.target.value);};
+  /* PASSO 2 · escolher a mensagem + preview */
+  $("#dispMsgChips").innerHTML=msgs.map((m,i)=>`<button class="pill mini ${i===dispMsgSel?"ok":""}" data-i="${i}" style="cursor:pointer">${esc(m.titulo)}</button>`).join("")
+    || `<span class="micro">as mensagens nascem quando um vídeo vai ao ar</span>`;
+  $$("#dispMsgChips .pill").forEach(b=>b.onclick=()=>{dispMsgSel=+b.dataset.i;rDisparador(S.d);});
+  const msel=msgs[dispMsgSel];
+  const linkV=(dp.mensagens&&dp.mensagens.link)||"";
+  const vid=(linkV.match(/(?:youtu\.be\/|v=)([A-Za-z0-9_-]{11})/)||[])[1]||"zkVylQ4cXak";
+  const thumb=`https://i.ytimg.com/vi/${vid}/hqdefault.jpg`;
+  $("#dispPreview").innerHTML=msel?`<div style="max-width:400px;background:linear-gradient(180deg,#0c2c1e,#0a2118);border:1px solid rgba(46,230,168,.25);border-radius:14px 14px 14px 4px;padding:6px 6px 10px;box-shadow:0 8px 24px rgba(0,0,0,.45)">
+      <div style="font:600 11px Inter;color:var(--ok);margin:4px 6px 6px">O Poder da Mente Sábia</div>
+      <div style="position:relative;border-radius:8px;overflow:hidden">
+        <img src="${thumb}" alt="capa do vídeo" style="width:100%;display:block;background:#0a0d14">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+          <div style="width:46px;height:32px;background:rgba(220,30,30,.92);border-radius:8px;display:flex;align-items:center;justify-content:center">
+            <div style="width:0;height:0;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:2px"></div></div></div>
+      </div>
+      <div style="font-size:13px;line-height:1.5;color:#EAF5EF;margin:8px 6px 0">${esc(msel.texto)}</div>
+      <div style="text-align:right;font-size:10px;color:rgba(234,245,239,.5);margin:2px 6px 0">agora ✓✓</div></div>
+    <div class="micro" style="margin-top:8px">📷 vai a foto da capa + a frase curta com o link — o jeito que mais chama atenção no grupo.</div>`
+    : `<div class="micro">—</div>`;
+  /* PASSO 3 · botão */
+  $("#dispDispararBtn").onclick=dispDisparar;
+  $("#dispDispararBtn").disabled=!msel;
+  /* fila */
+  $("#dispFila").innerHTML = fila.length? fila.slice().reverse().map(l=>`
+    <div class="card"><div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <b style="color:var(--prata-1)">${esc(l.mensagem_titulo||l.id||"leva")}</b>
+      <span class="pill mini ${l.aprovada?"ok":"warn"}">${l.aprovada?"✔ aprovada":"aguardando"}</span></div>
+      <div class="micro" style="margin:6px 0">${esc(l.estado||"")} · ${esc(l.criada_em?dtBR(l.criada_em):"")}${l.grupos&&l.grupos.length?` · ${l.grupos.length} grupos`:""}</div>
+      ${l.mensagem_texto?`<p class="sub" style="font-size:12px;margin:0">${esc(l.mensagem_texto)}</p>`:""}</div>`).join("")
+    : `<div class="card" style="display:flex;gap:12px;align-items:center"><span style="font-size:26px">📭</span>
+       <div><b style="color:var(--prata-1)">Nenhuma leva na fila</b>
+       <div class="micro">use a bancada acima: procure grupos, escolha a mensagem e clique em Disparar — a leva aprovada aparece aqui para o navegador do PC executar.</div></div></div>`;
+  /* histórico */
+  const okH=hist.filter(h=>h.status!=="erro").length;
+  const platsH=new Set(hist.map(h=>h.plataforma).filter(Boolean)).size;
+  const ultimo=hist.length?hist[hist.length-1]:null;
+  $("#dispHistLbl").textContent=hist.length?`${hist.length} envios registrados`:"nenhum envio ainda";
+  $("#dispHistKpis").innerHTML=hist.length?[["Grupos disparados",okH],["Plataformas",platsH],
+    ["Último envio",ultimo?haQuanto(ultimo.quando):"—"]]
+    .map(([r,v])=>`<div class="card"><div class="lbl">${r}</div><div class="n-cromo n-stat">${typeof v==="number"?fmt(v):esc(v)}</div></div>`).join(""):"";
+  $("#dispHist").innerHTML = hist.length? `<div class="grid gB">`+[...hist].reverse().map(h=>{
+    const pi=PLAT_ICO[h.plataforma]||["🔗",h.plataforma||"",""];
+    const cor=h.status==="erro"?"bad":"ok";
+    return `<div class="card"><div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <span class="pill mini ${pi[2]||"neutra"}">${pi[0]} ${esc(h.grupo||"grupo")}</span>
+      <span class="pill mini ${cor}">${esc(h.status||"enviado")}</span></div>
+      <div class="micro" style="margin:6px 0">${esc(h.quando?dtBR(h.quando):"")}${h.mensagem_titulo?" · "+esc(h.mensagem_titulo):""}</div>
+      ${h.reacao?`<div class="micro">reação: ${esc(h.reacao)}</div>`:""}</div>`;}).join("")+`</div>`
+    : `<div class="card" style="display:flex;gap:12px;align-items:center"><span style="font-size:26px">📊</span>
+       <div><b style="color:var(--prata-1)">Nenhum grupo disparado ainda</b>
+       <div class="micro">quando o Disparador começar (pelo navegador do PC, com o seu carimbo), cada envio aparece aqui: grupo, dia, mensagem usada e reação — e o Pesquisador cruza com as views do vídeo.</div></div></div>`;
+  /* grupos SEPARADOS POR PLATAFORMA (3 colunas com símbolo) */
+  const cont=(dp.grupos&&dp.grupos.por_plataforma)||{};
+  $("#dispGruposLbl").textContent=`${grupos.length} catalogados`;
+  const cardG=g=>{ const permite=/permit|sim/i.test(g.permite_divulgacao||"");
+    return `<div class="card" style="padding:11px"><b style="color:var(--prata-1);display:block">${esc(g.nome)}</b>
+      <div class="micro" style="margin:2px 0">${esc(g.tema||"")}</div>
+      <div style="display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap">
+        <span class="pill mini ${permite?"ok":"warn"}">${permite?"✔ permite":"⚠ ver regras"}</span>
+        ${g.membros?`<span class="micro">${esc(g.membros)} membros</span>`:""}
+        <a class="micro" href="${esc(g.link)}" target="_blank" rel="noopener" style="margin-left:auto">abrir ↗</a></div></div>`;};
+  $("#dispColunas").innerHTML=Object.keys(PLAT_ICO).map(p=>{
+    const [ico,nome,cor]=PLAT_ICO[p]; const gs=grupos.filter(g=>g.plataforma===p);
+    return `<div class="card" style="background:var(--card-bg)">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">
+        <span style="font-size:24px">${ico}</span>
+        <b style="color:var(--prata-1);font-size:15px">${nome}</b>
+        <span class="pill mini ${cor}" style="margin-left:auto">${gs.length}</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto">
+        ${gs.length?gs.map(cardG).join(""):`<div class="micro">nenhum ${nome} ainda — procure um nicho na bancada acima</div>`}</div></div>`;}).join("");
+  /* régua */
+  const R=[["5 grupos/dia","máximo por plataforma no 1º mês"],["10+ min","entre um envio e outro"],
+    ["1 dia","observando o grupo antes de compartilhar"],["horários variados","nunca em rajada"]];
+  $("#dispRegua").innerHTML=R.map(([n,s])=>`<div class="card"><div class="n-cromo n-mini">${esc(n)}</div><div class="micro">${esc(s)}</div></div>`).join("");
+}
+
+/* ═══════════ ROTEADOR + POLL ═══════════ */
+const ROTAS={inicio:rInicio,fabrica:rFabrica,cofre:rCofre,pesquisador:rPesquisador,receita:rReceita,
+  ideias:rIdeias,estudo:()=>rEstudo(),biblioteca:rBiblioteca,equipe:rEquipe,disparador:rDisparador};
+const ALIAS={capas:"fabrica",agente:"ideias",repositorio:"cofre",pesquisa:"pesquisador"};
+function rotaAtual(){ let h=location.hash.replace(/^#\/?/,"")||"inicio"; h=ALIAS[h]||h; return ROTAS[h]?h:"inicio"; }
+function pinta(){ const r=rotaAtual();
+  $$(".view").forEach(v=>v.classList.toggle("ativa",v.id==="v-"+r));
+  $$("#menu a").forEach(a=>a.classList.toggle("ativo",a.dataset.v===r));
+  if(S.d) ROTAS[r](S.d); else if(r==="estudo") rEstudo();
+}
+window.addEventListener("hashchange",pinta);
+
+function badges(d){
+  const T=tarefas(d); const por=p=>T.filter(t=>t.pg===p).length;
+  const põe=(id,n)=>{const b=$(id); if(!b) return; b.classList.toggle("hide",!n); b.textContent=n;};
+  põe("#bgFabrica",por("fabrica")); põe("#bgIdeias",por("ideias"));
+  põe("#bgPesq",por("pesquisador")); põe("#bgCofre",(d.pipeline?.videos||[]).filter(v=>v.portao?.pode).length);
+  põe("#bgDisp",((d.disparador?.fila?.levas)||[]).filter(l=>!l.aprovada).length);
+  põe("#bgInicio",0);
+}
+function ocupado(){
+  const v=$$("video").find(x=>!x.paused&&!x.ended);
+  const f=document.activeElement, digitando=f&&(f.tagName==="INPUT"||f.tagName==="TEXTAREA");
+  return !!v||digitando||!$("#overlay").classList.contains("hide");
+}
+async function atualiza(force){
+  try{
+    const d=await api("/api/resumo"+(force?"?force=1":""));
+    S.d=d; badges(d);
+    $("#stVivo").className="vivo"; $("#stVivo").innerHTML=`<span class="dot ok pulsa"></span> ESTÚDIO NO AR`;
+    $("#stColeta").textContent="dados "+haQuanto(d.coletado_em)+(d.aviso?" · ⚠ "+d.aviso:"");
+    if(!ocupado()) pinta();
+  }catch(e){
+    $("#stVivo").className="vivo off"; $("#stVivo").innerHTML=`<span class="dot warn"></span> SEM SINAL`;
+    $("#stColeta").textContent=e.message;
+  }
+}
+function agenda(){ clearTimeout(S.timer);
+  const rapido=rotaAtual()==="fabrica"||S.d?.producao?.estado==="trabalhando";
+  S.timer=setTimeout(async()=>{ if(!ocupado()) await atualiza(false); agenda(); }, rapido?10000:60000); }
+
+/* ═══════════ LOGIN ═══════════ */
+function mostraLogin(){ $("#app").classList.add("hide"); $("#telaLogin").classList.remove("hide"); $("#inSenha").focus(); }
+async function entrar(){
+  const senha=$("#inSenha").value; if(!senha) return;
+  $("#btEntrar").disabled=true; $("#btEntrar").textContent="conferindo…"; $("#erroLogin").textContent="";
+  try{ await api("/api/login",{senha});
+    $("#telaLogin").classList.add("hide"); $("#app").classList.remove("hide");
+    await atualiza(false); pinta(); agenda();
+  }catch(e){ $("#erroLogin").textContent="Senha não confere — tenta de novo.";
+    $(".loginCard").classList.add("shake"); setTimeout(()=>$(".loginCard").classList.remove("shake"),450);
+  }finally{ $("#btEntrar").disabled=false; $("#btEntrar").textContent="Entrar no Estúdio"; }
+}
+$("#btEntrar").onclick=entrar;
+$("#inSenha").addEventListener("keydown",e=>{ if(e.key==="Enter") entrar(); });
+$("#btSair").onclick=async()=>{ try{ await api("/api/logout",{}); }catch(e){} mostraLogin(); };
+
+(async function init(){
+  try{ const me=await api("/api/me");
+    if(me.autenticado){ $("#telaLogin").classList.add("hide"); $("#app").classList.remove("hide");
+      await atualiza(false); pinta(); agenda(); return; }
+  }catch(e){}
+  mostraLogin();
+})();
+</script>
+</body>
+</html>

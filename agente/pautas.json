@@ -1,0 +1,149 @@
+{
+  "atualizado_em": "2026-07-16",
+  "nota": "Banco de pautas do Agente Youtuber — RÉGUA DO DIRETOR (16/07): todo vídeo entre 5 e 30 minutos. Cada pauta nasce do PARÂMETRO + conceito COMPROVADO. Status: banco | escolhida | roteiro | producao | descartada",
+  "pautas": [
+    {
+      "id": "P01",
+      "titulo_candidato": "AJA COMO SE NADA PUDESSE TE ABALAR | Napoleon Hill",
+      "autor_ancora": "Napoleon Hill",
+      "formato": "ensino",
+      "duracao_alvo": "18-25min",
+      "conceito_fonte": "Mesmo conceito fez 5,1M + 2M views em 2 canais (medido 16/07)",
+      "pecas_parametro": [
+        "você no centro",
+        "autoridade",
+        "estado-limite"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P02",
+      "titulo_candidato": "OUÇA ISTO ANTES DE DORMIR E SUA MENTE NUNCA MAIS SERÁ A MESMA | Joseph Murphy",
+      "autor_ancora": "Joseph Murphy",
+      "formato": "noturno",
+      "duracao_alvo": "25-30min",
+      "conceito_fonte": "Molde do maior outlier do território: 10,05M views (3h18)",
+      "pecas_parametro": [
+        "você no centro",
+        "prazo",
+        "estado-limite",
+        "autoridade"
+      ],
+      "status": "banco",
+      "nota_regua": "adaptada à régua 5-30min (versão 1h30+ suspensa até o Diretor liberar)"
+    },
+    {
+      "id": "P03",
+      "titulo_candidato": "REPROGRAME SUA MENTE EM 21 DIAS — o método que a neurociência confirmou | Joseph Murphy",
+      "autor_ancora": "Joseph Murphy + neurociência",
+      "formato": "ensino",
+      "duracao_alvo": "20-30min",
+      "conceito_fonte": "Cluster 'reprogramar': 864k (NeuroVox 52min), 1,3M (Artétipos/Murphy 32min)",
+      "pecas_parametro": [
+        "você no centro",
+        "prazo",
+        "autoridade"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P04",
+      "titulo_candidato": "SUA MENTE FICA BLINDADA EM 20 MINUTOS DE ESCUTA — fortalecimento mental guiado",
+      "autor_ancora": "compilado próprio (estoico + ciência)",
+      "formato": "ensino",
+      "duracao_alvo": "20min",
+      "conceito_fonte": "Molde Mente Forte: 'SUA MENTE PRECISA SER FORTE | 20 minutos' = 3,5M",
+      "pecas_parametro": [
+        "você no centro",
+        "prazo",
+        "estado-limite"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P05",
+      "titulo_candidato": "O QUE VOCÊ PENSA, VOCÊ SE TORNA — a lei que Marco Aurélio e a neurociência confirmam",
+      "autor_ancora": "Marco Aurélio + neurociência",
+      "formato": "ensino",
+      "duracao_alvo": "15-25min",
+      "conceito_fonte": "Brunet 'SEUS PENSAMENTOS MUDAM SUA VIDA' = 3,2M (39min)",
+      "pecas_parametro": [
+        "você no centro",
+        "autoridade",
+        "estado-limite"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P06",
+      "titulo_candidato": "TREINE SUA MENTE PARA ATRAIR PROSPERIDADE | Napoleon Hill",
+      "autor_ancora": "Napoleon Hill",
+      "formato": "ensino",
+      "duracao_alvo": "25-30min",
+      "conceito_fonte": "'Treine sua aura para atrair riqueza | Napoleon Hill' = 2,4M (35min, há 11 meses)",
+      "pecas_parametro": [
+        "você no centro",
+        "autoridade"
+      ],
+      "status": "banco",
+      "nota_regua": "adaptada à régua 5-30min (versão 1h30+ suspensa até o Diretor liberar)"
+    },
+    {
+      "id": "P07",
+      "titulo_candidato": "APRENDA A FICAR EM SILÊNCIO E DEIXE SUA MENTE TRABALHAR POR VOCÊ",
+      "autor_ancora": "sabedoria clássica + psicologia",
+      "formato": "ensino",
+      "duracao_alvo": "15-20min",
+      "conceito_fonte": "'CRESÇA EM SILÊNCIO' = 1,7M (11min); reaproveita a produção do vídeo-01 (Silêncio) re-embalada",
+      "pecas_parametro": [
+        "você no centro",
+        "estado-limite"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P08",
+      "titulo_candidato": "30 MINUTOS OUVINDO ISTO E SUA PROSPERIDADE SERÁ ATIVADA | Joseph Murphy",
+      "autor_ancora": "Joseph Murphy",
+      "formato": "noturno",
+      "duracao_alvo": "25-30min",
+      "conceito_fonte": "'1 NOITE Ouvindo... PROSPERIDADE SERÁ ATIVADA | Napoleon Hill' = 1,97M (1h40)",
+      "pecas_parametro": [
+        "prazo",
+        "estado-limite",
+        "autoridade",
+        "você no centro"
+      ],
+      "status": "banco",
+      "nota_regua": "adaptada à régua 5-30min (versão 1h30+ suspensa até o Diretor liberar)"
+    },
+    {
+      "id": "P09",
+      "titulo_candidato": "ME DÊ 10 MINUTOS E EU DESTRAVO SUA DISCIPLINA — o método dos 1%",
+      "autor_ancora": "hábitos/disciplina (ciência aplicada)",
+      "formato": "ensino-curto",
+      "duracao_alvo": "10min",
+      "conceito_fonte": "'Me dê 523 segundos Pra Te VICIAR em Disciplina' = 1,27M (8min, há 9 meses)",
+      "pecas_parametro": [
+        "você no centro",
+        "prazo",
+        "estado-limite"
+      ],
+      "status": "banco"
+    },
+    {
+      "id": "P10",
+      "titulo_candidato": "EU ERA REFÉM DA MINHA PRÓPRIA MENTE — estas 7 mudanças me libertaram",
+      "autor_ancora": "psicologia real (jornada em 1ª pessoa)",
+      "formato": "ensino",
+      "duracao_alvo": "25min",
+      "conceito_fonte": "Contraste antes/depois: 'Eu era POBRE - 17 mudanças... me deixaram RICO' = 1,9M (30min)",
+      "pecas_parametro": [
+        "contraste antes/depois",
+        "número específico",
+        "estado-limite"
+      ],
+      "status": "banco"
+    }
+  ]
+}

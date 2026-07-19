@@ -1,0 +1,21 @@
+{
+  "nota": "Lista-mãe de nichos e sub-nichos que o Disparador vigia. A caça diária varre um lote por dia (rodízio) e ACRESCENTA sub-nichos novos que descobrir. Nunca encolhe.",
+  "atualizado_em": "2026-07-17",
+  "ultima_caca": null,
+  "proxima_caca": "diária, 06:30 (horário do servidor)",
+  "lote_por_dia": 8,
+  "cursor": 0,
+  "nichos": [
+    "mentalidade", "mentalidade vencedora", "mentalidade empreendedora", "mentalidade milionária",
+    "motivação", "motivação diária", "desenvolvimento pessoal", "autoconhecimento",
+    "lei da atração", "prosperidade", "abundância", "pensamento positivo",
+    "disciplina", "hábitos", "hábitos atômicos", "força de vontade",
+    "foco", "produtividade", "gestão do tempo", "deep work",
+    "estoicismo", "estoicismo prático", "sabedoria", "filosofia de vida",
+    "empreendedorismo", "alta performance", "metas e objetivos", "sair da zona de conforto",
+    "inteligência emocional", "autoconfiança", "resiliência", "superação",
+    "poder da mente", "mente subconsciente", "reprogramação mental", "gratidão",
+    "napoleon hill", "coaching", "PNL", "propósito de vida"
+  ],
+  "descobertos": []
+}

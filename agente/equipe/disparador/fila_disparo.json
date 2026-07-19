@@ -1,0 +1,41 @@
+{
+  "nota": "Fila de disparos do Disparador. Só EXECUTA com o carimbo do Diretor (decisao 'disparo_leva_{id}'=aprovado no painel). Nasce vazia — cada leva é montada a partir de data/grupos_nicho.json + BIBLIOTECA/MENSAGENS-MODELO.",
+  "regra_portao": "aprovado por LEVA (aprovou a leva, aprovou os grupos daquela leva); nunca dispara além do carimbado",
+  "levas": [
+    {
+      "id": "leva-teste-1",
+      "criada_em": "2026-07-17T17:00:14.383721+00:00",
+      "aprovada": false,
+      "mensagem_idx": 0,
+      "mensagem_titulo": "Motivação depois da ação",
+      "mensagem_texto": "A motivação vem DEPOIS da ação, não antes — é uma das 5 leis nesse vídeo de 5 min do nosso canal: https://youtu.be/zkVylQ4cXak",
+      "grupos": [
+        "https://t.me/DesenvolvimentoPessoaltop",
+        "https://www.facebook.com/groups/EMPDOBRASIL/",
+        "https://www.facebook.com/groups/688678757824909/",
+        "https://t.me/taticaspararesconquistarsuavida",
+        "https://t.me/palavras_que_transforma"
+      ],
+      "grupos_nomes": [
+        "Desenvolvimento Pessoal (top)",
+        "EMPREENDEDORES DO BRASIL",
+        "Desenvolvimento Pessoal",
+        "7 Taticas Para Reconquistar o Controle da Sua Vida",
+        "Palavra Que Transforma"
+      ],
+      "nota": "Leva de TESTE — 5 grupos sorteados. Aguarda decisao do Diretor sobre COMO enviar (nao somos membros ainda).",
+      "estado": "sorteada — aguardando o Diretor decidir o modo de envio"
+    },
+    {
+      "id": "leva-2",
+      "criada_em": "2026-07-17T20:00:24.630000+00:00",
+      "aprovada": true,
+      "mensagem_idx": 0,
+      "mensagem_titulo": "Motivação depois da ação",
+      "mensagem_texto": "A motivação vem DEPOIS da ação, não antes — é uma das 5 leis nesse vídeo de 5 min do nosso canal: https://youtu.be/zkVylQ4cXak",
+      "grupos": [],
+      "nota": "",
+      "estado": "aprovada — aguardando envio pelo navegador do PC"
+    }
+  ]
+}

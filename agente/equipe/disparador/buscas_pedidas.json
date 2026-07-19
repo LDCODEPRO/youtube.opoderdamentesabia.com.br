@@ -1,0 +1,24 @@
+{
+  "pedidos": [
+    {
+      "nicho": "mentalidade",
+      "quando": "2026-07-17T16:36:31.702730+00:00",
+      "achou_na_hora": 0
+    },
+    {
+      "nicho": "mentalidade",
+      "quando": "2026-07-17T16:37:51.958946+00:00",
+      "achou_na_hora": 0
+    },
+    {
+      "nicho": "mentalidade",
+      "quando": "2026-07-17T16:37:55.486698+00:00",
+      "achou_na_hora": 0
+    },
+    {
+      "nicho": "motivação",
+      "quando": "2026-07-17T16:37:57.721059+00:00",
+      "achou_na_hora": 0
+    }
+  ]
+}
